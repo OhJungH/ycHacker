@@ -67,7 +67,7 @@
     <section>
         <div id="mainRagion">
             <div style="text-align: center;">
-                <h3>공지사항</h3>
+                <h3>공지사항 sjdfj</h3>
             </div>
             <table class="table table-hover">
                 <thead>
