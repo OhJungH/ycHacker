@@ -87,7 +87,7 @@
             </p>
             <br/><br/>
             <p>
-                0851<span id="footerCopy">COPYRIGHT &copy; 2022(주)양천구해커스 ALL RIGHTS RESERVED</span>
+                1553<span id="footerCopy">COPYRIGHT &copy; 2022(주)양천구해커스 ALL RIGHTS RESERVED</span>
             </p>
         </div>
     </div>
