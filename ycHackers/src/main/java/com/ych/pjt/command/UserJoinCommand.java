@@ -27,7 +27,6 @@ public class UserJoinCommand implements ychCommand {
 		UserJoinDto dto = new UserJoinDto(num,id,pw,address,hobby,myself);
 		System.out.println(id+"/"+num+"/"+pw+address+"/"+myself);
 		
-		
 	}
 
 }
