@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- RWD -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MS -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/>
+<title>Insert title here</title>
+<!--bootstrap-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!--jquery-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<!--propper jquery-->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!--latest javascript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+ul li {
+margin-left:40px;
+}
+.userinfo {
+ margin-top:50px; margin-left: 400px; float:left;
+}
+</style>
+
+</head>
+<body>
+
+ <div class="cafelist">
+<nav class="navbar navbar-expand-md cafelist-nav" style="float:left; margin-left:100px; margin-top:50px">
+ <div class="container">
+ 	<ul class="navbar-nav w-100">
+		<li class="nav-item col text-center">
+			<a id="recipeAllView" class="nav-link" href="information">안내</a>
+		</li>
+		<li class="nav-item col text-center">
+		 	<a id="recipeConditionView" class="nav-link" href="reservation">검색</a>
+		</li>
+		<li class="nav-item col text-center">
+		 	<a id="recipeConditionView" class="nav-link" href="event" style="white-space : nowrap;">이벤트</a>
+		</li>
+		<li class="nav-item col text-center">
+		 	<a id="recipeConditionView" class="nav-link" href="report">신고</a>
+		</li>
+	</ul>
+ </div>
+</nav>
+</div>
+
+<div class="userinfo">
+<span>정훈님 안녕하세요</span>
+</div>
+<button style="margin-top:50px; margin-left:100px;">
+로그아웃
+</button>
+
+<div>
+<input type="text" placeholder="전체검색" class="form-control" style="width: 400px; margin :0; float:left;">
+<button type="submit" class="btn-info" style="height:40px;">검색</button>
+</div>
+<div class="container" style="margin-left:50px; float:left;">
+ <h1 style="margin-top:100px; margin-left:150px;">스터디룸 소개글</h1>
+  	<div id="demo" class="carousel slide" data-ride="carousel" style="width:850px; height:500px; margin-left:100px;">
+  		<div class="carousel-inner">
+  			<div class="carousel-item active">
+  				<img class="d-block w-100" src="https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="First slide">
+			</div>
+  			<div class="carousel-item">
+  				<img class="d-block w-100" src="https://images.pexels.com/photos/2544554/pexels-photo-2544554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Third slide">
+			</div>
+			
+			<a class="carousel-control-prev" href="#demo" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			</a>
+			<a class="carousel-control-next" href="#demo" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			</a>  				
+		</div>
+	<textarea style="margin-left:100px; margin-top:30px; resize:none; width:250px; height:200px;">스터디룸 설명</textarea>
+	</div>
+</div>
+	<div class="wrapper" style="margin-top:150px;">
+		<table style="border:1px solid #333; border-top:none; border-right:none;">
+			<tr>
+				<th style="padding:10px;">스터디룸 선택</th>
+				<th style="padding:10px;">10000원</th>
+			</tr>
+			<tr>
+				<th style="padding:10px;">스터디룸1</th>
+				<th style="padding:10px;">20000원</th>
+			</tr>
+			<tr>
+				<th style="padding:10px;">스터디룸2</th>
+				<th style="padding:10px;">30000원</th>
+			</tr>
+		</table>
+	<button type="button" class="btn btn-primary" style="margin-top:30px; float:right; margin-right:320px;">예약하기</button>
+	</div>
+	
+			
+</body>
+
+</html>
