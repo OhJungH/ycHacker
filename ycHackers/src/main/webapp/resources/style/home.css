@@ -44,9 +44,9 @@ body{
     background: cornsilk;
 }
 #textBox{
-    justify-items: center;
     box-shadow: -3px -3px 3px #000;
     background: yellow;
+    text-align: center;
 }
 .homeText{
     font-size: 2em;
