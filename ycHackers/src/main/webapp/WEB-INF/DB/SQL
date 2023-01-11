@@ -1,1 +1,117 @@
-Database 
+<<<<< cafelist tbl
+CREATE TABLE `studyroom`.`cafelist` (
+  `cafename` VARCHAR(20) NOT NULL,
+  `cafeno` INT NULL,
+  `cafelocation` VARCHAR(20) NULL,
+  `cafeprice` INT NULL,
+  `cafeimage` VARCHAR(20) NULL,
+  `cafemember` INT NULL,
+  `cafelike` INT NULL,
+  `cafeintroduce` VARCHAR(20) NULL,
+  `cafetel` INT NULL);
+ >>>>>
+  
+ <<<<< userData tbl
+  CREATE TABLE studyroom.UserData
+(
+	USERNUM BIGINT NOT NULL PRIMARY KEY,
+    USERID VARCHAR(30) NOT NULL,
+    USERPW VARCHAR(100) NOT NULL,
+    USERAUTH VARCHAR(20) DEFAULT 'ROLE_USER',
+    USERNAME VARCHAR(20),
+    USERPHONE VARCHAR(20),
+    USERBIRTH DATE,
+    USERLOCATION INT,
+    USERGENDER INT,
+	USERDATE timestamp DEFAULT NOW()
+);
+>>>>>
+
+<<<<< InfoBoard tbl
+ CREATE TABLE studyroom.InfoData
+(
+	INFONUM BIGINT NOT NULL PRIMARY KEY,
+    INFOTYPE VARCHAR(10),
+    INFOAUTHOR VARCHAR(30),
+    INFOAUTH VARCHAR(20),
+    INFODATE TIMESTAMP DEFAULT NOW(),
+    INFOUPDATEDATE DATE,
+    INFOTITLE VARCHAR(100),
+    INFOCONTENT VARCHAR(3000),
+    INFOGROUP INT,
+    INFOINDENT INT,
+    INFOHIT INT,
+    INFOCONDITION VARCHAR(10)
+);
+>>>>>
+<<<<< ResTBL tbl
+CREATE TABLE ResTBL
+(
+	resnum int(100) not null primary key,
+	resname varchar(20),
+	resbirth date,
+	resphone varchar(20),
+	resdate date,
+	restime timestamp,
+	resmember int,
+	rescomments varchar(3000),
+	cafephone varchar(20)
+);
+>>>>>
+<<<<< sequences
+  CREATE TABLE studyroom.sequences(
+	NAME VARCHAR(32),
+    CURRVAL BIGINT UNSIGNED
+) ENGINE = InnoDB;
+
+DELIMITER $$
+	CREATE PROCEDURE `create_sequence` (IN the_name text) 
+    MODIFIES SQL DATA
+    DETERMINISTIC
+    BEGIN 
+		DELETE FROM studyroom.sequences WHERE name=the_name;
+        INSERT INTO studyroom.sequences VALUES(the_name,0);
+	END $$
+
+DELIMITER $$
+	CREATE FUNCTION `nextval` (the_name VARCHAR(32))
+    RETURNS BIGINT UNSIGNED
+    MODIFIES SQL DATA
+    DETERMINISTIC
+    BEGIN
+		DECLARE ret BIGINT UNSIGNED;
+        UPDATE studyroom.sequences SET currval=currval+1 
+			WHERE name = the_name;
+		SELECT currval INTO ret FROM studyroom.sequences
+			WHERE name = the_name 
+            LIMIT 1;
+		RETURN ret;
+	END $$
+  
+  CALL create_sequence('infoseq');
+  CALL create_sequence('userseq');
+  CALL create_sequence('resseq');
+  CALL create_sequence('cafeseq');	
+  
+ ***sequence use case
+ INSERT INTO USERTBL (NUM,USERID) VALUES
+ (
+	(SELECT nextval('test') FROM DUAL),
+	'ID'
+);
+>>>>>
+
+<<<<< ResTBL tbl
+create table ResTBL(
+resnum int(100) not null primary key,
+resname varchar(20),
+resbirth date,
+resphone varchar(20),
+resdate date,
+restime timestamp
+resmember int(100),
+rescomments varchar(3000)
+cafephone varchar(20)
+);
+>>>>>
+
