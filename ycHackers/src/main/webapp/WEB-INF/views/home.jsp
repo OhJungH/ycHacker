@@ -4,7 +4,8 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,44 +15,43 @@
 <!-- MS -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
-<title>JSP</title>
-<!--bootstrap-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<title>home</title>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!--propper jquery -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <!--latest javascript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!--bootstrap-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"/>
 <!--fontawesome icon-->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
-	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
 <!--google icon -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 <!--custom Style-->
-    <link rel="stylesheet" href="css/home.css"/>
-    <link rel="stylesheet" href="css/footer.css"/>
+    <link rel="stylesheet" href="style/home.css"/>
+    <link rel="stylesheet" href="style/footer.css"/>
 </head>
 <body>
+
 <div id="homeContainer">
         <div id="infoBox" class="homeBox">
-            <!--a element bootstrap stratch--> 
-            <a id="infoBoard" class="homeText " href="infoBoard">안내</a>
+            <a class="homeText " href="infoBoardHome">안내</a>
         </div>
         <div id="loginBox" class="homeBox"> 
-            <a id="loginView" class="homeText" href="loginView">로그인</a>
+            <a class="homeText" href="loginView">로그인</a>
         </div>
         <div id="joinBox"class="homeBox"> 
-            <a id="joinView" class="homeText" href="joinView">회원가입</a>
+            <a class="homeText" href="joinViewHome">회원가입</a>
         </div>
         <div id="textBox" class="homeBox"> 
             <span class="homeText">
                 YCHackers
-                <h3 id="clock">00:00</h3>
+                <i id="clock">00:00</i>
             </span>
         </div>
     </div>
-    <script src="JS/clock.js"></script>
+    <script src="js/clock.js"></script>
     <div id="footer">
         <div class="footerBox">
             <p id="footerPageName" class="footerLabel">YCHackers</p>
@@ -79,5 +79,10 @@
             </p>
         </div>
     </div>
+    
+<script>
+$(document).ready(function(){
+});
+</script>
 </body>
 </html>
