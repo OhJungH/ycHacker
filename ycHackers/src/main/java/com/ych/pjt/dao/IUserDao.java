@@ -1,5 +1,7 @@
 package com.ych.pjt.dao;
 
-public interface IUserDao {
+import com.ych.pjt.dto.UserDataDto;
 
+public interface IUserDao {
+	public String userJoin(UserDataDto dto);
 }
