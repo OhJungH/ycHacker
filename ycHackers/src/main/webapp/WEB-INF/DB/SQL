@@ -1,4 +1,4 @@
-<<<<< 카페리스트
+<<<<< cafelist tbl
 CREATE TABLE `studyroom`.`cafelist` (
   `cafename` VARCHAR(20) NOT NULL,
   `cafeno` INT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE `studyroom`.`cafelist` (
   `cafetel` INT NULL);
  >>>>>
   
- <<<<< 회원정보
+ <<<<< userData tbl
   CREATE TABLE studyroom.UserData
 (
 	USERNUM BIGINT NOT NULL PRIMARY KEY,
@@ -27,7 +27,7 @@ CREATE TABLE `studyroom`.`cafelist` (
 );
 >>>>>
 
-<<<<< 안내메세지
+<<<<< InfoBoard tbl
  CREATE TABLE studyroom.InfoData
 (
 	INFONUM BIGINT NOT NULL PRIMARY KEY,
@@ -44,8 +44,20 @@ CREATE TABLE `studyroom`.`cafelist` (
     INFOCONDITION VARCHAR(10)
 );
 >>>>>
-
-<<<<< 시퀀스
+<<<<< ResTBL tbl
+create table ResTBL(
+resnum int(100) not null primary key,
+resname varchar(20),
+resbirth date,
+resphone varchar(20),
+resdate date,
+restime timestamp
+resmember int(100),
+rescomments varchar(3000)
+cafephone varchar(20)
+);
+>>>>>
+<<<<< sequences
   CREATE TABLE studyroom.sequences(
 	NAME VARCHAR(32),
     CURRVAL BIGINT UNSIGNED
@@ -76,10 +88,20 @@ DELIMITER $$
 	END $$
   
   CALL create_sequence('infoseq');
-  CALL create_sequence('userInfoDataseq');
+  CALL create_sequence('userseq');
+  CALL create_sequence('resseq');
+  CALL create_sequence('cafeseq');	
+  
+ ***sequence use case
+ INSERT INTO USERTBL (NUM,USERID) VALUES
+ (
+	(SELECT nextval('test') FROM DUAL),
+	'ID'
+);
+
 >>>>>
 
-<<<<< 예약
+<<<<< ResTBL tbl
 create table ResTBL(
 resnum int(100) not null primary key,
 resname varchar(20),
@@ -89,16 +111,7 @@ resdate date,
 restime timestamp
 resmember int(100),
 rescomments varchar(3000)
+cafephone varchar(20)
 );
 >>>>>
 
-<<<<<예약변경
-create table ReschangeTBL(
-resnum int(100) not null primary key,
-rename varchar(20),
-cafephone varchar(20),
-resdate date,
-restime timestamp
-);
->>>>>
-  
