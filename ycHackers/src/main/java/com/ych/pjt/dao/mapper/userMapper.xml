@@ -4,5 +4,8 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- dao interface - mapper --> 
 <mapper namespace="com.ych.pjt.dao.IUserDao">
-		
+<insert id="userJoin" parameterType="com.ych.pjt.dto.UserDataDto">
+	INSERT INTO UserData(USERNUM,USERID,USERPW,USERNAME,USERPHONE,USERBIRTH,USERLOCATION,USERGENDER)
+	VALUES ((SELECT nextval('userseq') FROM DUAL), #{userId}, #{userPw}, #{userName}, #{userPhone}, #{userBirth}, #{userLocation}, #{userGender})
+</insert>
 </mapper>
