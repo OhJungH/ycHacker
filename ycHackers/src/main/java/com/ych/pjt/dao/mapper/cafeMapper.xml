@@ -5,4 +5,8 @@
 <!-- dao interface - mapper --> 
 <mapper namespace="com.ych.pjt.dao.ICafeDao">
 		
+<<<<<<< HEAD
 </mapper>
+=======
+</mapper>
+>>>>>>> branch 'ojh' of https://github.com/OhJungH/ycHacker.git
