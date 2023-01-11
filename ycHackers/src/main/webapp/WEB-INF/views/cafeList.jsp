@@ -31,13 +31,6 @@
 </head>
 <body>
 
-<div class="searchList">
-	<form action="#" method="get" id="cafeList" name="cafeList">
-	
-	</form>
-	<button class="btn-search"></button>
-		<input type="text" placeholder="전체검색">
-</div>
 
 <div style="margin-top:50px; margin-left:350px;">
 <select style="margin-right:70px;">
