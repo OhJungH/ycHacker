@@ -28,46 +28,15 @@
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<style>
-ul li {
-margin-left:40px;
-}
-.userinfo {
- margin-top:50px; margin-left: 400px; float:left;
-}
-</style>
 </head>
 <body>
-<div class="cafelist">
-<nav class="navbar navbar-expand-md cafelist-nav" style="float:left; margin-left:100px; margin-top:50px">
- <div class="container">
- 	<ul class="navbar-nav w-100">
-		<li class="nav-item col text-center">
-			<a id="recipeAllView" class="nav-link" href="information">안내</a>
-		</li>
-		<li class="nav-item col text-center">
-		 	<a id="recipeConditionView" class="nav-link" href="reservation">검색</a>
-		</li>
-		<li class="nav-item col text-center">
-		 	<a id="recipeConditionView" class="nav-link" href="event" style="white-space : nowrap;">이벤트</a>
-		</li>
-		<li class="nav-item col text-center">
-		 	<a id="recipeConditionView" class="nav-link" href="report">신고</a>
-		</li>
-	</ul>
- </div>
-</nav>
 
-<div class="userinfo">
-<span>정훈님 안녕하세요</span>
-</div>
-<button style="margin-top:50px; margin-left:100px;">
-로그아웃
-</button>
-</div>
-<div>
-<input type="text" placeholder="전체검색" class="form-control" style="width: 400px; margin :0; auto:width; float:left;">
-<button type="submit" class="btn-info" style="height:40px;">검색</button>
+<div class="searchList">
+	<form action="#" method="get" id="cafeList" name="cafeList">
+	
+	</form>
+	<button class="btn-search"></button>
+		<input type="text" placeholder="전체검색">
 </div>
 
 <div style="margin-top:50px; margin-left:350px;">
