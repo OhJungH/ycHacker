@@ -18,3 +18,7 @@ body{
 	margin: auto;
 	padding: 5%;
 }
+form.was_validated input:invalid{
+	border-color:red;
+}
+
