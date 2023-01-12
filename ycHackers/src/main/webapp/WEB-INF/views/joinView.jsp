@@ -111,7 +111,48 @@
 	</div>
 </div>
 <script>
+document.querySelectorAll("input").forEach(input => {
+	input.addEventListener("invalid",()=>{
+		document.forms[0].classList.add("was_validated");
+	});
+});
+
+const pw = document.querySelector("#userPw");
+const pwValid = document.querySelector("#pwValid").value;
+const pwConp = (pw.value==pwValid);
+
 $(document).ready(function(){
+	$("#joinFrm").submit(function(e){
+		e.preventDefault();
+		if(pwConp){
+			$.ajax({
+				url:$("#joinFrm").attr("action"),
+				type:"post",
+				data:$("#joinFrm").serialize(),
+				success:function(data){
+					if(data.search("join-success")> -1){
+						$("#joinResert").text("가입성공. 3초 후 로그인 화면으로 이동합니다.");
+						$("#joinResert").focus();
+						setTimeout(function(){
+							window.location.href="loginView";
+						},3000);
+					}
+					else{
+						$("#joinResert").text("가입실패. 중복된 Email입니다.");
+						$("#joinResert").focus();
+					}
+				},
+				error:function(){
+					alert("505 서버오류");
+				}
+			});	
+		}
+		else{
+			alert("비밀번호가 일치하지 않습니다.");
+			pw.focus();
+			return false;
+		}
+	});
 });
 </script>
 </body>
