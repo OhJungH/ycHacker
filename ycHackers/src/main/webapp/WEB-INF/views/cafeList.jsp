@@ -30,19 +30,49 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-<div style="margin-top:50px; margin-left:350px;">
-<select style="margin-right:70px;">
+<form action="#" method="get" id="cafeSearch" name="cafeSearch">
+<input type="text" placeholder="전체검색" style="width: 550px; height:50px; float:left; margin-left: 580px;">
+<div>
+<button type="submit" class="btn btn-success" id="searchSubmit" style="height:50px;">검색</button>
+</div>
+</form>
+<div style="margin-top:50px; margin-left:350px; margin-bottom:50px;">
+<select style="margin-right:180px;">
 	<option>지역</option>
 	<option>강남구</option>
+	<option>강동구</option>
+	<option>강북구</option>
 	<option>강서구</option>
-	<option>양천구</option>
+	<option>관악구</option>
+	<option>광진구</option>
+	<option>구로구</option>
+	<option>금천구</option>
+	<option>노원구</option>
+	<option>도봉구</option>
+	<option>동대문구</option>
+	<option>동작구</option>
+	<option>마포구</option>
+	<option>서대문구</option>
+	<option>서초구</option>
+	<option>성동구</option>
+	<option>성북구</option>
+	<option>송파구</option>
+	<option>영등포구</option>
+	<option>용산구</option>
+	<option>은평구</option>
+	<option>종로구</option>
+	<option>중구</option>
+	<option>중랑구</option>
 </select>
-<select>
+<select style="margin-right : 180px;">
 	<option>인원</option>
-	<option>2</option>
-	<option>3</option>
-	<option>4</option>
-</select>
+	<option>2인실</option>
+	<option>3인실</option>
+	<option>4인실</option>
+	<option>5인실</option>
+	<option>6인실</option>
+</select>날짜
+<input type="date">
 </div>
 <div id="mainRegion" class="container mt-3">
 	<div class="row mb-3" style="float:left; margin-left:-50px; margin-bottom:100px">
