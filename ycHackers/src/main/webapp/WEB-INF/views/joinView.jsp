@@ -46,28 +46,28 @@
 			</div>
 			<div class="form-group">
 				<label for="userPw">비밀번호</label>
-				<input id="userPw" name="userPw" type="password" class="form-control" placeholder="대문자, 소문자, 특수문자, 8자 이상" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$" required/>
+				<input id="userPw" name="userPw" type="password" class="form-control" placeholder="대문자, 소문자, 특수문자, 8자 이상" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,16}$" required/>
 			</div>
 			<div class="form-group">
 				<label for="pwValid">비밀번호 확인</label>
-				<input id="pwValid" class="form-control" type="password" placeholder="한번 더 입력해주세요." pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$" required/>
+				<input id="pwValid" class="form-control" type="password" onChange="pwV" placeholder="한번 더 입력해주세요." pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,16}$" required/>
 			</div>
 			<input type="hidden" name="userAuth" value="."/>
 			<div class="form-group">
 				<label for="userName">이름</label>
-				<input id="userName" name="userName" type="text" class="form-control" required/>
+				<input id="userName" name="userName" type="text" class="form-control" placeholder="한글 이름을 입력해주세요." pattern="[가-힣]{2,10}" required/>
 			</div>
 			<div class="form-group">
 				<label for="userPhone">전화번호</label>
-				<input id="userPhone" name="userPhone" type="text" class="form-control" placeholder="000-0000-0000" required/>
+				<input id="userPhone" name="userPhone" type="text" class="form-control" placeholder="000-0000-0000" pattern="(010)-\d{3,4}-\d{4}" required/>
 			</div>
 			<div class="form-group">
 				<label for="userBirth">생년월일</label>
-				<input id="userBirth" name="userBirth" type="date" class="form-control"/>
+				<input id="userBirth" name="userBirth" type="date" class="form-control"	pattern="\d{4}-[1-12]{2}-[1-31]{2}" onchange="birthValid" required/>
 			</div>
 			<div class="form-group">
 				<label for="userLocation">내 지역</label>
-				<input id="userLocation" name="userLocation" type="text" class="form-control" placeholder="data.go.kr API 적용"/>
+				<input id="userLocation" name="userLocation" type="text" placeholder="우편번호를 적어주세요." pattern="\d{5}" class="form-control" placeholder="data.go.kr API 적용"/>
 			</div>
 			<div class="form-group">
 				<label for="userGender">성별</label>
@@ -118,9 +118,40 @@ document.querySelectorAll("input").forEach(input => {
 });
 
 const pw = document.querySelector("#userPw");
-const pwValid = document.querySelector("#pwValid").value;
-const pwConp = (pw.value==pwValid);
+const pwValid = document.querySelector("#pwValid");
+let validM="";
+let pwConp=false;
+function pwV(){
+	if(pw.value!=pwValid.value){
+		document.querySelector("#pwValid").classList.add("was_validated");
+		pwConp=false;
+		validM="비밀번호가 일치하지않습니다. "
+	}else{
+		document.querySelector("#pwValid").classList.remove("was_validated");
+		pwConp=true;
+	}
+}
+/* 생일 검증 필요
+const birth = document.querySelector("#userBirth");
+const birthDate = birth.value;
+const currDate = new Date();
+let dateB = false;
+if(473040000000 < currDate-birthDate){
+	dateB=true;
+	validM="15세 이하는 가입할 수 없습니다. "
+}
+if(0 < currDate-birthDate){
+	dateB=true;
+	validM="현재보다 이후의 날짜는 입력할 수 없습니다.";
+}
 
+function birthValid(){
+	if(dateB){
+		alert(dateM);
+		pwConp=false;
+	}
+}
+*/
 $(document).ready(function(){
 	$("#joinFrm").submit(function(e){
 		e.preventDefault();
@@ -148,8 +179,7 @@ $(document).ready(function(){
 			});	
 		}
 		else{
-			alert("비밀번호가 일치하지 않습니다.");
-			pw.focus();
+			alert(validM);
 			return false;
 		}
 	});
