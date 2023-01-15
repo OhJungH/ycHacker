@@ -42,7 +42,7 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<div class="form-group">
 				<label for="userId">E-mail</label>
-				<input id="userId" name="userId" type="email" class="form-control" placeholder="email 주소를 적어주세요."pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required/>
+				<input id="userId" name="userId" type="email" class="form-control" placeholder="email 주소를 적어주세요." pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required/>
 			</div>
 			<div class="form-group">
 				<label for="userPw">비밀번호</label>
@@ -50,7 +50,7 @@
 			</div>
 			<div class="form-group">
 				<label for="pwValid">비밀번호 확인</label>
-				<input id="pwValid" class="form-control" type="password" onChange="pwV" placeholder="한번 더 입력해주세요." pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,16}$" required/>
+				<input id="pwValid" class="form-control" type="password" placeholder="한번 더 입력해주세요." required/>
 			</div>
 			<input type="hidden" name="userAuth" value="."/>
 			<div class="form-group">
@@ -63,7 +63,7 @@
 			</div>
 			<div class="form-group">
 				<label for="userBirth">생년월일</label>
-				<input id="userBirth" name="userBirth" type="date" class="form-control"	pattern="\d{4}-[1-12]{2}-[1-31]{2}" onchange="birthValid" required/>
+				<input id="userBirth" name="userBirth" type="date" class="form-control"	pattern="\d{4}-[1-12]{2}-[1-31]{2}" required/>
 			</div>
 			<div class="form-group">
 				<label for="userLocation">내 지역</label>
@@ -71,8 +71,8 @@
 			</div>
 			<div class="form-group">
 				<label for="userGender">성별</label>
-				<select class="form-control" id="userGender" name="userGender">
-					<option>선택해주세요.</option>
+				<select class="form-control" id="userGender" name="userGender" required>
+					<option value="">선택해주세요.</option>
 					<option value="1">남성</option>
 					<option value="2">여성</option>
 				</select>
@@ -116,45 +116,73 @@ document.querySelectorAll("input").forEach(input => {
 		document.forms[0].classList.add("was_validated");
 	});
 });
-
-const pw = document.querySelector("#userPw");
-const pwValid = document.querySelector("#pwValid");
-let validM="";
 let pwConp=false;
-function pwV(){
+let validM="";
+
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '-' + month + '-' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+}
+
+function formDataValid(){
+	//비밀번호 확인
+	const pw = document.querySelector("#userPw");
+	const pwValid = document.querySelector("#pwValid");
+	
 	if(pw.value!=pwValid.value){
 		document.querySelector("#pwValid").classList.add("was_validated");
 		pwConp=false;
 		validM="비밀번호가 일치하지않습니다. "
+		pwValid.focus();
 	}else{
 		document.querySelector("#pwValid").classList.remove("was_validated");
 		pwConp=true;
 	}
-}
-/* 생일 검증 필요
-const birth = document.querySelector("#userBirth");
-const birthDate = birth.value;
-const currDate = new Date();
-let dateB = false;
-if(473040000000 < currDate-birthDate){
-	dateB=true;
-	validM="15세 이하는 가입할 수 없습니다. "
-}
-if(0 < currDate-birthDate){
-	dateB=true;
-	validM="현재보다 이후의 날짜는 입력할 수 없습니다.";
-}
-
-function birthValid(){
+	
+	//생년월일 확인
+	let dateB = false;
+	const birth = document.querySelector("#userBirth");
+	const birthD = new Date(birth.value);
+	let birthDate=getFormatDate(birthD);
+	
+	let date = new Date();
+	let currDate = getFormatDate(date);
+	date.setDate(date.getDate()-5110);
+	let minDate = getFormatDate(date);
+	console.log("b:"+birthDate+"/c:"+currDate+"/m:"+minDate)
+	
+	if(birthDate>currDate){
+		dateB=true;
+		validM +="\n 현재보다 이후의 날짜는 입력할 수 없습니다.";
+		birth.focus();
+	}
+	else if(birthDate>minDate){
+		dateB=true;
+		validM +="\n 14세 이하는 가입할 수 없습니다. "
+		birth.focus();
+	}
+	
+	let gender = document.querySelector("select");
+	let genderData = gender.value;
+	if(genderData===""){
+		dateB=true;
+		validM +="\n 성별을 선택해주세요.";
+		gender.focus();
+	}
+	
 	if(dateB){
-		alert(dateM);
 		pwConp=false;
 	}
 }
-*/
+
 $(document).ready(function(){
 	$("#joinFrm").submit(function(e){
 		e.preventDefault();
+		formDataValid();
 		if(pwConp){
 			$.ajax({
 				url:$("#joinFrm").attr("action"),
