@@ -33,5 +33,14 @@ public class MainController {
 		System.out.println("joinView request at home");
 		return "joinView";
 	}
-
+	@RequestMapping("/Reservation")
+	public String Reservation(HttpServletRequest request, Model model) {
+		System.out.println("Res request");
+		return "Reservation";
+	}
+	@RequestMapping("myResInfo")
+	public String myResInfo(HttpServletRequest request, Model model) {
+		System.out.println("myResInfo request");
+		return "myResInfo";
+	}
 }
