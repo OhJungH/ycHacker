@@ -20,7 +20,6 @@
 	
 	<context:property-placeholder location="classpath:/config/database.properties"/>
 	
-	
 	<!-- 수정 시작 부분 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
@@ -31,7 +30,6 @@
 	<resources location="/resources/js/" mapping="/js/**"/>
 	<resources location="/resources/style/" mapping="/style/**"/>
 	
-
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
