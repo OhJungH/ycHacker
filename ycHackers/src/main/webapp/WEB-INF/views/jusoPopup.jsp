@@ -11,7 +11,7 @@ String zipNo = request.getParameter("zipNo");
 String addrDetail = request.getParameter("addrDetail");
 String admCd = request.getParameter("admCd");
 String rnMgtSn = request.getParameter("rnMgtSn");
-String bdMgtSn = request.getParameter("bdMgtSn");
+String bdMgtSn = request.getParameter("bdMgtSn"); 
 String detBdNmList = request.getParameter("detBdNmList");
 //** 2017년 2월 추가제공 **/
 String bdNm = request.getParameter("bdNm"); String bdKdcd = request.getParameter("bdKdcd"); String siNm = request.getParameter("siNm"); String sggNm = request.getParameter("sggNm"); String emdNm = request.getParameter("emdNm"); String liNm = request.getParameter("liNm"); String rn = request.getParameter("rn");
