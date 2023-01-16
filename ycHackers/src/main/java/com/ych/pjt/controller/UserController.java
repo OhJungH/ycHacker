@@ -46,10 +46,4 @@ public class UserController {
 			return "join-failed";
 		}
 	}
-	/*
-	@RequestMapping("/jusoPopup")
-	public String jusoPopup(HttpServletRequest req, Model model) {
-		System.out.println("jusoPopup request");
-		return "jusoPopup";
-	}*/
 }
