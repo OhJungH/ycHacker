@@ -29,8 +29,8 @@
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 <!--custom Style-->
-<link rel="stylesheet" href="style/joinView.css"/>
-<link rel="stylesheet" href="style/footer.css"/>
+    <link rel="stylesheet" href="style/joinView.css"/>
+    <link rel="stylesheet" href="style/footer.css"/>
 </head>
 <body>
 
@@ -42,38 +42,37 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<div class="form-group">
 				<label for="userId">E-mail</label>
-				<input id="userId" name="userId" type="email" class="form-control" placeholder="email 주소를 적어주세요." pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required/>
+				<input id="userId" name="userId" type="email" class="form-control" placeholder="email 주소를 적어주세요."pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required/>
 			</div>
 			<div class="form-group">
 				<label for="userPw">비밀번호</label>
-				<input id="userPw" name="userPw" type="password" class="form-control" placeholder="대문자, 소문자, 특수문자, 8자 이상" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,16}$" required/>
+				<input id="userPw" name="userPw" type="password" class="form-control" placeholder="대문자, 소문자, 특수문자, 8자 이상" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$" required/>
 			</div>
 			<div class="form-group">
 				<label for="pwValid">비밀번호 확인</label>
-				<input id="pwValid" class="form-control" type="password" placeholder="한번 더 입력해주세요." required/>
+				<input id="pwValid" class="form-control" type="password" placeholder="한번 더 입력해주세요." pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$" required/>
 			</div>
 			<input type="hidden" name="userAuth" value="."/>
 			<div class="form-group">
 				<label for="userName">이름</label>
-				<input id="userName" name="userName" type="text" class="form-control" placeholder="한글 이름을 입력해주세요." pattern="[가-힣]{2,10}" required/>
+				<input id="userName" name="userName" type="text" class="form-control" required/>
 			</div>
 			<div class="form-group">
 				<label for="userPhone">전화번호</label>
-				<input id="userPhone" name="userPhone" type="text" class="form-control" placeholder="000-0000-0000" pattern="(010)-\d{3,4}-\d{4}" required/>
+				<input id="userPhone" name="userPhone" type="text" class="form-control" placeholder="000-0000-0000" required/>
 			</div>
 			<div class="form-group">
 				<label for="userBirth">생년월일</label>
-				<input id="userBirth" name="userBirth" type="date" class="form-control"	pattern="\d{4}-[1-12]{2}-[1-31]{2}" required/>
+				<input id="userBirth" name="userBirth" type="date" class="form-control"/>
 			</div>
 			<div class="form-group">
 				<label for="userLocation">내 지역</label>
-				<input id="userLocation" name="userLocation" type="text" placeholder="주소를 검색해 우편번호 5자리 숫자를 입력합니다." pattern="\d{5}" class="form-control" placeholder="data.go.kr API 적용"/>
+				<input id="userLocation" name="userLocation" type="text" class="form-control" placeholder="data.go.kr API 적용"/>
 			</div>
-			<!-- onclick="goPopup()"  -->
 			<div class="form-group">
 				<label for="userGender">성별</label>
-				<select class="form-control" id="userGender" name="userGender" required>
-					<option value="">선택해주세요.</option>
+				<select class="form-control" id="userGender" name="userGender">
+					<option>선택해주세요.</option>
 					<option value="1">남성</option>
 					<option value="2">여성</option>
 				</select>
@@ -85,16 +84,6 @@
 		</form>
 	</div>
 </div>
-<!-- 
-<script>
-//우편번호 검색
-function goPopup(){
-	let pop = window.open("/pjt/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");
-}
-function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
-	document.form.userLocation.value = zipNo;
-}
-</script> -->
 <div id="footer">
 	<div class="footerBox">
 	<p id="footerPageName" class="footerLabel">YCHackers</p>
@@ -127,73 +116,14 @@ document.querySelectorAll("input").forEach(input => {
 		document.forms[0].classList.add("was_validated");
 	});
 });
-let pwConp=false;
-let validM="";
 
-function getFormatDate(date){
-    var year = date.getFullYear();              //yyyy
-    var month = (1 + date.getMonth());          //M
-    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-    var day = date.getDate();                   //d
-    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-    return  year + '-' + month + '-' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
-}
-
-function formDataValid(){
-	//비밀번호 확인
-	const pw = document.querySelector("#userPw");
-	const pwValid = document.querySelector("#pwValid");
-	
-	if(pw.value!=pwValid.value){
-		document.querySelector("#pwValid").classList.add("was_validated");
-		pwConp=false;
-		validM="비밀번호가 일치하지않습니다. "
-		pwValid.focus();
-	}else{
-		document.querySelector("#pwValid").classList.remove("was_validated");
-		pwConp=true;
-	}
-	
-	//생년월일 확인
-	let dateB = false;
-	const birth = document.querySelector("#userBirth");
-	const birthD = new Date(birth.value);
-	let birthDate=getFormatDate(birthD);
-	
-	let date = new Date();
-	let currDate = getFormatDate(date);
-	date.setDate(date.getDate()-5110);
-	let minDate = getFormatDate(date);
-	console.log("b:"+birthDate+"/c:"+currDate+"/m:"+minDate)
-	
-	if(birthDate>currDate){
-		dateB=true;
-		validM +="\n 현재보다 이후의 날짜는 입력할 수 없습니다.";
-		birth.focus();
-	}
-	else if(birthDate>minDate){
-		dateB=true;
-		validM +="\n 14세 이하는 가입할 수 없습니다. "
-		birth.focus();
-	}
-	
-	let gender = document.querySelector("select");
-	let genderData = gender.value;
-	if(genderData===""){
-		dateB=true;
-		validM +="\n 성별을 선택해주세요.";
-		gender.focus();
-	}
-	
-	if(dateB){
-		pwConp=false;
-	}
-}
+const pw = document.querySelector("#userPw");
+const pwValid = document.querySelector("#pwValid").value;
+const pwConp = (pw.value==pwValid);
 
 $(document).ready(function(){
 	$("#joinFrm").submit(function(e){
 		e.preventDefault();
-		formDataValid();
 		if(pwConp){
 			$.ajax({
 				url:$("#joinFrm").attr("action"),
@@ -218,7 +148,8 @@ $(document).ready(function(){
 			});	
 		}
 		else{
-			alert(validM);
+			alert("비밀번호가 일치하지 않습니다.");
+			pw.focus();
 			return false;
 		}
 	});
