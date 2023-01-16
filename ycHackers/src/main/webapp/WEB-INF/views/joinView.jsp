@@ -29,8 +29,8 @@
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 <!--custom Style-->
-    <link rel="stylesheet" href="style/joinView.css"/>
-    <link rel="stylesheet" href="style/footer.css"/>
+<link rel="stylesheet" href="style/joinView.css"/>
+<link rel="stylesheet" href="style/footer.css"/>
 </head>
 <body>
 
@@ -67,8 +67,9 @@
 			</div>
 			<div class="form-group">
 				<label for="userLocation">내 지역</label>
-				<input id="userLocation" name="userLocation" type="text" placeholder="우편번호를 적어주세요." pattern="\d{5}" class="form-control" placeholder="data.go.kr API 적용"/>
+				<input id="userLocation" name="userLocation" type="text" placeholder="주소를 검색해 우편번호 5자리 숫자를 입력합니다." pattern="\d{5}" class="form-control" placeholder="data.go.kr API 적용"/>
 			</div>
+			<!-- onclick="goPopup()"  -->
 			<div class="form-group">
 				<label for="userGender">성별</label>
 				<select class="form-control" id="userGender" name="userGender" required>
@@ -84,6 +85,16 @@
 		</form>
 	</div>
 </div>
+<!-- 
+<script>
+//우편번호 검색
+function goPopup(){
+	let pop = window.open("/pjt/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");
+}
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+	document.form.userLocation.value = zipNo;
+}
+</script> -->
 <div id="footer">
 	<div class="footerBox">
 	<p id="footerPageName" class="footerLabel">YCHackers</p>
