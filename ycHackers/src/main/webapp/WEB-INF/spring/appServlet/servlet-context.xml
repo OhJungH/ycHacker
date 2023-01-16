@@ -17,7 +17,10 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-
+	
+	<context:property-placeholder location="classpath:/config/database.properties"/>
+	
+	
 	<!-- 수정 시작 부분 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
@@ -38,8 +41,8 @@
 	<beans:bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" >
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url" value="jdbc:mysql://localhost:3306/studyroom" />
-		<beans:property name="username" value="root" />
-		<beans:property name="password" value="wgdr1350" />
+		<beans:property name="username" value="{mysqlDb.username}" />
+		<beans:property name="password" value="{mysqlDb.password}" />
 	</beans:bean>
 	
 	<!-- dataSource bean을 멤버필드로 사용하는 JdbeTemplate bean 정의 -->
