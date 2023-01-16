@@ -84,7 +84,7 @@
 			<input type="date" id="resDate" name="resDate" style="width:500px;">
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
-			<label for="resTime">예약시간</label>
+			<label for="resTime">예약시간1</label>
 			<input type="text" id="resTime" name="resTime" style="width:500px;">
 		</div>
 	</form>

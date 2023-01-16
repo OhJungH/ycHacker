@@ -30,20 +30,27 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-<div style="margin-top:50px; margin-left:350px;">
-<select style="margin-right:70px;">
-	<option>지역</option>
-	<option>강남구</option>
-	<option>강서구</option>
-	<option>양천구</option>
-</select>
-<select>
-	<option>인원</option>
-	<option>2</option>
-	<option>3</option>
-	<option>4</option>
-</select>
-</div>
+
+<form action="cafeDetail" method="get" id="cafeSearch" name="cafeSearch">
+	<input type="hidden" value="search" name="viewType">
+	<input hidden="hidden" value="total" id="searchWhat" name="searchWhat">
+	<input hidden="hidden" value="location" id="chose" name="chose">
+			<div class="dropdown">
+				<div class="dropdown-menu">
+					<a class="dropdown-item search" id="total" style="display:none;">전체검색</a>
+					<a class="dropdown-item search" id="location">지역</a>
+					<a class="dropdown-item searhc" id="people">인원</a>
+				</div>
+			</div>	
+	<div style = "text-align: center;">
+	<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" style= "width:70px; height:50px; ">제목</button>
+	<input type="text" style="width: 550px; height:50px;">
+		
+			<button type="submit" class="btn btn-dark" id="searchSubmit" style="height:50px; ">검색</button>
+		
+	</div>
+</form>
+
 <div id="mainRegion" class="container mt-3">
 	<div class="row mb-3" style="float:left; margin-left:-50px; margin-bottom:100px">
 			<div class="col-md-4" style="height:auto;">
@@ -53,87 +60,55 @@
 					<span style="white-space:nowrap;">스터디룸 소개글</span>
 			</div>
 	</div>
-	<div class="row mb-3" style="float:left; margin-left:100px; margin-bottom:100px">
-			<div class="col-md-4" style="height:auto;">
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-					<span style="white-space:nowrap;">스터디룸 소개글</span>
-			</div>
-	</div>
-	<div class="row mb-3">
-			<div class="col-md-4" style="height:auto; margin-left:100px; margin-bottom:100px" >
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-					<span style="white-space:nowrap;">스터디룸 소개글</span>
-			</div>
-	</div>
-	<div class="row mb-3" style="float:left; margin-left:-50px; margin-bottom:100px">
-			<div class="col-md-4" style="height:auto;">
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-			</div>
-	</div>
-	<div class="row mb-3" style="float:left; margin-left:100px; margin-bottom:100px">
-			<div class="col-md-4" style="height:auto;">
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-			</div>
-	</div>
-	<div class="row mb-3">
-			<div class="col-md-4" style="height:auto; margin-left:100px; margin-bottom:100px" >
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-			</div>
-	</div>
-	<div class="row mb-3" style="float:left; margin-left:-50px; margin-bottom:100px">
-			<div class="col-md-4" style="height:auto;">
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-			</div>
-	</div>
-	<div class="row mb-3" style="float:left; margin-left:100px; margin-bottom:100px">
-			<div class="col-md-4" style="height:auto;">
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-			</div>
-	</div>
-	<div class="row mb-3">
-			<div class="col-md-4" style="height:auto; margin-left:100px; margin-bottom:100px" >
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-			</div>
-	</div>
-	<div class="row mb-3" style="float:left; margin-left:-50px; margin-bottom:100px">
-			<div class="col-md-4" style="height:auto;">
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-			</div>
-	</div>
-	<div class="row mb-3" style="float:left; margin-left:100px; margin-bottom:100px">
-			<div class="col-md-4" style="height:auto;">
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-			</div>
-	</div>
-	<div class="row mb-3">
-			<div class="col-md-4" style="height:auto; margin-left:100px; margin-bottom:100px" >
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px">
-				</div>
-			</div>
-	</div>
 </div>
 
+<script>
+$(document).ready(function() {
+	$("#cafeDetail").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : "cafeDetail?chose=location",
+			type : "get",
+			data {
+			viewType : "all"
+			},
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러");
+			}
+		});
+	});
+	$("a.search").on("click", function(event) {
+		$("a.search").attr("style", "display : inline;");
+		$("button.search").text($(event.target).text());
+		$("#searchWhat").attr("value", $(event.target).attr("id"));
+		$(event.target).attr("style". "display: none;");
+	});
+	$("#searchSubmit").on("click", function() {
+		let search = $("serach").val();
+		if(search =="") {
+			alert("검색어를 입력");
+			return false;
+		}
+		return true;
+	});
+	$("#cafeSearch").on("submit", function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#cafeSearch").attr("action"),
+			type : $("#cafeSearch").attr("method"),
+			data : $("#cafeSearch").serialize(),
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러");
+			}
+		});
+	});
+});
+</script>
 </body>
-
 </html>
