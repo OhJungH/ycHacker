@@ -4,5 +4,8 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- dao interface - mapper --> 
 <mapper namespace="com.ych.pjt.dao.IResDao">
-		
+<insert id="Res" parameterType="com.ych.pjt.dto.ResDto">
+INSERT INTO restbl(RESNUM,RESNAME,RESBIRTH,RESPHONE,RESDATE,RESTIME,RESMEMBER,RESCOMMENTS,CAFEPHONE)
+VALUES((SELECT nextval('resseq') FROM DUAL), #{resName},#{resBirth},#{resPhone},#{resDate},#{resTime},#{resMember},#{resComments},#{cafePhone})
+</insert>
 </mapper>
