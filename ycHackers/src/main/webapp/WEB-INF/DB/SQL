@@ -47,15 +47,14 @@ CREATE TABLE `studyroom`.`cafelist` (
 <<<<< ResTBL tbl
 CREATE TABLE ResTBL
 (
-	resnum int(100) not null primary key,
+	resnum int not null primary key,
 	resname varchar(20),
 	resbirth date,
-	resphone varchar(20),
-	resdate date,
-	restime timestamp,
+	resphone varchar(20),	
+	restime varchar(20),
 	resmember int,
 	rescomments varchar(3000),
-	cafephone varchar(20)
+	cafephone varchar(20)	
 );
 >>>>>
 <<<<< sequences
@@ -102,16 +101,15 @@ DELIMITER $$
 >>>>>
 
 <<<<< ResTBL tbl
-create table ResTBL(
-resnum int(100) not null primary key,
-resname varchar(20),
-resbirth date,
-resphone varchar(20),
-resdate date,
-restime timestamp
-resmember int(100),
-rescomments varchar(3000)
-cafephone varchar(20)
+CREATE TABLE ResTBL(
+	RESNUM INT NOT NULL PRIMARY KEY,
+	RESNAME VARCHAR(20),
+	RESBIRTH DATE,
+	RESPHONE VARCHAR20),	
+	RESTIME VARCHAR(20),
+	RESMEMBER INT,
+	RESCOMMENTS VARCHAR(3000),
+	CAFEPHONE VARCHAR(20)	
 );
 >>>>>
 
