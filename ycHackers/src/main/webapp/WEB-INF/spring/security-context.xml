@@ -23,7 +23,6 @@
 		<intercept-url pattern="/js/**" access="permitAll"/>
 		<intercept-url pattern="/style/**" access="permitAll"/>	
 		<!-- isAnonymous(): 로그인 안한 상태(비회원)만 접근 -->	
-		<intercept-url pattern="/*" access="isAnonymous()"/> <!-- 지금은 모든 접근가능(나중에 삭제) -->
 		<intercept-url pattern="/home" access="isAnonymous()"/>
 		<intercept-url pattern="/infoBoardHome" access="isAnonymous()"/>
 		<intercept-url pattern="/joinViewHome" access="isAnonymous()"/>
