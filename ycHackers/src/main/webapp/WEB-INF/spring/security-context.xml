@@ -29,6 +29,10 @@
 		<intercept-url pattern="/join" access="isAnonymous()"/>			
 		<intercept-url pattern="/login" access="isAnonymous()"/>
 		<intercept-url pattern="/loginView" access="isAnonymous()"/>
+			<!-- social login url -->
+		<intercept-url pattern="/kredirect" access="isAnonymous()"/>
+		<intercept-url pattern="/nredirect" access="isAnonymous()"/>
+		<intercept-url pattern="/gredirect" access="isAnonymous()"/>
 		<intercept-url pattern="/Res" access="isAnonymous()"/> <!-- 로그인 한 상태로 바뀌어야 됨 -->
 		<intercept-url pattern="/myResInfo" access="isAnonymous()"/> <!-- 로그인 한 상태로 바뀌어야 됨 -->		
 		<!-- hasRole(): ()안의 권한을 획득한 사람만 접근 -->
