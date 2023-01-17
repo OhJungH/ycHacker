@@ -15,6 +15,7 @@
 <!-- MS -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <title>login page</title>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -41,7 +42,7 @@
 			<input class="loginControl form-control" name="userId" type="email"  placeholder="abcd@efg.hij" required/>
 		</div>
 		<div class="input-group">
-			<input class="loginControl form-control" name="userPw" type="password"/>
+			<input class="loginControl form-control" name="userPw" type="password" required/>
 			<div class="input-group-append">
 				<button class="btn btn-outline-success" type="submit">로그인</button>
 			</div>
@@ -54,6 +55,7 @@
 				remember me?
 			</label>
 		</div>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
 	<a href="#">
 		<img class="socialLoginIcon rounded-circle" alt="kakaoBtn" src="https://cs.kakao.com/img/cskakaocom/pc/thumb/thumb_kakaotalk.png"/>
@@ -91,5 +93,23 @@
 		</p>
 	</div>
 </div>
+<script>
+<c:choose>
+	<c:when test="${not empty log}">
+		$("#loginfo").text("welcome");
+	</c:when>
+	<c:when test="${not empty logout}">
+		$("#skillTitle").text("log out 완료");
+		$("#skillDetails").text("spring security를 통해 로그아웃했습니다. HttpSession의 rememberMe 쿠키를 만료시켜 사용자 정보를 삭제했습니다.");
+		$("#loginfo").text("log out 성공");
+	</c:when>
+	<c:when test="${not empty error}">
+		$("#loginfo").text("welcome");
+	</c:when>
+	<c:otherwise>
+		$("#loginfo").text("information");
+	</c:otherwise>
+</c:choose>
+</script>
 </body>
 </html>

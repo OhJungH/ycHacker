@@ -8,4 +8,10 @@
 	INSERT INTO UserData(USERNUM,USERID,USERPW,USERNAME,USERPHONE,USERBIRTH,USERLOCATION,USERGENDER)
 	VALUES ((SELECT nextval('userseq') FROM DUAL), #{userId}, #{userPw}, #{userName}, #{userPhone}, #{userBirth}, #{userLocation}, #{userGender})
 </insert>
+<select id="login" resultType="com.ych.pjt.dto.UserDataDto">
+	SELECT * FROM UserData WHERE USERID=#{userId} 
+</select>
+<select id="userMainData" resultType="com.ych.pjt.dto.UserDataDto">
+	SELECT * FROM UserData WHERE USERID=#{userId}
+</select>
 </mapper>

@@ -113,3 +113,5 @@ CREATE TABLE ResTBL(
 );
 >>>>>
 
+<<<<< admin 계정 가입 후 변경
+UPDATE UserData SET USERAUTH='ROLE_ADMIN' WHERE USERNUM=3;
