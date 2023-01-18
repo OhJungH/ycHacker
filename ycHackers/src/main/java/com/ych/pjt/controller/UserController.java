@@ -2,10 +2,12 @@ package com.ych.pjt.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -20,22 +22,33 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.UserJoinCommand;
 import com.ych.pjt.command.UserMainDataCommand;
 import com.ych.pjt.dao.UserDao;
+import com.ych.pjt.dto.UserDataDto;
+import com.ych.pjt.naver.NaverLoginBO;
 import com.ych.pjt.util.Constant;
 
 @Controller
 public class UserController {
 	private IYchCommand com;
+	private static String KAKAO_CLIENT_ID = "kakao developer 개인고유번호";
 	
+	//Dependency Injection
 	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
 	public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
@@ -48,7 +61,17 @@ public class UserController {
 		this.uDao=uDao;
 		Constant.uDao=uDao;
 	}
-	private static String KAKAO_CLIENT__ID = "kakao developer 개인고유번호";
+		//social login(naver, google)
+	private NaverLoginBO naverLoginBO;
+	@Autowired
+	public void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
+	@Autowired
+	private GoogleConnectionFactory googleConnectionFactory;
+	@Autowired
+	private OAuth2Parameters googleOAuth2Parameters;
+
 	@RequestMapping("/join")
 	@ResponseBody
 	public String join (HttpServletRequest req, HttpServletResponse res, Model model) {
@@ -120,20 +143,35 @@ public class UserController {
 		System.out.println("log out request");
 		return "logoutView";
 	}
+	
+	//social login method
 	private void socialURL(Model model, HttpSession session) {
 		String kakao_url = "https://kauth.kakao.com/oauth/authorize"
-				+ "?client_id="+KAKAO_CLIENT__ID
+				+ "?client_id="+KAKAO_CLIENT_ID
 				+ "&redirect_uri=https://localhost:8443/pjt/kredirect"
 				+ "&response_type=code";
+		System.out.println("socialURL###kakao: "+kakao_url+"\n");
 		model.addAttribute("kakao_url",kakao_url);
 		
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		System.out.println("socialURL###naver: "+naverAuthUrl+"\n");
+		model.addAttribute("naver_url", naverAuthUrl);
+		
+		OAuth2Operations oAuthOperations = googleConnectionFactory.getOAuthOperations();
+		String url = oAuthOperations.buildAuthenticateUrl(GrantType.AUTHORIZATION_CODE,googleOAuth2Parameters);
+		System.out.println("google OAuth2.0 url: "+url);
+		model.addAttribute("google_url", url);
+		
 	}
+	
 	//kakao login redirect
 	@RequestMapping(value="/kredirect", produces="application/json;charset=UTF8")
 	public String kredirect(
 			@RequestParam String authorize_code,
+			HttpServletRequest req,
 			HttpServletResponse res,
 			Model model) throws Exception {
+		System.out.println("kakao redirect request");
 		System.out.println("#####kakaoCode#####"+authorize_code);
 		String access_Token=getKakaoAccessToken(authorize_code,res);
 		System.out.println("###kakao access_token###"+access_Token);
@@ -158,7 +196,7 @@ public class UserController {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id="+KAKAO_CLIENT__ID);
+			sb.append("&client_id="+KAKAO_CLIENT_ID);
 			sb.append("&redirect_uri=https://localhost:8443/pjt/kredirect");
 			sb.append("&code="+code);
 			bw.write(sb.toString());
@@ -226,4 +264,108 @@ public class UserController {
 		}
 		return userInfo;
 	}
+	
+	//naver login redirect
+	@RequestMapping(value="/nredirect", produces="application/json;charset=UTF8")
+	public String nredirect(
+			@RequestParam String code,
+			@RequestParam String state,
+			HttpServletRequest req,
+			HttpSession session, Model model) throws Exception {
+		System.out.println("naver redirect request");
+		OAuth2AccessToken oAuthToken = naverLoginBO.getAccessToken(session, code, state);
+		String apiResult = naverLoginBO.getUserProfile(oAuthToken);
+		System.out.println("###naver code###: "+code);
+		System.out.println("state: "+state);
+		System.out.println("apiResult: "+apiResult);
+		
+		JSONParser parser = new JSONParser();
+		Object object = parser.parse(apiResult);
+		JSONObject jsonObj = (JSONObject)object;
+		JSONObject responseObj = (JSONObject)jsonObj.get("response");
+		System.out.println("user data: "+responseObj);
+		
+		String id =(String)responseObj.get("id");
+		String email = (String)responseObj.get("email");
+		String genderSt = (String)responseObj.get("gender");
+		int gender = 0;
+		if(genderSt.equals("M")) gender=1;
+		if(genderSt.equals("W")) gender=2;
+		String birthDay =(String)responseObj.get("birthday");
+		String birthyear = (String)responseObj.get("birthyear");
+		String birthday = birthyear+"-"+birthDay;
+		String name=(String)responseObj.get("name");
+		String phone=(String)responseObj.get("mobile");
+		System.out.println("email: "+email+"/ gender(M1/W2): "+gender
+				+"/birthday: "+birthday+"/name: "+name+"/phone: "+phone);
+		UserDataDto dto = new UserDataDto(0,email,"asdASD!!","",name,phone,null,0,gender,null);
+		model.addAttribute("email", email);
+		model.addAttribute("name", name);
+		model.addAttribute("id",id);
+		model.addAttribute("userDto", dto);
+		
+		return "socialLogin";
+	}
+	
+	//google login redirect
+	@RequestMapping(value="/gredirect",produces="application/text;charset=UTF8")
+	public String googleCallback(
+			@RequestParam String code,
+			HttpServletRequest req,
+			HttpServletResponse res,
+			Model model) throws IOException {
+		System.out.println("google redirect request");
+		OAuth2Operations oAuthOperations = googleConnectionFactory.getOAuthOperations();
+		AccessGrant accessGrant = oAuthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(), null);
+		String accessToken = accessGrant.getAccessToken();
+		System.out.println("###google_access_token###: "+accessToken);
+		
+		HashMap<String, Object> map = getGoogleUserInfo(accessToken, res);
+		String email = (String)map.get("email");
+		String authUsername = "google_"+email;
+		String name = (String)map.get("name");
+		String id = (String)map.get("id");
+
+		model.addAttribute("email", email);
+		model.addAttribute("name", name);
+		model.addAttribute("id", id);
+		model.addAttribute("authUsername", authUsername);
+		model.addAttribute("userMap", map);
+		return "socialLogin";
+	}
+	private HashMap<String, Object> getGoogleUserInfo(String accessToken,HttpServletResponse res){
+		res.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html;charset=UTF-8");
+		HashMap<String, Object> googleUserInfo = new HashMap<String, Object>();
+		
+		String reqURL="https://www.googleapis.com/userinfo/v2/me?access_token="+accessToken;
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+			connection.setRequestProperty("Authorization", "Bearer"+accessToken);
+			int responseCode = connection.getResponseCode();
+			if(responseCode==200) {//connect success code: 200
+				BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
+				String line="";
+				String result="";
+				while((line=br.readLine())!=null)result+=line;
+				JSONParser parser = new JSONParser();
+				Object object = parser.parse(result);
+				JSONObject jsonObj = (JSONObject)object;
+				String name_obj=(String)jsonObj.get("name");
+				String email_obj=(String)jsonObj.get("email");
+				String id_obj="GOOGLE_"+(String)jsonObj.get("id");
+				
+				googleUserInfo.put("name", name_obj);
+				googleUserInfo.put("email", email_obj);
+				googleUserInfo.put("id", id_obj);
+				System.out.println("googleUserInfo: "+googleUserInfo);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return googleUserInfo;
+	}
+	
 }
