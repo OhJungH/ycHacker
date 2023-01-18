@@ -29,7 +29,7 @@
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- custom style -->
-<link rel="stylesheet" href="html/MyResInfo">
+<link rel="stylesheet" href="html/MyResInfo.html">
 </head>
 <body>
 <div class="container" style="text-align:center">
@@ -64,6 +64,11 @@
        	</div>
 	</div>	
 </nav>
+
+<a>
+	<img src="../image/img_avatar2.png" style="width:400px;height:300px;">
+</a>
+
 <div>
 	<form action="myResInfo" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -87,6 +92,8 @@
 			<label for="resTime">예약시간</label>
 			<input type="text" id="resTime" name="resTime" style="width:500px;">
 		</div>
+		<button type="submit" class="btn btn-success">예약변경</button>
+		<button type="submit" class="btn btn-danger">예약취소</button>
 	</form>
 </div>
 

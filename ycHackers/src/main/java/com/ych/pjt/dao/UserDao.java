@@ -15,7 +15,7 @@ public class UserDao implements IUserDao {
 		String result = null;
 		try {
 			int res = sqlSession.insert("userJoin",dto);
-			System.out.println("dao res: "+res);
+			System.out.println("join request res: "+res);
 			if(res>0) {
 				result="success";
 			}else {
@@ -26,5 +26,19 @@ public class UserDao implements IUserDao {
 			result="failed";
 		}
 		return result;
+	}
+
+	@Override
+	public UserDataDto login(String userId) {
+		System.out.println("login request: "+userId);
+		UserDataDto result=sqlSession.selectOne("login", userId);
+		return result;
+	}
+
+	@Override
+	public UserDataDto userMainData(String userId) {
+		System.out.println("userMainData method");
+		UserDataDto dto = sqlSession.selectOne("userMainData",userId);
+		return dto;
 	}
 }

@@ -18,11 +18,6 @@ public class MainController {
 		System.out.println("home request");
 		return "home";
 	}
-	@RequestMapping("/loginView")
-	public String loginView(HttpServletRequest request, Model model) {
-		System.out.println("loginView request at home");
-		return "loginView";
-	}
 	@RequestMapping("/infoBoardHome")
 	public String infoBoard(HttpServletRequest request, Model model) {
 		System.out.println("infoBoard request at home");
@@ -33,14 +28,5 @@ public class MainController {
 		System.out.println("joinView request at home");
 		return "joinView";
 	}
-	@RequestMapping("/Reservation")
-	public String Reservation(HttpServletRequest request, Model model) {
-		System.out.println("Res request");
-		return "Reservation";
-	}
-	@RequestMapping("myResInfo")
-	public String myResInfo(HttpServletRequest request, Model model) {
-		System.out.println("myResInfo request");
-		return "myResInfo";
-	}
+
 }
