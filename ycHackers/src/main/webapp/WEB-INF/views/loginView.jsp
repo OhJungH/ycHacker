@@ -60,10 +60,10 @@
 	<a id="klog" href="${kakao_url}">
 		<img class="socialLoginIcon rounded-circle" alt="kakaoBtn" src="https://cs.kakao.com/img/cskakaocom/pc/thumb/thumb_kakaotalk.png"/>
 	</a>
-	<a id="nlog" href="{naver_url}">
+	<a id="nlog" href="${naver_url}">
 		<img class="socialLoginIcon rounded-circle" alt="naverBtn" src="https://play-lh.googleusercontent.com/Kbu0747Cx3rpzHcSbtM1zDriGFG74zVbtkPmVnOKpmLCS59l7IuKD5M3MKbaq_nEaZM=w240-h480-rw"/>
 	</a>
-	<a id="glog" href="{google_url}">
+	<a id="glog" href="${google_url}">
 		<img class="socialLoginIcon rounded-circle" alt="googleBtn" src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1=w240-h480-rw"/>
 	</a>
 </div>
