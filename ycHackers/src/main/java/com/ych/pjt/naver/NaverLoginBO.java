@@ -55,6 +55,7 @@ public class NaverLoginBO {
 					.state(state)
 					.build(NaverLoginApi.instance());
 			OAuth2AccessToken accessToken = oAuthService.getAccessToken(code);
+			System.out.println("###naver_access_token###: "+accessToken);
 			return accessToken; 
 		}
 		else {

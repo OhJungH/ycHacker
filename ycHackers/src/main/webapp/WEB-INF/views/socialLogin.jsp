@@ -33,16 +33,15 @@
 <body>
 
 <div class="container">
-<!-- 카카오 비지니스로 등록하면 값을 받아 사용 -->
 	<form id="frm1" name="frm1" method = "post" action="login">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<div class="form-group">
 			<label for="uId">아이디</label>
-			<input type="hidden" class="form-control" name="userId" id="uId" value="aaa@naver.com"/>
+			<input type="hidden" class="form-control" name="userId" id="uId" value="${tempUser}"/>
 		</div>
 		<div class="form-group">
 			<label for="uPw">비밀번호</label>
-			<input type="hidden" class="form-control" name="userPw" id="uPw" value="12345"/>
+			<input type="hidden" class="form-control" name="userPw" id="uPw" value="${tempPw}"/>
 		</div>
 		<button id="subm" type="submit" class="btn btn-success">로그인</button>
 	</form>
