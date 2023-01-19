@@ -8,11 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import com.ych.pjt.command.IYchCommand;
+import com.ych.pjt.command.MyResInfoCommand;
+import com.ych.pjt.command.MyResModifyCommand;
+import com.ych.pjt.command.MyResModifyViewCommand;
 import com.ych.pjt.command.ResCommand;
 import com.ych.pjt.dao.ResDao;
 import com.ych.pjt.util.Constant;
@@ -34,30 +34,36 @@ public class ResController {
 		Constant.rDao = rDao;
 	}
 	
-	@RequestMapping(value="/Res",method=RequestMethod.POST)
-	@ResponseBody
-	public String res(HttpServletRequest req, HttpServletResponse response, Model model) {
-		System.out.println("Res request");
+	@RequestMapping("/resForm")
+	public String resForm(HttpServletRequest req, HttpServletResponse response, Model model) {
+		System.out.println("resForm request");
 		com = new ResCommand();
-		com.execute(req, model);
-		
-		String result = (String)req.getAttribute("result");
-		if(result.equals("success")) {
-			return "join-success";
-		}else {
-			return "join-failed";
-		}
+		com.execute(req,model);
+		//예약 list를 하는 경우 list용 Command 추가
+		return "resForm";
 	}
-	
-	@RequestMapping("/Reservation")
-	public String Reservation(HttpServletRequest request, Model model) {
-		System.out.println("Res request");
-		return "Reservation";
+		
+	@RequestMapping("/myResInfoView")
+	public String myResInfo(HttpServletRequest req, Model model) {
+		System.out.println("myResInfoView request");
+		com = new MyResInfoCommand();
+		com.execute(req, model);
+		return "myResInfoView";
+	}
+	@RequestMapping("/myResModifyForm")
+	public String myResModifyFrm(HttpServletRequest req, Model model) {
+		System.out.println("myResModifyForm requeset");
+		com = new MyResModifyViewCommand();
+		com.execute(req, model);	
+		return "myResModifyForm";
+	}
+	@RequestMapping("/myResModify")
+	public String myResModify(HttpServletRequest req, Model model) {
+		String num = req.getParameter("resNum");
+		System.out.println("my res modify request: "+num);
+		com = new MyResModifyCommand();
+		com.execute(req, model);
+		return "myResModify";
 	}
 
-	@RequestMapping("myResInfo")
-	public String myResInfo(HttpServletRequest request, Model model) {
-		System.out.println("myResInfo request");
-		return "myResInfo";
-	}
 }

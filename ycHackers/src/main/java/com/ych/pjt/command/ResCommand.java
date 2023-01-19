@@ -28,7 +28,7 @@ public class ResCommand implements IYchCommand {
 		ResDto dto = new ResDto(num, name, birth, phone, date, time, member, comments, cafephone);
 		
 		ResDao rdao = Constant.rDao;
-		String result = rdao.res(dto);
+		String result = rdao.resForm(dto);
 		System.out.println("result : " + result);	
 		req.setAttribute("result",result);
 	}

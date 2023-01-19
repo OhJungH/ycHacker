@@ -10,11 +10,11 @@ public class ResDao implements IResDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public String res(ResDto dto) {
+	public String resForm(ResDto dto) {
 		System.out.println("res method");
 		String result = null;
 		try {
-			int res = sqlSession.insert("Res",dto);
+			int res = sqlSession.insert("resForm",dto);
 			if(res > 0){
 				result="success";
 			}
@@ -29,4 +29,12 @@ public class ResDao implements IResDao {
 		
 		return result;
 	}
+	
+	/* ResModify */
+	@Override
+	public ResDto resModify(int resNum) {
+		ResDto dto = sqlSession.selectOne("resModify", resNum);
+		return dto;
+	}
+	
 }
