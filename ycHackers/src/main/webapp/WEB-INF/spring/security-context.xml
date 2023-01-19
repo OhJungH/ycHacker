@@ -36,7 +36,7 @@
 		<intercept-url pattern="/Res" access="isAnonymous()"/> <!-- 로그인 한 상태로 바뀌어야 됨 -->
 		<intercept-url pattern="/myResInfo" access="isAnonymous()"/> <!-- 로그인 한 상태로 바뀌어야 됨 -->		
 		<!-- hasRole(): ()안의 권한을 획득한 사람만 접근 -->
-		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')" requires-channel="https"/>
+		<intercept-url pattern="/**" access="hasAnyRole('ROLE_TEMPUSER','ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')" requires-channel="https"/>
 		
 		<form-login 
 			login-processing-url="/login"
