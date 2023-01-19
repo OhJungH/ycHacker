@@ -66,6 +66,9 @@
 	<a id="glog" href="${google_url}">
 		<img class="socialLoginIcon rounded-circle" alt="googleBtn" src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1=w240-h480-rw"/>
 	</a>
+	<a id="flog" href="{facebook_url}">
+		<img class="socialLoginIcon rounded-circle" alt="metaBtn" src="https://logosandtypes.com/wp-content/uploads/2022/03/metaverse.svg"/>
+	</a>
 </div>
 <div id="footer">
 	<div class="footerBox">
@@ -93,6 +96,7 @@
 		</p>
 	</div>
 </div>
+
 <script>
 <c:choose>
 	<c:when test="${not empty log}">
@@ -111,5 +115,63 @@
 	</c:otherwise>
 </c:choose>
 </script>
+<script type="text/javascript">
+/*facebook 로그인은 나중에...
+function getUserData() {
+	/* FB.api('/me', function(response) {
+        document.getElementById('response').innerHTML = 'Hello ' + response.name;
+        console.log(response);
+    }); 
+*/
+/* facebook 로그인은 나중에...
+    FB.api('/me', {fields: 'name,email'}, function(response) {
+        var facebookname = response.name;
+        window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/hansub_project/home?facebookname="+facebookname);
+});
+function metaLogin(){
+	//load the JavaScript SDK
+	(function(d, s, id){
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) {return;}
+	    js = d.createElement(s); js.id = id;
+	    js.src = "//connect.facebook.com/ko_KR/sdk.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+}
+$(document).ready(function(){
+	$("#flog").click(function(e){
+		e.preventDefault();
+		//already login facebook check
+		FB.getLoginStatus(function(response) {
+			statusChangeCallback(response);
+		});
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '2368003246689982',
+				cookie     : true,
+				xfbml      : true,
+				version    : 'v15.0'
+			});
+			FB.AppEvents.logPageView();   
+		};
+		metaLogin();
+	    //do the login
+	    	FB.login(function(response) {
+	        	if (response.authResponse) {
+	            	access_token = response.authResponse.accessToken; //get access token
+	            	user_id = response.authResponse.userID; //get FB UID
+	            	console.log('access_token = '+access_token);
+	            	console.log('user_id = '+user_id);
+	            	//user just authorized your app
+	            	//document.getElementById('loginBtn').style.display = 'none';
+	            	getUserData();
+	        	}
+	    	},
+	    	{scope: 'email,public_profile,user_birthday',return_scopes: true});
+	});
+});
+*/
+</script>
+
 </body>
 </html>
