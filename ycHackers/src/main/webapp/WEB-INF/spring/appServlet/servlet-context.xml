@@ -18,7 +18,6 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 	
-	<context:property-placeholder location="classpath:/config/database.properties"/>
 	
 	<!-- 수정 시작 부분 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
@@ -39,8 +38,8 @@
 	<beans:bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" >
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url" value="jdbc:mysql://localhost:3306/studyroom" />
-		<beans:property name="username" value="{mysqlDb.username}" />
-		<beans:property name="password" value="{mysqlDb.password}" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="wgdr1350" />
 	</beans:bean>
 	
 	<!-- dataSource bean을 멤버필드로 사용하는 JdbeTemplate bean 정의 -->
@@ -89,5 +88,19 @@
 	<beans:bean name="rDao" class="com.ych.pjt.dao.ResDao"/>	
 	<beans:bean name="cDao" class="com.ych.pjt.dao.CafeDao"/>	
 	<context:component-scan base-package="com.ych.pjt" />
+	
+	<!--  social log in -->
+	<beans:bean id="naverLoginBO" name="naverLoginBO" class="com.ych.pjt.naver.NaverLoginBO"/>
+	<!-- google social login class bean  -->
+	<!--   client ID와 security secret setting(구글 cloud에서 받는 API를 위한 key -->
+	<beans:bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
+		<beans:constructor-arg value="CLIENT_ID"/>
+		<beans:constructor-arg value="CLIENT_SECURITY_SECRET"/>
+	</beans:bean>
+	<!--   google oauth parameters -->
+	<beans:bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+		<beans:property name="scope" value="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email"/>
+		<beans:property name="redirectUri" value="https://localhost:8443/pjt/gredirect"/>
+	</beans:bean>
 	
 </beans:beans>

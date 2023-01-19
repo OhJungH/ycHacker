@@ -4,5 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- dao interface - mapper --> 
 <mapper namespace="com.ych.pjt.dao.ICafeDao">
-		
+		<select id="cafeList" resultType="com.ych.pjt.dto.CafeDto">
+			SELECT * FROM CAFELIST ORDER BY CAFENO DESC
+		</select>
 </mapper>

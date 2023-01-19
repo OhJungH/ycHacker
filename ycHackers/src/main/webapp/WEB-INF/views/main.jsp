@@ -49,7 +49,7 @@
 				<a class="nav-link" href="info">안내</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="search">검색</a>
+				<a class="nav-link" href="cafeList" id="cafeList">검색</a>
 			</li>
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE')">
 				<li class="nav-item">
@@ -157,8 +157,21 @@
 	</div>
 </div>
 <script>
-$(document).reaady(function(){
-    
+$(document).ready(function(){
+	$("#cafeList").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#cafeList").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
 });
 </script>
 
