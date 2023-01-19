@@ -10,6 +10,8 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,11 +36,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.ych.pjt.command.IYchCommand;
+import com.ych.pjt.command.ResCommand;
+import com.ych.pjt.command.TempUserCommand;
 import com.ych.pjt.command.UserJoinCommand;
 import com.ych.pjt.command.UserMainDataCommand;
 import com.ych.pjt.dao.UserDao;
+import com.ych.pjt.dto.TempUserDto;
 import com.ych.pjt.dto.UserDataDto;
 import com.ych.pjt.naver.NaverLoginBO;
 import com.ych.pjt.util.Constant;
@@ -163,6 +169,14 @@ public class UserController {
 		model.addAttribute("google_url", url);
 		
 	}
+	//Authority when social log in
+	private String social_Auth = "ROLE_TEMPUSER";
+	//method Saving temporary user data
+	private void tempDB(HttpServletRequest req, Model model, TempUserDto dto) {
+		com = new TempUserCommand();
+		req.setAttribute("dto", dto);
+		com.execute(req, model);
+	}
 	
 	//kakao login redirect
 	@RequestMapping(value="/kredirect", produces="application/json;charset=UTF8")
@@ -176,7 +190,18 @@ public class UserController {
 		String access_Token=getKakaoAccessToken(authorize_code,res);
 		System.out.println("###kakao access_token###"+access_Token);
 		HashMap<String, Object> userInfo = getKakaoUserInfo(access_Token);
-		model.addAttribute("kakaoUser", userInfo);
+		
+		String email = (String)userInfo.get("email");
+		String authUserName="kakao_"+email;
+		String authPw = (String)userInfo.get("name");
+		String cryptPw = passwordEncoder.encode(authPw);
+		
+		TempUserDto dto = new TempUserDto(authUserName, cryptPw, social_Auth);
+		tempDB(req,model,dto);
+		
+		model.addAttribute("tempUserInfo", userInfo);
+		model.addAttribute("tempUser", authUserName);
+		model.addAttribute("tempPw", authPw);
 		return "socialLogin";
 	}
 	public String getKakaoAccessToken (
@@ -284,9 +309,13 @@ public class UserController {
 		JSONObject jsonObj = (JSONObject)object;
 		JSONObject responseObj = (JSONObject)jsonObj.get("response");
 		System.out.println("user data: "+responseObj);
+	
+		@SuppressWarnings("unchecked")
+		HashMap<String, Object> userInfo = new ObjectMapper().readValue(responseObj.toString(), HashMap.class);
 		
 		String id =(String)responseObj.get("id");
 		String email = (String)responseObj.get("email");
+		String authUserName="naver_"+email;
 		String genderSt = (String)responseObj.get("gender");
 		int gender = 0;
 		if(genderSt.equals("M")) gender=1;
@@ -295,18 +324,19 @@ public class UserController {
 		String birthyear = (String)responseObj.get("birthyear");
 		String birthday = birthyear+"-"+birthDay;
 		String name=(String)responseObj.get("name");
+		String cryptPw = passwordEncoder.encode(name);
 		String phone=(String)responseObj.get("mobile");
-		System.out.println("email: "+email+"/ gender(M1/W2): "+gender
+		System.out.println("email: "+email+"/id: "+id+"/gender(M1/W2): "+gender
 				+"/birthday: "+birthday+"/name: "+name+"/phone: "+phone);
-		UserDataDto dto = new UserDataDto(0,email,"asdASD!!","",name,phone,null,0,gender,null);
-		model.addAttribute("email", email);
-		model.addAttribute("name", name);
-		model.addAttribute("id",id);
-		model.addAttribute("userDto", dto);
 		
+		TempUserDto dto = new TempUserDto(authUserName,cryptPw,social_Auth);
+		tempDB(req,model,dto);
+		
+		model.addAttribute("tempUserInfo", userInfo);
+		model.addAttribute("tempUser", authUserName);
+		model.addAttribute("tempPw", name);
 		return "socialLogin";
 	}
-	
 	//google login redirect
 	@RequestMapping(value="/gredirect",produces="application/text;charset=UTF8")
 	public String googleCallback(
@@ -322,15 +352,19 @@ public class UserController {
 		
 		HashMap<String, Object> map = getGoogleUserInfo(accessToken, res);
 		String email = (String)map.get("email");
-		String authUsername = "google_"+email;
+		String authUserName = "google_"+email;
 		String name = (String)map.get("name");
+		String cryptPw = passwordEncoder.encode(name);
 		String id = (String)map.get("id");
-
-		model.addAttribute("email", email);
-		model.addAttribute("name", name);
-		model.addAttribute("id", id);
-		model.addAttribute("authUsername", authUsername);
-		model.addAttribute("userMap", map);
+		System.out.println("user data(email: "+email+"/id: "+id+"/name: "+name+")");
+		
+		TempUserDto dto = new TempUserDto(authUserName,cryptPw,social_Auth);
+		tempDB(req,model,dto);
+		
+		model.addAttribute("tempUser", authUserName);
+		model.addAttribute("tempPw", name);
+		model.addAttribute("tempUserInfo", map);
+		
 		return "socialLogin";
 	}
 	private HashMap<String, Object> getGoogleUserInfo(String accessToken,HttpServletResponse res){
@@ -368,4 +402,24 @@ public class UserController {
 		return googleUserInfo;
 	}
 	
+	//facebook redirect
+	@RequestMapping(value="/fredirect",produces="application/text;charset=UTF8")
+	public String facebookRedirect(HttpServletRequest req, Model model) {
+		/*javascript의 data를 가져와야함. 
+		HashMap<String, Object> userInfo = 
+		String email = 
+		String authUserName="facebook_"+email;
+		String name = 
+		String cryptPw = passwordEncoder.encode(name);
+		
+		TempUserDto dto = new TempUserDto(authUserName,cryptPw,social_Auth);
+		tempDB(req,model,dto);
+		
+		model.addAttribute("tempUserInfo", userInfo);
+		model.addAttribute("tempUser", authUserName);
+		model.addAttribute("tempPw", name);
+		*/
+		return "socialLogin";
+	}
+
 }
