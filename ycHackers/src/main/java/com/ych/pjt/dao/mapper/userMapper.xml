@@ -4,6 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- dao interface - mapper --> 
 <mapper namespace="com.ych.pjt.dao.IUserDao">
+	<!-- DB data user-->
 <insert id="userJoin" parameterType="com.ych.pjt.dto.UserDataDto">
 	INSERT INTO UserData(USERNUM,USERID,USERPW,USERNAME,USERPHONE,USERBIRTH,USERLOCATION,USERGENDER)
 	VALUES ((SELECT nextval('userseq') FROM DUAL), #{userId}, #{userPw}, #{userName}, #{userPhone}, #{userBirth}, #{userLocation}, #{userGender})
@@ -13,5 +14,16 @@
 </select>
 <select id="userMainData" resultType="com.ych.pjt.dto.UserDataDto">
 	SELECT * FROM UserData WHERE USERID=#{userId}
+</select>
+	<!-- temporary user -->
+<select id="tempUserDB" resultType="com.ych.pjt.dto.TempUserDto">
+	SELECT * FROM TempUser WHERE USERID=#{userId}
+</select>
+<insert id="tempUserJoin" parameterType="com.ych.pjt.dto.TempUserDto">
+	INSERT INTO TempUser(USERNUM,USERID,USERPW) 
+	VALUES ((SELECT nextval('snsuseq') FROM DUAL),#{userId},#{userPw})
+</insert>
+<select id="tempUserLogin" resultType="com.ych.pjt.dto.TempUserDto">
+	SELECT * FROM TempUser WHERE USERID=#{userId}
 </select>
 </mapper>
