@@ -4,5 +4,9 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- dao interface - mapper --> 
 <mapper namespace="com.ych.pjt.dao.IAdminDao">
-		
+
+	<select id="userList" resultType="com.ych.pjt.dto.UserDataDto">
+	select userId,userName,userDate
+	from userData
+	</select>
 </mapper>

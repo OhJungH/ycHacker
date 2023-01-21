@@ -53,7 +53,7 @@
 			</li>
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE')">
 				<li class="nav-item">
-					<a class="nav-link" href="manager">관리자</a>
+					<a class="nav-link" href="admin" id="admin">관리자</a>
 				</li>
 			</sec:authorize>
 		</ul>
@@ -72,6 +72,8 @@
 		</div>
 	</div><hr/>
 </nav>
+
+
 <section>
 	<div id="mainRagion">
 		<div style="text-align: center;">
@@ -162,6 +164,20 @@ $(document).ready(function(){
 		event.preventDefault();
 		$.ajax({
 			url : $("#cafeList").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	$("#admin").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#admin").attr("href"),
 			type : "get",
 			data : "",
 			success : function(data) {

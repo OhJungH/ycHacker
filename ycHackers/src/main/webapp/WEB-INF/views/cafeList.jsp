@@ -33,13 +33,13 @@
 <body>
 
 <div class="cafeSearch" style="margin-bottom:50px;">
-	<form action="cafeAllView" method="get" id="searchFrm">
+	<form action="cafeList" method="get" id="searchFrm">
 		<input type="hidden" value="search" name="cafeSearch">
 		<div class="input-group" style="width:40%;height:50px; margin:auto;">
 			<input hidden="hidden" value="cafeName" id="searchWhat" name="searchWhat">
 			<input hidden="hidden" value="cafeLocation" id="location" name="location">
-			<div class="input-group-prepend">
-				<div class="dropdown">
+			<div class="input-group-prepend d-inline">
+				<div class="dropdown d-inline">
 					<button type="button" class="btn btn-primary dropdown-toggle search" data-toggle="dropdown" style=" display : inline-block; height:50px;">전체검색</button>
 					<div class="dropdown-menu">
 						<a  class="dropdown-item search" id="totalSearch" style="display : none">전체검색</a>
@@ -85,6 +85,20 @@ $(document).ready(function() {
 			return false;
 		}
 		return true;
+	});
+	$("#searchFrm").on("submit", function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#searchFrm").attr("action"),
+			type : $("#searchFrm").attr("method"),
+			data : $("#searchFrm").serialize(),
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러");
+			}
+		});
 	});
 });
 </script>
