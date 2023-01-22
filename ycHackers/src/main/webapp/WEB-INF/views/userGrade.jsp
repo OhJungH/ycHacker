@@ -54,8 +54,10 @@ text-align: center;
 </div>
 <div>
 <h2>회원 리스트</h2>
-<input type="text" id="userId" name="userId" placeholder="회원검색" style="width: 600px; margin:0;float:left;">
+<form action="userSearch" method="get" id="searchUser" name="searchUser">
+<input type="text" id="userName" name="userName" placeholder="회원검색" style="width: 600px; margin:0;float:left;">
 <button type="submit" id="userSearch" style="height:30px;">검색</button><br><br><br>
+</form>
 
 </div>
 <div class="table">
@@ -64,19 +66,53 @@ text-align: center;
 	<tr>
 		<th>이름/아이디</th>
 		<th>가입일</th>
-		<th>관리</th>
+		<th>회원등급</th>
 	</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${userList}" var="user">
 			<tr>
 				<td class="userName">${user.userName}/${user.userId}</td>
-				<td class="userDate">${user.userDate}></td>
+				<td class="userDate">${user.userDate}</td>
+				<td class="userAuth">${user.userAuth}&nbsp;/&nbsp;
+				<div class="input-group">
+					<input hidden="hidden" value="roleAd" id="roleAd" name="roleAd">
+					<input hidden="hidden" value="roleMng" id="roleMng" name="roleMng">
+					<input hidden="hidden" value="roleUser" id="roleUser" name="roleUser">
+						<div class="dropdown">
+						<button type="button" class="btn dropdown-toggle changeGrade" data-toggle="dropdown">변경</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item changeGrade" id="role_Ad">role_Admin</a>
+								<a class="dropdown-item changeGrade" id="role_Mng">role_Manager</a>
+								<a class="dropdown-item changeGrade" id="role_User">role_User</a>
+							</div>
+						</div>
+					</div>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
 </div>
 </div>
+
+<script>
+$(document).ready(function() {
+	$("a.changeGrade").on("click",function(event) {
+		$("a.changeGrade").attr("style", "display : inline;");
+		$("button.changeGrade").text($(event.target).text());
+		$("#roleAd").attr("value", $(event.target).attr("id"));		
+		$(event.target).attr("style", "display : none;");
+	});
+	$("#userSearch").on("click",function() {
+		let userName =$("userName").val();
+		if(userName == "") {
+			alert("검색어 입력");
+			return false;
+		}
+		return true;
+	});
+});
+</script>
 </body>
 </html>

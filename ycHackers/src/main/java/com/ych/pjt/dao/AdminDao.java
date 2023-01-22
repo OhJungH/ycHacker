@@ -16,7 +16,12 @@ public class AdminDao implements IAdminDao {
 	public ArrayList<UserDataDto> userList() {
 		
 		ArrayList<UserDataDto> dtos = (ArrayList)sqlSession.selectList("userList");
-		
+		return dtos;
+	}
+
+	public ArrayList<UserDataDto> userSearch() {
+		ArrayList<UserDataDto> dtos = new ArrayList<UserDataDto>();
+		dtos = (ArrayList)sqlSession.selectList("userList");
 		return dtos;
 	}
 	

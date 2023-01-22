@@ -6,7 +6,10 @@
 <mapper namespace="com.ych.pjt.dao.IAdminDao">
 
 	<select id="userList" resultType="com.ych.pjt.dto.UserDataDto">
-	select userId,userName,userDate
-	from userData
+	select userId,userName,userDate,userAuth from userData
+	</select>
+	
+	<select id="userName" resultType="com.ych.pjt.dto.UserDataDto">
+	select * from userdata where USERNAME like concat('%',#{userName},'%') 
 	</select>
 </mapper>

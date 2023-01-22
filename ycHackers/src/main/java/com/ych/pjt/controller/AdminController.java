@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.UserGradeCommand;
+import com.ych.pjt.command.UserSearchCommand;
 import com.ych.pjt.dao.AdminDao;
 import com.ych.pjt.dao.ResDao;
 import com.ych.pjt.util.Constant;
@@ -38,9 +39,16 @@ public class AdminController {
 	@RequestMapping("/userGrade")
 	public String userGrade(HttpServletRequest req, Model model) {
 		System.out.println("userGrade");
-		
 		com = new UserGradeCommand();
 		com.execute(req, model);
 		return "userGrade"; 
+	}
+	
+	@RequestMapping("/userSearch")
+	public String userSearch(HttpServletRequest req, Model model) {
+		System.out.println("userSearch");
+		com = new UserSearchCommand();
+		com.execute(req, model);
+		return "userGrade";
 	}
 }

@@ -17,7 +17,6 @@ public class UserGradeCommand implements IYchCommand {
 	public void execute(HttpServletRequest req, Model model) {
 		AdminDao adDao = Constant.adDao;
 		
-		
 		ArrayList<UserDataDto> dtos = adDao.userList();
 		model.addAttribute("userList", dtos);
 	
