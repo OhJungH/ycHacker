@@ -35,11 +35,11 @@
     color:#000;
 }
 .introCardI:hover{/*info*/
-    background-color:rgb(165, 223, 203);
+    background-color:#94f1ff;
 }
-.introCardA:hover{/*arlet*/
-    background-color:rgb(222, 182, 168);
+.introCardA:hover{/*alert*/
+    background-color:#ff9ea8;
 }
 .introCardE:hover{/*event*/
-    background-color:rgb(197, 249, 197);
+    background-color:#78ff96;
 }
