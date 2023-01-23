@@ -73,27 +73,44 @@
 	<form action="resModify" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<div class="form-group text-center text-info threeDEffect">
+			<label for="resNum">회원번호</label>
+			<input type="text" id="resNum" name="resNum" value="${myResInfo.resNum}" style="width:500px;">
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
 			<label for="resName">이름</label>
-			<input type="text" id="resName" name="resName" value="${resModify.resName}" style="width:500px;">
+			<input type="text" id="resName" name="resName" value="${myResInfo.resName}" style="width:500px;">
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
-			<label for="resNum">예약번호</label>
-			<input type="text" id="resNum" name="resNum" value="${resModify.resNum}"  style="width:500px;">
+			<label for="resBirth">생년월일</label>
+			<input type="date" id="resBirth" name="resBirth" value="${myResInfo.resBirth}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
-			<label for="cafePhone">전화번호</label>
-			<input type="text" id="cafePhone" name="cafePhone" value="${resModify.cafePhone}" style="width:500px;">
+			<label for="resPhone">연락처</label>
+			<input type="text" id="resPhone" name="resPhone" value="${myResInfo.resPhone}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resDate">예약날짜</label>
-			<input type="date" id="resDate" name="resDate" value="${resModify.resDate}" style="width:500px;">
+			<input type="date" id="resDate" name="resDate" value="${myResInfo.resDate}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resTime">예약시간</label>
-			<input type="text" id="resTime" name="resTime" value="${resModify.resTime}" style="width:500px;">
+			<input type="text" id="resTime" name="resTime" value="${myResInfo.resTime}" style="width:500px;" readonly>
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resMember">인원</label>
+			<input type="text" id="resMember" name="resMember" value="${myResInfo.resMember}" style="width:500px;" readonly>
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="payments">결제</label>
+			<input type="text" id="payments" name="payments" style="width:500px;">
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resComments">요청사항</label>
+			<input type="text" id="resComments" name="resComments" value="${myResInfo.resComments}" style="width:500px;" readonly>
 		</div>
 		<button type="submit" class="btn btn-success">예약변경</button>
 		<button type="submit" class="btn btn-danger">예약취소</button>
+		<a class="btn btn-primary" href="main">메인으로</a>
 	</form>
 </div>
 

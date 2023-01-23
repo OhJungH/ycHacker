@@ -9,9 +9,7 @@ INSERT INTO restbl(RESNUM,RESNAME,RESBIRTH,RESPHONE,RESDATE,RESTIME,RESMEMBER,RE
 VALUES((SELECT nextval('resseq') FROM DUAL), #{resName},#{resBirth},#{resPhone},#{resDate},#{resTime},#{resMember},#{resComments},#{cafePhone})
 </insert>
 
-<update id="resModify" parameterType="com.ych.pjt.dto.ResDto">
-UPDATE restbl SET 
-RESNUM=#{resNum}, RESNAME=#{resName}, CAFEPHONE=#{cafePhone},RESDATE=#{resDate},RESTIME=#{resTime}
-WHERE RESNUM=#{resNum}
-</update>
+<select id="myResInfo" resultType="com.ych.pjt.dto.ResDto">
+select * from restbl where RESNUM = #{resNum}
+</select>
 </mapper>
