@@ -28,5 +28,10 @@ public class MainController {
 		System.out.println("joinView request at home");
 		return "joinView";
 	}
+	@RequestMapping("/myPageView")
+	public String myPageView(HttpServletRequest request, Model model) {
+		System.out.println("myPageView request");
+		return "myPageView";
+	}
 
 }
