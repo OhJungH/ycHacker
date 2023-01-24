@@ -67,6 +67,7 @@ text-align: center;
 		<th>이름/아이디</th>
 		<th>가입일</th>
 		<th>회원등급</th>
+		<th>등급변경</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -74,36 +75,67 @@ text-align: center;
 			<tr>
 				<td class="userName">${user.userName}/${user.userId}</td>
 				<td class="userDate">${user.userDate}</td>
-				<td class="userAuth">${user.userAuth}&nbsp;/&nbsp;
+				<td class="userAuth">${user.userAuth}</td>
+				<td class="changeGrade">
 				<div class="input-group">
-					<input hidden="hidden" value="roleAd" id="roleAd" name="roleAd">
-					<input hidden="hidden" value="roleMng" id="roleMng" name="roleMng">
-					<input hidden="hidden" value="roleUser" id="roleUser" name="roleUser">
-						<div class="dropdown">
-						<button type="button" class="btn dropdown-toggle changeGrade" data-toggle="dropdown">변경</button>
-							<div class="dropdown-menu">
-								<a class="dropdown-item changeGrade" id="role_Ad">role_Admin</a>
-								<a class="dropdown-item changeGrade" id="role_Mng">role_Manager</a>
-								<a class="dropdown-item changeGrade" id="role_User">role_User</a>
-							</div>
-						</div>
+					<select class="userAuth"name="userAuth" id="userAuth" data-userId="${user.userId}"> 
+								<option value="none" selected>권한변경</option>				
+								<option value="ROLE_USER">ROLE_USERS</option>
+								<option value="ROLE_MNG">ROLE_MANAGER</option>
+								<option value="ROLE_AD">ROLE_ADMIN</option>
+					</select>
 					</div>
 				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
+<button type="button" id="saveButton">
+저장
+</button>
 </div>
 </div>
 
 <script>
 $(document).ready(function() {
-	$("a.changeGrade").on("click",function(event) {
-		$("a.changeGrade").attr("style", "display : inline;");
+	$(".userAuth").change(function(event) {
+		let aaa = $(event.target);
+		event.preventDefault();
+		let userId = aaa.attr("data-userId");
+		let userAuth = aaa.val();
+		
+		$("#saveButton").click(function(event) {
+			
+			$.ajax({
+				url : "changeGrade?${_csrf.parameterName}=${_csrf.token}",
+				type : "post",
+				data : {
+					"userId":userId,
+					"userAuth":userAuth
+				},success : function(data) {
+					$("#mainRagion").html(data);
+				},
+				error : function() {
+					alert("에러입니다.");
+				}
+				
+			});
+		})
+		
+		
+		
+		
+	});
+	
+	
+	/* $("a.changeGrade").on("click",function(event) {
+		let e = $(event.target)
+		e.attr("style", "display : inline;");
 		$("button.changeGrade").text($(event.target).text());
 		$("#roleAd").attr("value", $(event.target).attr("id"));		
 		$(event.target).attr("style", "display : none;");
-	});
+	}); */
+	
 	$("#userSearch").on("click",function() {
 		let userName =$("userName").val();
 		if(userName == "") {

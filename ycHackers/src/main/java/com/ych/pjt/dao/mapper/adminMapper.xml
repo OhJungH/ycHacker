@@ -10,6 +10,11 @@
 	</select>
 	
 	<select id="userName" resultType="com.ych.pjt.dto.UserDataDto">
-	select * from userdata where USERNAME like concat('%',#{userName},'%') 
+	select  username userdata where USERNAME like concat('%',#{userName},'%') 
 	</select>
+	
+	<update id="changeGrade" parameterType="com.ych.pjt.dto.UserDataDto">
+		update userData set userAuth = #{userAuth} where userId = #{userId}
+	</update>
+	
 </mapper>

@@ -24,6 +24,13 @@ public class AdminDao implements IAdminDao {
 		dtos = (ArrayList)sqlSession.selectList("userList");
 		return dtos;
 	}
+
+
+	public String changeGrade(UserDataDto dto) {
+		int asd = sqlSession.update("changeGrade", dto);
+		
+		return null;
+	}
 	
 	
 
