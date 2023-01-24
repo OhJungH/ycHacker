@@ -1,0 +1,45 @@
+/*class*/
+.homeTitle {
+    text-align: center;
+}
+.infoCard{
+    box-shadow:3px 3px 5px black;
+    margin-top: 0.5rem;
+}
+.infoDetails{
+    color:#fff;
+    text-decoration: underline;
+}
+.infoCardBody{
+    padding: 5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    }
+/*id*/
+#homeInfoContainer{
+    background-color:ivory;
+    min-height: 40rem;
+}
+#homeBar{
+    background-color: cornsilk;
+}
+.infoCardDeck{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+/*hover*/
+.infoDetails:hover{/*card link*/
+    color:#000;
+}
+.introCardI:hover{/*info*/
+    background-color:#94f1ff;
+}
+.introCardA:hover{/*alert*/
+    background-color:#ff9ea8;
+}
+.introCardE:hover{/*event*/
+    background-color:#78ff96;
+}

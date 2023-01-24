@@ -1,5 +1,9 @@
 package com.ych.pjt.dao;
 
-public interface IInfoDao {
+import java.util.ArrayList;
 
+import com.ych.pjt.dto.InfoBoardDto;
+
+public interface IInfoDao {
+	public ArrayList<InfoBoardDto> infoBoardHome();
 }

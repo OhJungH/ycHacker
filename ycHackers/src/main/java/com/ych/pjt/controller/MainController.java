@@ -18,11 +18,6 @@ public class MainController {
 		System.out.println("home request");
 		return "home";
 	}
-	@RequestMapping("/infoBoardHome")
-	public String infoBoard(HttpServletRequest request, Model model) {
-		System.out.println("infoBoard request at home");
-		return "infoBoardHome";
-	}
 	@RequestMapping("/joinViewHome")
 	public String joinView(HttpServletRequest request, Model model) {
 		System.out.println("joinView request at home");
