@@ -46,7 +46,7 @@ import com.ych.pjt.util.Constant;
 @Controller
 public class UserController {
 	private IYchCommand com;
-	private static String KAKAO_CLIENT_ID = "kakao developer 개인고유번호";
+	private static String KAKAO_CLIENT_ID = "kakao developer 媛쒖씤怨좎쑀踰덊샇";
 	
 	//Dependency Injection
 	private BCryptPasswordEncoder passwordEncoder;
@@ -107,14 +107,14 @@ public class UserController {
 		System.out.println("main page request:"+authentication);
 		getUsername(authentication, req);
 		
-		//username, auth 확인
+		//username, auth �솗�씤
 		String userName = (String)req.getAttribute("username");
 		String auth = (String)req.getAttribute("auth");
 		System.out.println("user data: "+userName+"//"+auth);
 		//user data load
 		com= new UserMainDataCommand();
 		com.execute(req, model);
-		//board관련 load
+		//board愿��젴 load
 		
 		return "main";
 	}
@@ -143,6 +143,11 @@ public class UserController {
 		System.out.println("log out request");
 		return "logoutView";
 	}
+	@RequestMapping("/userInfoView")
+	public String userInfoView(HttpServletRequest req, Model model) {
+		System.out.println("userInfoView request");
+		return "userInfoView";
+	}	
 	
 	//social login method
 	private void socialURL(Model model, HttpSession session) {

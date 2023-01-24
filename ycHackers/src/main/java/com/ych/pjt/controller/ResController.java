@@ -48,10 +48,5 @@ public class ResController {
 		com.execute(req, model);
 		return "myResInfoView";
 	}
-	//UserController에 있어야 하는데 충돌될 수 있어서 임시로 ResController에 함 
-	@RequestMapping("/userInfoView")
-	public String userInfoView(HttpServletRequest req, Model model) {
-		System.out.println("userInfoView request");
-		return "userInfoView";
-	}
+	 
 }
