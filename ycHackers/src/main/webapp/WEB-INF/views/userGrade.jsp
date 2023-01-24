@@ -54,8 +54,10 @@ text-align: center;
 </div>
 <div>
 <h2>회원 리스트</h2>
-<input type="text" id="userId" name="userId" placeholder="회원검색" style="width: 600px; margin:0;float:left;">
+<form action="userSearch" method="get" id="searchUser" name="searchUser">
+<input type="text" id="userName" name="userName" placeholder="회원검색" style="width: 600px; margin:0;float:left;">
 <button type="submit" id="userSearch" style="height:30px;">검색</button><br><br><br>
+</form>
 
 </div>
 <div class="table">
@@ -64,19 +66,85 @@ text-align: center;
 	<tr>
 		<th>이름/아이디</th>
 		<th>가입일</th>
-		<th>관리</th>
+		<th>회원등급</th>
+		<th>등급변경</th>
 	</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${userList}" var="user">
 			<tr>
 				<td class="userName">${user.userName}/${user.userId}</td>
-				<td class="userDate">${user.userDate}></td>
+				<td class="userDate">${user.userDate}</td>
+				<td class="userAuth">${user.userAuth}</td>
+				<td class="changeGrade">
+				<div class="input-group">
+					<select class="userAuth"name="userAuth" id="userAuth" data-userId="${user.userId}"> 
+								<option value="none" selected>권한변경</option>				
+								<option value="ROLE_USER">ROLE_USERS</option>
+								<option value="ROLE_MNG">ROLE_MANAGER</option>
+								<option value="ROLE_AD">ROLE_ADMIN</option>
+					</select>
+					</div>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
+<button type="button" id="saveButton">
+저장
+</button>
 </div>
 </div>
+
+<script>
+$(document).ready(function() {
+	$(".userAuth").change(function(event) {
+		let aaa = $(event.target);
+		event.preventDefault();
+		let userId = aaa.attr("data-userId");
+		let userAuth = aaa.val();
+		
+		$("#saveButton").click(function(event) {
+			
+			$.ajax({
+				url : "changeGrade?${_csrf.parameterName}=${_csrf.token}",
+				type : "post",
+				data : {
+					"userId":userId,
+					"userAuth":userAuth
+				},success : function(data) {
+					$("#mainRagion").html(data);
+				},
+				error : function() {
+					alert("에러입니다.");
+				}
+				
+			});
+		})
+		
+		
+		
+		
+	});
+	
+	
+	/* $("a.changeGrade").on("click",function(event) {
+		let e = $(event.target)
+		e.attr("style", "display : inline;");
+		$("button.changeGrade").text($(event.target).text());
+		$("#roleAd").attr("value", $(event.target).attr("id"));		
+		$(event.target).attr("style", "display : none;");
+	}); */
+	
+	$("#userSearch").on("click",function() {
+		let userName =$("userName").val();
+		if(userName == "") {
+			alert("검색어 입력");
+			return false;
+		}
+		return true;
+	});
+});
+</script>
 </body>
 </html>

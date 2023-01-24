@@ -57,7 +57,6 @@ td {
 	</ul>
 </div>
 <div class="container">
-
 	<table border="1" style="margin-bottom:50px;">
 		<tr>
 			<td style="width:30px;">1.</td>
@@ -101,7 +100,6 @@ td {
 
 <script>
 $(document).ready(function() {
-
 	$("#userGrade").click(function(event) {
 		event.preventDefault();
 		$.ajax({
