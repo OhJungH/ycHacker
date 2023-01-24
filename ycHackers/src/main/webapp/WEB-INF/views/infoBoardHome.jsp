@@ -44,39 +44,28 @@
 			</p>
     </div>
 	<div class="card-columns infoCardDeck">
-	<!-- 
-		1. forEach만 쓰고 jstl로 변수를 선언해 사용?
-		String cardStyle, String bedgeValue를 if로
-		
-		2. forEach와 choose-when을 사용?
-		???????
-				 
-		c:forEach items="${infoHomeList}" var="dto">
-			c:choose>
-				c:when test="${dto.infoType} eq 'info'">
-					<div class="card infoCard introCardI">
-						<div class="card-body text-center infoCardBody">
+		<c:forEach items="${infoHomeList}" var="dto">
+			<div class="card infoCard introCard${dto.infoType}">
+				<div class="card-body text-center infoCardBody">
+					<c:choose>
+						<c:when test="${dto.infoType} eq 'info'">
 							<span class="badge badge-info">공지사항</span><br/>
-				/c:when>
-				c:when test="${dto.infoType} eq 'result'">
-					<div class="card infoCard introCardA">
-						<div class="card-body text-center infoCardBody">
+						</c:when>
+						<c:when test="${dto.infoType} eq 'result'">
 							<span class="badge badge-danger">신고처리</span><br/>
-				/c:when>
-				c:when test="${dto.infoType} eq 'event'">
-					<div class="card infoCard introCardE">
-						<div class="card-body text-center infoCardBody">
-							<span class="badge badge-danger">이벤트</span><br/>
-				/c:when>
-						<h4 class="d-inline">${dto.infoNum}. ${dto.infoTitle}(${dto.infoIndent})</h4><br/>
-						<span class="card-text">${dto.infoContent}(${dto.infoHit})</span><br/>
-						<a href="infoDetails?infoNum=${dto.infoNum}" class="infoDetails card-link stretched-link">내용보기</a>
-					</div>	
-				</div>
-			/c:choose>			
-		/c:forEach>
-	-->
-		<div class="card infoCard introCardI">
+						</c:when>
+						<c:when test="${dto.infoType} eq 'event'">
+							<span class="badge badge-success">이벤트</span><br/>
+						</c:when>
+					</c:choose>
+					<h4 class="d-inline">${dto.infoNum}. ${dto.infoTitle}(${dto.infoIndent})</h4><br/>
+					<span class="card-text">${dto.infoContent}(${dto.infoHit})</span><br/>
+					<a href="infoDetails?infoNum=${dto.infoNum}" class="infoDetails card-link stretched-link">내용보기</a>				
+				</div>	
+			</div>
+		</c:forEach>
+	
+		<div class="card infoCard introCardinfo">
 			<div class="card-body text-center infoCardBody">
 				<span class="badge badge-info">공지사항</span><br/>
 				<h4 class="d-inline">1. 글 제목(29)</h4><br/>
@@ -84,7 +73,7 @@
 				<a href="infoDetails?infoNum=infonum" class="infoDetails card-link stretched-link">내용보기</a>
 			</div>	
 		</div>
-		<div class="card infoCard introCardA">
+		<div class="card infoCard introCardresult">
 			<div class="card-body text-center infoCardBody">
 				<span class="badge badge-danger">신고처리</span><br/>
 				<h4 class="d-inline">infoNum. infoTitle (infoIdent)</h4><br/>
@@ -92,7 +81,7 @@
 				<a href="infoDetails?infoNum=infonum" class="infoDetails card-link stretched-link">내용보기</a>
 			</div>
 		</div>
-		<div class="card infoCard introCardE">
+		<div class="card infoCard introCardevent">
 			<div class="card-body text-center infoCardBody">
 				<span class="badge badge-success">이벤트</span><br/>
 				<h4 class="d-inline">3. infoTitle (infoIdent)</h4><br/>
