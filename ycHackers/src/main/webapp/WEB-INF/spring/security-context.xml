@@ -16,13 +16,14 @@
 			<frame-options disabled="true"/>
 		</headers>
 		
-		<!-- 처음 접근 페이지("/"요청 = home), permitAll: 모두 접근 -->
+		<!-- 처음 접근 페이지 permitAll: 모두 접근 -->
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/processLogin" access="permitAll"/>
 		<intercept-url pattern="/images/**" access="permitAll"/>
 		<intercept-url pattern="/js/**" access="permitAll"/>
 		<intercept-url pattern="/style/**" access="permitAll"/>	
 		<!-- isAnonymous(): 로그인 안한 상태(비회원)만 접근 -->	
+		<intercept-url pattern="/" access="isAnonymous()"/>
 		<intercept-url pattern="/home" access="isAnonymous()"/>
 		<intercept-url pattern="/infoBoardHome" access="isAnonymous()"/>
 		<intercept-url pattern="/joinViewHome" access="isAnonymous()"/>
