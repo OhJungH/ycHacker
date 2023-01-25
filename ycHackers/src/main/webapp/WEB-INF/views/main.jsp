@@ -51,9 +51,14 @@
 			<li class="nav-item">
 				<a class="nav-link" href="cafeList" id="cafeList">검색</a>
 			</li>
-			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE')">
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 				<li class="nav-item">
 					<a class="nav-link" href="admin" id="admin">관리자</a>
+				</li>
+			</sec:authorize>
+			<sec:authorize access="hasAnyRole('ROLE_MANAGER')">
+				<li class="nav-item">
+					<a class="nav-link" href="studyroomwrite" id="studyroomwrite">스터디룸 등록</a>
 				</li>
 			</sec:authorize>
 		</ul>
@@ -188,6 +193,21 @@ $(document).ready(function(){
 			}
 		});
 	});
+	$("#studyroomwrite").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#studyroomwrite").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	
 });
 </script>
 
