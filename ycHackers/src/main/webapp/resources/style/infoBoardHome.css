@@ -34,12 +34,12 @@
 .infoDetails:hover{/*card link*/
     color:#000;
 }
-.introCardI:hover{/*info*/
+.introCardinfo:hover{/*공지*/
     background-color:#94f1ff;
 }
-.introCardA:hover{/*alert*/
+.introCardresult:hover{/*신고처리 결과*/
     background-color:#ff9ea8;
 }
-.introCardE:hover{/*event*/
+.introCardevent:hover{/*이벤트*/
     background-color:#78ff96;
 }
