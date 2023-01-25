@@ -81,8 +81,8 @@ text-align: center;
 					<select class="userAuth"name="userAuth" id="userAuth" data-userId="${user.userId}"> 
 								<option value="none" selected>권한변경</option>				
 								<option value="ROLE_USER">ROLE_USERS</option>
-								<option value="ROLE_MNG">ROLE_MANAGER</option>
-								<option value="ROLE_AD">ROLE_ADMIN</option>
+								<option value="ROLE_MANAGER">ROLE_MANAGER</option>
+								<option value="ROLE_ADMIN">ROLE_ADMIN</option>
 					</select>
 					</div>
 				</td>

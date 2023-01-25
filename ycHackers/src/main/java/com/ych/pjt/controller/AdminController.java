@@ -65,4 +65,10 @@ public class AdminController {
 		com.execute(req, model);
 		return "userGrade";
 	}
+	
+	@RequestMapping("/studyroomwrite")
+	public String studyroom(HttpServletRequest req, Model model) {
+		System.out.println("studyroomwrite");
+		return "studyroomwrite";
+	}
 }
