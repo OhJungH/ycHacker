@@ -16,8 +16,7 @@
 			<frame-options disabled="true"/>
 		</headers>
 		
-		<!-- 처음 접근 페이지 permitAll: 모두 접근 -->
-		<intercept-url pattern="/" access="permitAll"/>
+		<!-- permitAll: 모두 접근 -->
 		<intercept-url pattern="/processLogin" access="permitAll"/>
 		<intercept-url pattern="/images/**" access="permitAll"/>
 		<intercept-url pattern="/js/**" access="permitAll"/>
