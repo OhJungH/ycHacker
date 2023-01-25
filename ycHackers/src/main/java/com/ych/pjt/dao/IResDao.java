@@ -4,4 +4,5 @@ import com.ych.pjt.dto.ResDto;
 
 public interface IResDao {
 	public String res(ResDto dto);
+	public ResDto myResInfo(String resNum);
 }

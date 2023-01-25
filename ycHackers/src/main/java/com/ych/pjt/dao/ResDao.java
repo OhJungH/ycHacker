@@ -29,4 +29,11 @@ public class ResDao implements IResDao {
 		
 		return result;
 	}
+	/* 내 예약 정보 */
+	@Override
+	public ResDto myResInfo(String resNum) {
+		System.out.println("dao");
+		ResDto dto = sqlSession.selectOne("myResInfo",resNum);
+		return dto;
+	}
 }

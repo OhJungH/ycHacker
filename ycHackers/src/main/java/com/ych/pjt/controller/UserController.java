@@ -149,6 +149,11 @@ public class UserController {
 		System.out.println("log out request");
 		return "logoutView";
 	}
+	@RequestMapping("/userInfoView")
+	public String userInfoView(HttpServletRequest req, Model model) {
+		System.out.println("userInfoView request");
+		return "userInfoView";
+	}
 	
 	//social login method
 	private void socialURL(Model model, HttpSession session) {
