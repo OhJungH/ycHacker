@@ -1,6 +1,10 @@
 #footer {
     margin: 0;
+    height: 30%;
     background: cornsilk;
+    float:left;
+    width:100%;
+    margin-top: 2rem;
   }
 .footerBox {
 	margin-left: 2em;

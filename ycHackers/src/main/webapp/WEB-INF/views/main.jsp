@@ -39,12 +39,15 @@
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="user_id"/>
 </sec:authorize>
-<nav class="navbar navbar-expand-sm">
+<nav class="navbar navbar-expand-sm mainNav">
 	<button class="navbar-toggler btn btn-block" type="button" data-toggle="collapse" data-target="#collapsiblebar">
 		<span class="navbar-toggler-icon text-dark"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="collapsiblebar">
 		<ul class=" nav justify-content-center">
+			<li class="nav-item">
+				<a class="nav-link" href="home">home</a>
+			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="info">안내</a>
 			</li>
@@ -84,7 +87,7 @@
 		<div style="text-align: center;">
 			<h3>공지사항</h3>
 		</div>
-		<table class="table table-hover">
+		<table class="table table-hover mainTBL">
 			<thead>
 				<tr>
 					<th>글 번호</th>
