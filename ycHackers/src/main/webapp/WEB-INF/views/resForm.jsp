@@ -30,6 +30,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- custom style -->
 <link rel="stylesheet" href="html/Reservation.html"/>
+<link rel="stylesheet" href="style/footer.css"/>
+<link rel="stylesheet" href="style/top.css"/>
 </head>
 <body>
 <div class="container" style="text-align:center">
