@@ -29,7 +29,8 @@
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- custom style -->
-<link rel="stylesheet" href="html/MyResInfo.html">
+<link rel="stylesheet" href="style/footer.css"/>
+<link rel="stylesheet" href="style/top.css"/>
 </head>
 <body>
 <div class="container" style="text-align:center">
@@ -65,53 +66,44 @@
 	</div>	
 </nav>
 
-<a>
-	<img src="../image/img_avatar2.png" style="width:400px;height:300px;">
-</a>
-
 <div>
-	<form action="resModify" method="post">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		<div class="form-group text-center text-info threeDEffect">
-			<label for="resNum">회원번호</label>
-			<input type="text" id="resNum" name="resNum" value="${myResInfo.resNum}" style="width:500px;">
-		</div>
-		<div class="form-group text-center text-info threeDEffect">
-			<label for="resName">이름</label>
-			<input type="text" id="resName" name="resName" value="${myResInfo.resName}" style="width:500px;">
-		</div>
-		<div class="form-group text-center text-info threeDEffect">
-			<label for="resBirth">생년월일</label>
-			<input type="date" id="resBirth" name="resBirth" value="${myResInfo.resBirth}" style="width:500px;" readonly>
-		</div>
-		<div class="form-group text-center text-info threeDEffect">
-			<label for="resPhone">연락처</label>
-			<input type="text" id="resPhone" name="resPhone" value="${myResInfo.resPhone}" style="width:500px;" readonly>
-		</div>
-		<div class="form-group text-center text-info threeDEffect">
-			<label for="resDate">예약날짜</label>
-			<input type="date" id="resDate" name="resDate" value="${myResInfo.resDate}" style="width:500px;" readonly>
-		</div>
-		<div class="form-group text-center text-info threeDEffect">
-			<label for="resTime">예약시간</label>
-			<input type="text" id="resTime" name="resTime" value="${myResInfo.resTime}" style="width:500px;" readonly>
-		</div>
-		<div class="form-group text-center text-info threeDEffect">
-			<label for="resMember">인원</label>
-			<input type="text" id="resMember" name="resMember" value="${myResInfo.resMember}" style="width:500px;" readonly>
-		</div>
-		<div class="form-group text-center text-info threeDEffect">
-			<label for="payments">결제</label>
-			<input type="text" id="payments" name="payments" style="width:500px;">
-		</div>
-		<div class="form-group text-center text-info threeDEffect">
-			<label for="resComments">요청사항</label>
-			<input type="text" id="resComments" name="resComments" value="${myResInfo.resComments}" style="width:500px;" readonly>
-		</div>
+	<form action="myResInfo" method="post">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>회원번호</th>
+					<th>이름</th>
+					<th>생년월일</th>
+					<th>연락처</th>
+					<th>예약날짜</th>
+					<th>예약시간</th>
+					<th>인원</th>
+					<th>결제</th>
+					<th>요청사항</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${myResInfo1}" var="ResDto">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
+					<tr>
+						<td>"${ResDto.resNum}"</td>
+						<td>"${ResDto.resName}"</td>
+						<td>"${ResDto.resBirth}"</td>
+						<td>"${ResDto.resPhone}"</td>
+						<td>"${ResDto.resDate}"</td>
+						<td>"${ResDto.resTime}"</td>
+						<td>"${ResDto.resMember}"</td>
+						<td>"${ResDto.resComments}"</td>
+					</tr>			
+				</c:forEach>
+			</tbody>		
+		</table>			
+	</form>
+	<div style="align:center;">	
 		<button type="submit" class="btn btn-success">예약변경</button>
 		<button type="submit" class="btn btn-danger">예약취소</button>
-		<a class="btn btn-primary" href="main">메인으로</a>
-	</form>
+		<a class="btn btn-primary" href="main">메인으로</a>		
+	</div>
 </div>
 
 </body>

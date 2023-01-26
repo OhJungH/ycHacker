@@ -10,6 +10,6 @@ VALUES((SELECT nextval('resseq') FROM DUAL), #{resName},#{resBirth},#{resPhone},
 </insert>
 
 <select id="myResInfo" resultType="com.ych.pjt.dto.ResDto">
-select * from restbl where RESNUM = #{resNum}
+select * from restbl order by RESNUM
 </select>
 </mapper>
