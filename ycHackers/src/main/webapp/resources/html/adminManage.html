@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- RWD -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MS -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
+<title>admin page</title>
+<!--jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--propper jquery -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!--latest javascript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!--bootstrap-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!--fontawesome icon-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"/>
+<!--google icon -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+<!--custom style-->
+<link rel="stylesheet" href="../style/admin.css"/>
+<link rel="stylesheet" href="../style/adminManage.css"/>
+
+</head>
+<body>
+
+<div class="adminNavContainer"><!-- jsp에서는 nav 삭제 -->
+	<ul class="nav navbar flex-column adminNav">
+		<li class="nav-item">
+			<a class="nav-link" href="infoBoardManage" id="infoBoardManage">안내사항관리</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="userGrade" id="userGrade" >회원등급관리</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">페이지 정보</a>
+		</li>
+	</ul>
+</div>
+<div class="adminContainer">
+	<h3 class="title">안내 게시판 관리 페이지</h3>
+	<hr/>
+	<button id="infoBoardWriteForm" type="button" class="btn btn-outline-success btn-block">
+		<i class="fas fa-pen"></i>
+		글 쓰기
+	</button>
+	<table id="infoListTbl" class="table table-border">
+		<thead>
+			<tr>
+				<th>no</th>
+				<th>제목</th>
+				<th>작성일(hit)</th>
+				<th>작성자</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>이용자 규칙</td>
+				<td>2000-01-01</td>
+				<td>관리자</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<script>
+$(document).ready(function() {
+});
+</script>
+</body>
+</html>

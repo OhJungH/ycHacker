@@ -35,17 +35,17 @@
 <div class="adminNavContainer">
 	<ul class="nav navbar flex-column adminNav">
 		<li class="nav-item">
-			<a class="nav-link" href="#" style="color:black;">안내사항관리</a>
+			<a class="nav-link" href="infoBoardManage" id="infoBoardManage">안내사항관리</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="userGrade" id="userGrade" style="color:black;">회원등급관리</a>
+			<a class="nav-link" href="userGrade" id="userGrade" >회원등급관리</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#" style="color:black;">페이지 정보</a>
+			<a class="nav-link" href="#">페이지 정보</a>
 		</li>
 	</ul>
 </div>
-<div class="adminContainer">
+<div id="adminContainer" class="adminContainer">
 	<div class="infoPreviewContainer">
 		<table class="infoPreviewTable">
 			<thead>
@@ -110,7 +110,21 @@ $(document).ready(function() {
 			type : "get",
 			data : "",
 			success : function(data) {
-				$("#mainRagion").html(data);
+				$("#adminContainer").html(data);//mainRagion이 아닌 adminContainer
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	$("#infoBoardManage").click(function(event){
+		event.preventDefault();
+		$.ajax({
+			url:$("#infoBoardManage").attr("href"),	
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#adminContainer").html(data);
 			},
 			error : function() {
 				alert("에러입니다.");

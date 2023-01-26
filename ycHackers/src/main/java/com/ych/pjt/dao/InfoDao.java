@@ -17,6 +17,21 @@ public class InfoDao implements IInfoDao {
 		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoBoardHome");
 		return dtos;
 	}
+	@Override
+	public ArrayList<InfoBoardDto> infoBoardManage() {
+		System.out.println("infoBoard manage first List method");
+		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoBoardManage");
+		return dtos;
+	}
+	@Override
+	public ArrayList<InfoBoardDto> infoPageList(String pageNum) {
+		System.out.println("infoBoard mangage page List method: "+pageNum);
+		int page = Integer.parseInt(pageNum);
+		int startN = (page-1)*10+1;
+		System.out.println("start page number: "+startN);
+		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoPageList", startN);
+		return dtos;
+	}
 	
 	
 }
