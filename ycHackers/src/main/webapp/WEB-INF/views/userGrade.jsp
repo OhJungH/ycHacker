@@ -36,64 +36,45 @@ text-align: center;
 </head>
 <body>
 <div class="container" style="margin-top:50px;">
-<div style="float:left; border-right:medium solid black; margin-left: 30px;margin-right: 100px;" >
-	<ul class="nav flex-column" style="line-height:100px;">
-		<li class="nav-item">
-			<a class="nav-link" href="#" style="color:black;">안내사항관리</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="userGrade" id="userGrade" style="color:black;">회원등급관리</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="#" style="color:black;">페이지 정보</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="#" style="color:black;">logout</a>
-		</li>
-	</ul>
-</div>
-<div>
-<h2>회원 리스트</h2>
-<form action="userSearch" method="get" id="searchUser" name="searchUser">
-<input type="text" id="userName" name="userName" placeholder="회원검색" style="width: 600px; margin:0;float:left;">
-<button type="submit" id="userSearch" style="height:30px;">검색</button><br><br><br>
-</form>
-
-</div>
-<div class="table">
-<table border="1" style="width:800px;">
-	<thead>
-	<tr>
-		<th>이름/아이디</th>
-		<th>가입일</th>
-		<th>회원등급</th>
-		<th>등급변경</th>
-	</tr>
-	</thead>
-	<tbody>
-		<c:forEach items="${userList}" var="user">
-			<tr>
-				<td class="userName">${user.userName}/${user.userId}</td>
-				<td class="userDate">${user.userDate}</td>
-				<td class="userAuth">${user.userAuth}</td>
-				<td class="changeGrade">
-				<div class="input-group">
-					<select class="userAuth"name="userAuth" id="userAuth" data-userId="${user.userId}"> 
-								<option value="none" selected>권한변경</option>				
-								<option value="ROLE_USER">ROLE_USERS</option>
-								<option value="ROLE_MANAGER">ROLE_MANAGER</option>
-								<option value="ROLE_ADMIN">ROLE_ADMIN</option>
-					</select>
-					</div>
-				</td>
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
-<button type="button" id="saveButton">
-저장
-</button>
-</div>
+	<div style="margin-bottom:2rem;">
+		<h2>회원 리스트</h2>
+		<form action="userSearch" method="get" id="searchUser" name="searchUser">
+			<input type="text" id="userName" name="userName" placeholder="회원검색" style="width: 80%; margin:0;float:left;">
+			<button type="submit" id="userSearch" style="height:30px;display:inline-block;max-width:10%;">검색</button>
+		</form>
+	</div>
+	<div class="table">
+		<table border="1" style="width:100%;">
+			<thead>
+				<tr>
+					<th>이름/아이디</th>
+					<th>가입일</th>
+					<th>회원등급</th>
+					<th>등급변경</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${userList}" var="user">
+					<tr>
+						<td class="userName">${user.userName}/${user.userId}</td>
+						<td class="userDate">${user.userDate}</td>
+						<td class="userAuth">${user.userAuth}</td>
+						<td class="changeGrade">
+							<div class="input-group">
+								<select class="userAuth"name="userAuth" id="userAuth" data-userId="${user.userId}"> 
+									<option value="none" selected>권한변경</option>				
+									<option value="ROLE_USER">ROLE_USERS</option>
+									<option value="ROLE_MANAGER">ROLE_MANAGER</option>
+									<option value="ROLE_ADMIN">ROLE_ADMIN</option>
+								</select>
+							</div>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<button type="button" id="saveButton" class="btn btn-outline-danger btn-block">저장</button>
+	</div>
 </div>
 
 <script>

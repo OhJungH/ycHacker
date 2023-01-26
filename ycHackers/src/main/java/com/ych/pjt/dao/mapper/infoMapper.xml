@@ -6,5 +6,19 @@
 <mapper namespace="com.ych.pjt.dao.IInfoDao">
 <select id="infoBoardHome" resultType="com.ych.pjt.dto.InfoBoardDto">
 	SELECT * FROM InfoData ORDER BY INFONUM DESC
+</select>
+<select id="infoBoardManage" resultType="com.ych.pjt.dto.InfoBoardDto">
+	<!-- ORACLE SQL
+	<![CDATA[
+		SELECT * FROM(
+			SELECT A.*, ROWNUM AS RNUM FROM 
+				(SELECT * FROM InfoData ORDER BY INFONUM DESC)
+			A) 
+		WHERE INFONUM < 11
+	]]> -->
+	SELECT * FROM InfoData ORDER BY INFONUM DESC LIMIT 10
 </select>		
+<select id="infoPageList" resultType="com.ych.pjt.dto.InfoBoardDto">
+	SELECT * FROM InfoData Order BY INFONUM DESC LIMIT #{startN}, 10
+</select>
 </mapper>
