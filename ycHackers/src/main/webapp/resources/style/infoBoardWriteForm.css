@@ -1,1 +1,46 @@
 @charset "UTF-8";
+/*class*/
+.infoCon{
+    border-radius: 10px;
+    color: lightgray;
+    width: 100%;
+    padding-left:1rem;
+}
+.infoType span{
+    font-size: 100%;
+}
+/*id*/
+#adminContainer{
+    height: fit-content;
+}
+#infoWritePrecautions{
+    border-radius: 10px 10px;
+    border: 5px solid #fa8072bd;
+    width: 100%;
+    height:fit-content;
+    margin-bottom: 0.5rem;
+}
+#infoWritePrecautions p {
+    text-align: initial;
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+#infoWriteContainer{
+    background-color: #f46d5d14;
+    padding: 1rem;
+}
+#submitBtn{
+    color:#000;
+    border-color: #fff4f3;
+}
+#infoWriteFrm p, #infoWriteFrm .form-group{
+    text-align: start;
+}
+/*hover*/
+#submitBtn:hover{
+    color:#fff;
+    font-weight: 700;
+}
+#infoWritePrecautions p:hover{
+    text-decoration: underline;
+}
