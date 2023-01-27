@@ -29,7 +29,6 @@
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- custom style -->
-<link rel="stylesheet" href="html/Reservation.html"/>
 <link rel="stylesheet" href="style/footer.css"/>
 <link rel="stylesheet" href="style/top.css"/>
 </head>
@@ -99,7 +98,11 @@
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="payments">결제</label>
-			<input type="text" id="payments" name="payments" style="width:500px;">
+			<input type="text" id="payMents" name="payMents" style="width:500px;">
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="cafePhone">카페번호</label>
+			<input type="text" id="cafePhone" name="cafePhone" style="width:500px;">
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resComments">요청사항</label>

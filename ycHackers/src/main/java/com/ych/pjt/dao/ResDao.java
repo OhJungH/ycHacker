@@ -16,7 +16,7 @@ public class ResDao implements IResDao {
 		System.out.println("res method");
 		String result = null;
 		try {
-			int res = sqlSession.insert("Res",dto);
+			int res = sqlSession.insert("res",dto);
 			if(res > 0){
 				result="success";
 			}

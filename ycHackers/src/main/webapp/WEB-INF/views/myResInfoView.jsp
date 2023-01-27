@@ -79,31 +79,33 @@
 					<th>예약시간</th>
 					<th>인원</th>
 					<th>결제</th>
+					<th>카페번호</th>
 					<th>요청사항</th>
+					<th>예약변경</th>
+					<th>예약취소</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${myResInfo1}" var="ResDto">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
 					<tr>
-						<td>"${ResDto.resNum}"</td>
-						<td>"${ResDto.resName}"</td>
-						<td>"${ResDto.resBirth}"</td>
-						<td>"${ResDto.resPhone}"</td>
-						<td>"${ResDto.resDate}"</td>
-						<td>"${ResDto.resTime}"</td>
-						<td>"${ResDto.resMember}"</td>
-						<td>"${ResDto.resComments}"</td>
+						<td>${ResDto.resNum}</td>
+						<td>${ResDto.resName}</td>
+						<td>${ResDto.resBirth}</td>
+						<td>${ResDto.resPhone}</td>
+						<td>${ResDto.resDate}</td>
+						<td>${ResDto.resTime}</td>
+						<td>${ResDto.resMember}</td>
+						<td>${ResDto.payMents}</td>
+						<td>${ResDto.cafePhone}</td>
+						<td>${ResDto.resComments}</td>
+						<td><button class="btn btn-primary">예약변경</button></td>
+						<td><button class="btn btn-danger">예약취소</button></td>
 					</tr>			
 				</c:forEach>
 			</tbody>		
 		</table>			
 	</form>
-	<div style="align:center;">	
-		<button type="submit" class="btn btn-success">예약변경</button>
-		<button type="submit" class="btn btn-danger">예약취소</button>
-		<a class="btn btn-primary" href="main">메인으로</a>		
-	</div>
 </div>
 
 </body>
