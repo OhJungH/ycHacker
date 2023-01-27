@@ -65,7 +65,7 @@
 		</tbody>
 	</table>
 </div>
-<!-- pagenation -->
+<!-- pagination -->
 <nav aria-label="page navigation">
 		<ul class="pagination justify-content-center" id="pagination"></ul>
 </nav>
@@ -113,22 +113,22 @@ $(function(){
 					pageNo = pageA.text();
 					pageNo1 = parseInt(pageNo);//페이지 번호를 계산해 변경하기위해 int로 형변환
 					pageNo2 = pageNo1 + 1;
-					purl = "plist?pageNo=" + pageNo2;
+					purl = "infoPList?pageNo=" + pageNo2;
 				}
 				else if(pageNo == "Previous") {
 					pageA = $("li.active > a");//.active를 지닌 li의 a element
 					pageNo = pageA.text();
 					pageNo1 = parseInt(pageNo);//페이지 번호를 계산해 변경하기위해 int로 형변환
 					pageNo2 = pageNo1 - 1;
-					purl = "plist?pageNo=" + pageNo2;
+					purl = "infoPList?pageNo=" + pageNo2;
 				}
 				else if(pageNo == "First") {
 					pageNo2 = 1;
-					purl = "plist?pageNo=" + pageNo2;
+					purl = "infoPList?pageNo=" + pageNo2;
 				}
 				else if(pageNo == "Last") {
 					pageNo2 = 35;//마지막 페이지는 어떻게?
-					purl = "plist?pageNo=" + pageNo2;
+					purl = "infoPList?pageNo=" + pageNo2;
 				}
 				else {
 					return;
@@ -152,7 +152,6 @@ $(function(){
 		console.info(page + ' (from event listening)');
 	});//on("page")
 });
-
 </script>
 </body>
 </html>
