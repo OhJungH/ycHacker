@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +18,6 @@ import com.ych.pjt.util.Constant;
 public class ResController {
 	private IYchCommand com;
 	
-	private BCryptPasswordEncoder passwordEncoder;
-	@Autowired
-	public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
-		this.passwordEncoder = passwordEncoder;
-		Constant.passwordEncoder = passwordEncoder;
-	}
 	private ResDao rDao;
 	@Autowired
 	public void setRDao(ResDao rDao) {
