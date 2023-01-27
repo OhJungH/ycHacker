@@ -1,7 +1,5 @@
 package com.ych.pjt.command;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
@@ -20,7 +18,7 @@ public class ChangeGradeCommand implements IYchCommand {
 		UserDataDto dto = new UserDataDto();
 		dto.setUserAuth(userAuth);
 		dto.setUserId(userId);
-		String result = adDao.changeGrade(dto);
+		adDao.changeGrade(dto);
 	}
 
 }

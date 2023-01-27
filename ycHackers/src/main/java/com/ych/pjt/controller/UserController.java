@@ -52,7 +52,6 @@ import com.ych.pjt.util.Constant;
 @Controller
 public class UserController {
 	private IYchCommand com;
-	private static String KAKAO_CLIENT_ID = "kakao developer 개인고유번호";
 	
 	//Dependency Injection
 	private BCryptPasswordEncoder passwordEncoder;
@@ -68,16 +67,20 @@ public class UserController {
 		Constant.uDao=uDao;
 	}
 		//social login(naver, google)
+	private static String KAKAO_CLIENT_ID = "kakao developer 개인고유번호";
+
 	private NaverLoginBO naverLoginBO;
 	@Autowired
 	public void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
+
 	@Autowired
 	private GoogleConnectionFactory googleConnectionFactory;
 	@Autowired
 	private OAuth2Parameters googleOAuth2Parameters;
-
+	
+	//requestMapping
 	@RequestMapping("/join")
 	@ResponseBody
 	public String join (HttpServletRequest req, HttpServletResponse res, Model model) {
