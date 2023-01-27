@@ -5,16 +5,33 @@
 <!-- dao interface - mapper --> 
 <mapper namespace="com.ych.pjt.dao.IAdminDao">
 
-	<select id="userList" resultType="com.ych.pjt.dto.UserDataDto">
-	select userId,userName,userDate,userAuth from userData
-	</select>
-	
-	<select id="userName" resultType="com.ych.pjt.dto.UserDataDto">
-	select  username userdata where USERNAME like concat('%',#{userName},'%') 
-	</select>
-	
-	<update id="changeGrade" parameterType="com.ych.pjt.dto.UserDataDto">
-		update userData set userAuth = #{userAuth} where userId = #{userId}
-	</update>
+<!-- user Role change -->
+<select id="userList" resultType="com.ych.pjt.dto.UserDataDto">
+	SELECT USERID,USERNAME,USERDATA,USERAUTH FROM userData
+</select>
+<select id="userName" resultType="com.ych.pjt.dto.UserDataDto">
+	SELECT USERNAME FROM userData WHERE USERNAME LIKE CONCAT('%',#{userName},'%') 
+</select>	
+<update id="changeGrade" parameterType="com.ych.pjt.dto.UserDataDto">
+	UPDATE userData SET USERAUTH=#{userAuth} WHERE USERID=#{userId}
+</update>
+<!-- Information Board -->
+<select id="infoBoardHome" resultType="com.ych.pjt.dto.InfoBoardDto">
+	SELECT * FROM InfoData ORDER BY INFONUM DESC
+</select> 
+<select id="infoBoardManage" resultType="com.ych.pjt.dto.InfoBoardDto">
+	<!-- ORACLE SQL
+	<![CDATA[
+		SELECT * FROM(
+			SELECT A.*, ROWNUM AS RNUM FROM 
+				(SELECT * FROM InfoData ORDER BY INFONUM DESC)
+			A) 
+		WHERE INFONUM < 11
+	]]> -->
+	SELECT * FROM InfoData ORDER BY INFONUM DESC LIMIT 10
+</select>		
+<select id="infoPageList" resultType="com.ych.pjt.dto.InfoBoardDto">
+	SELECT * FROM InfoData ORDER BY INFONUM DESC LIMIT #{startN}, 10
+</select>
 	
 </mapper>
