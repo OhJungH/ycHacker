@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-import com.ych.pjt.dao.InfoDao;
+import com.ych.pjt.dao.AdminDao;
 import com.ych.pjt.dto.InfoBoardDto;
 import com.ych.pjt.util.Constant;
 
@@ -14,8 +14,8 @@ public class InfoBoardManageCommand implements IYchCommand {
 
 	@Override
 	public void execute(HttpServletRequest req, Model model) {
-		InfoDao iDao = Constant.iDao;
-		ArrayList<InfoBoardDto> dtos = iDao.infoBoardManage();
+		AdminDao adDao = Constant.adDao;
+		ArrayList<InfoBoardDto> dtos = adDao.infoBoardManage();
 		model.addAttribute("infoBoardList",dtos);
 	}
 
