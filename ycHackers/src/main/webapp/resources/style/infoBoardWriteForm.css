@@ -36,6 +36,11 @@
 #infoWriteFrm p, #infoWriteFrm .form-group{
     text-align: start;
 }
+#validateM{
+    color:red;
+    font-size: 0.8rem;
+    justify-content:center;
+}
 /*hover*/
 #submitBtn:hover{
     color:#fff;
