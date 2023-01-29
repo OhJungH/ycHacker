@@ -7,7 +7,7 @@
 
 <!-- user Role change -->
 <select id="userList" resultType="com.ych.pjt.dto.UserDataDto">
-	SELECT USERID,USERNAME,USERDATA,USERAUTH FROM userData
+	SELECT USERID,USERNAME,USERDATE,USERAUTH FROM userData 
 </select>
 <select id="userName" resultType="com.ych.pjt.dto.UserDataDto">
 	SELECT USERNAME FROM userData WHERE USERNAME LIKE CONCAT('%',#{userName},'%') 
