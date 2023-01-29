@@ -4,12 +4,17 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- dao interface - mapper --> 
 <mapper namespace="com.ych.pjt.dao.IResDao">
+
 <insert id="res" parameterType="com.ych.pjt.dto.ResDto">
 INSERT INTO restbl(RESNUM,RESNAME,RESBIRTH,RESPHONE,RESDATE,RESTIME,RESMEMBER,PAYMENTS,RESCOMMENTS,CAFEPHONE)
 VALUES((SELECT nextval('resseq') FROM DUAL), #{resName},#{resBirth},#{resPhone},#{resDate},#{resTime},#{resMember},#{payMents},#{resComments},#{cafePhone})
 </insert> 
 
 <select id="myResInfo" resultType="com.ych.pjt.dto.ResDto">
-select * from restbl order by RESNUM
+SELECT * FROM restbl ORDER BY RESNUM
+</select>
+
+<select id="myResInfoPageList" resultType="com.ych.pjt.dto.ResDto">
+	SELECT * FROM restbl ORDER BY LIMIT 10
 </select>
 </mapper>

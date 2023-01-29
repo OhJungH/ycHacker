@@ -23,12 +23,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <!--bootstrap-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<!-- custom style sheet-->
-<link rel="stylesheet" href="style/footer.css"/>
+<!-- custom style -->
 <link rel="stylesheet" href="style/top.css"/>
+<link rel="stylesheet" href="style/footer.css"/>
 <style>
 #myInfoBox{
-	padding-left: 1em;
+    padding-left: 1em;
 }
 </style>
 </head>
@@ -37,68 +37,58 @@
 	<h1 style="color:#00CCFF;">YCHackers</h1>
 </div>
 
-<nav class="navbar navbar-expand-md" style="margin-bottom: 1em">
+<nav class="navbar navbar-expand-md">	
 	<button class="navbar-toggler btn btn-block" type="button" data-toggle="collapse" data-target="#collapsiblebar">
 		<span class="navbar-toggler-icon text-dark"></span>
 	</button>	
-	<div class="collapse navbar-collapse" id="collapsibleNavbar">		
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		<ul class="navbar-nav">
 			<li class="nav-item">
 				<a class="nav-link" href="home"> 
 			 		<i class="fas fa-home" style="font-size:30px;color:white;"></i>
 			 	</a>
-			</li>			
+			</li>
 			 <li class="nav-item">
-			 	<a class="nav-link" href="#">안내</a>
+			 	<a class="nav-link" href="info">안내</a>
 			 </li>
 			 <li class="nav-item">
-			 	<a class="nav-link" href="#">검색</a> 
+			 	<a class="nav-link" href="search">검색</a> 
 			 </li>
 			 <li class="nav-item">
-			 	<a class="nav-link" href="#">관리자</a>
-			 </li>								
+			 	<a class="nav-link" href="manager">관리자</a>
+			 </li>			
 		</ul>
 		<div id="myInfoBox">
-        	<a class="myInfoLink" href="#">id</a><br/>
-        	<a class="myInfoLink" href="#">등급</a><br/>
-        	<a class="myInfoLink" href="#">로그아웃</a>
-       	</div>
+                <a class="myInfoLink" href="#">id</a><br/>
+                <a class="myInfoLink" href="#">등급</a><br/>
+                <a class="myInfoLink" href="#">로그아웃</a>
+        </div>
 	</div>	
 </nav>
 
-<table border="1" style="width:800px;height:300px;text-align:center;margin:auto;">
-	<tr>
-		<th colspan="3" style="text-align:center;">회원번호</th>
-	</tr>
-	<tr>
-		<td colspan="2">ID</td>
-		<td>회원등급</td>
-	</tr>
-	<tr>
-		<td colspan="3">이름</td>
-	</tr>
-	<tr>
-		<td colspan="3">생년월일</td>
-	</tr>
-	<tr>
-		<td colspan="3">지역코드(우편번호)</td>
-	</tr>
-	<tr>
-		<td colspan="3">성별</td>
-	</tr>
-</table>
+<div class="container" style="text-align:center;">
+	<h1 style="color:#A744DE;">취소 안내문</h1>
+</div>
 
-<div style="text-align:center;margin-top:1em;">
-	<button type="submit" class="btn btn-success">submit</button>
-	<button type="submit" class="btn btn-info">비밀번호변경</button>
-	<button type="submit" class="btn btn-danger">회원탈퇴</button>
+<p style="text-align:center;">
+<b>1. 예약취소는 하루 전 18시까지만 가능하며 이후 취소 및 노쇼
+당일취소의 경우 환불이 불가합니다.</b>
+</p>
+<p style="text-align:center;">
+<b>2. 잦은 예약 취소는 다른 회원분들의 이용에 불편을 끼치게 되므로 
+삼가 해주시기 바랍니다.</b>
+</p>
+
+<div class="cancelButton" style="text-align:center;">
+	<button type="submit" class="btn btn-danger" onclick="cancelButton()">취소하기</button>
+	<a class="btn btn-warning" href="myResInfoView">이전으로</a>
 </div>
 
 <div id="footer">
-    <div class="footerBox">
-        <p id="footerPageName" class="footerLabel">YCHackers</p>
+	<div class="footerBox">
+    	<p id="footerPageName" class="footerLabel">YCHackers</p>
         <p id="footerCompany">
-            <span class="footerLabel">회사명</span> (사)양천구해커스
+        	<span class="footerLabel">회사명</span> (사)양천구해커스
         </p>
         <p id="footerCompanyNum">
             <span class="footerLabel">사업자번호</span> 000-00-00000
@@ -107,17 +97,26 @@
         <a class="footerLink" id="companyIntro" href="companyIntro">회사소개</a>&emsp; 
         <a class="footerLink" id="termsOfService" href="termsOfService">서비스이용약관</a> &emsp;
         <a class="footerLink" id="privacyPolicy" href="privacyPolicy">개인정보처리방침</a>
-    </div>
-    <div class="footerBox">
-        <p>
-            <span class="footerLabel">등록문의</span> 000-0000-0000
-        </p>
-        <p>
-            <span class="footerLabel">기타문의</span> 000-0000-0000
-        </p>
-        <br/><br/>
-        <p>
-            <span id="footerCopy">COPYRIGHT &copy; 2022(주)양천구해커스 ALL RIGHTS RESERVED</span>
-        </p>
-    </div>
+     </div>
+     <div class="footerBox">
+         <p>
+             <span class="footerLabel">등록문의</span> 000-0000-0000
+         </p>
+         <p>
+             <span class="footerLabel">기타문의</span> 000-0000-0000
+         </p>
+         <br/><br/>
+         <p>
+             <span id="footerCopy">COPYRIGHT &copy; 2022(주)양천구해커스 ALL RIGHTS RESERVED</span>
+         </p>
+     </div>
 </div>
+
+<script>
+function cancelButton() {
+	alert('취소되었습니다.');
+}
+
+</script>
+</body>
+</html>

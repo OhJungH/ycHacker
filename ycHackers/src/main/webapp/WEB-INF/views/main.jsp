@@ -71,7 +71,7 @@
 		<div id="myInfoBox">
 			<p class="myInfoP">
 				ID: 
-				<a class="myInfoLink" href="#">${userDto.userId}</a><br/>
+				<a class="myInfoLink" href="myPageView">${userDto.userId}</a><br/>
 			</p>
 			<p class="myInfoP">
 				등급: 
