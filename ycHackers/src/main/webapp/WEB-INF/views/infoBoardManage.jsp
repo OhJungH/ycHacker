@@ -127,7 +127,7 @@ $(function(){
 					purl = "infoPList?pageNo=" + pageNo2;
 				}
 				else if(pageNo == "Last") {
-					pageNo2 = 35;//마지막 페이지는 어떻게?
+					pageNo2 = ${infoBoardList}.size;//마지막 페이지는 어떻게?
 					purl = "infoPList?pageNo=" + pageNo2;
 				}
 				else {
