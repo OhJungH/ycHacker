@@ -22,3 +22,5 @@ public class InfoBoardPageListCommand implements IYchCommand {
 	}
 
 }
+
+

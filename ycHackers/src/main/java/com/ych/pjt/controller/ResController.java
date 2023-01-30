@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.MyResInfoCommand;
-import com.ych.pjt.command.MyResInfoPageListCommand;
 import com.ych.pjt.command.ResCommand;
 import com.ych.pjt.dao.ResDao;
 import com.ych.pjt.util.Constant;
@@ -55,13 +54,4 @@ public class ResController {
 		return "resCancelView";
 	}
 	
-	@RequestMapping("/myResInfoPList")
-	public String myResInfoPList(HttpServletRequest req, Model model) {
-		String pageNum = req.getParameter("pageNo");
-		System.out.println("myResInfoPList: " + pageNum);
-		com = new MyResInfoPageListCommand();
-		com.execute(req, model);
-		return "myResInfoView";
-	
-	}
 }
