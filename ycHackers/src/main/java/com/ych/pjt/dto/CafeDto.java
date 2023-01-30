@@ -9,13 +9,13 @@ public class CafeDto {
 	private int cafeMember;
 	private int cafeLike;
 	private String cafeIntro;
-	private int number;
+	private int cafeTel;
+	private String cafeTime;
 	public CafeDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public CafeDto(String cafeName, String cafeLocation, String cafePrice, String cafeImage, int cafeMember,
-			int cafeLike, String cafeIntro, int number) {
+			int cafeLike, String cafeIntro, int cafeTel, String cafeTime) {
 		super();
 		this.cafeName = cafeName;
 		this.cafeLocation = cafeLocation;
@@ -24,7 +24,8 @@ public class CafeDto {
 		this.cafeMember = cafeMember;
 		this.cafeLike = cafeLike;
 		this.cafeIntro = cafeIntro;
-		this.number = number;
+		this.cafeTel = cafeTel;
+		this.cafeTime = cafeTime;
 	}
 	public String getCafeName() {
 		return cafeName;
@@ -68,11 +69,19 @@ public class CafeDto {
 	public void setCafeIntro(String cafeIntro) {
 		this.cafeIntro = cafeIntro;
 	}
-	public int getNumber() {
-		return number;
+	public int getCafeTel() {
+		return cafeTel;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setCafeTel(int cafeTel) {
+		this.cafeTel = cafeTel;
 	}
+	public String getCafeTime() {
+		return cafeTime;
+	}
+	public void setCafeTime(String cafeTime) {
+		this.cafeTime = cafeTime;
+	}
+	
+	
 	
 }

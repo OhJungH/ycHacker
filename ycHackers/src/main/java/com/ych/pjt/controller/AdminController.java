@@ -65,35 +65,6 @@ public class AdminController {
 		return "infoBoardWriteForm";
 	}
 
-	/*회원 권한 관련 request*/
-	@RequestMapping("/userGrade")
-	public String userGrade(HttpServletRequest req, Model model) {
-		System.out.println("userGrade");
-		com = new UserGradeCommand();
-		com.execute(req, model);
-		return "userGrade"; 
-	}
-	@RequestMapping("/userSearch")
-	public String userSearch(HttpServletRequest req, Model model) {
-		System.out.println("userSearch");
-		com = new UserSearchCommand();
-		com.execute(req, model);
-		return "userGrade";
-	}
-	@RequestMapping(value="/changeGrade",method = RequestMethod.POST)
-	public String changeGrade(HttpServletRequest req, Model model) {
-		// grade change
-		com = new ChangeGradeCommand();
-		com.execute(req, model);
-		// user grade List
-		com = new UserGradeCommand();
-		com.execute(req, model);
-		return "userGrade";
-	}
-	//cafe관련은..어떻게?
-	@RequestMapping("/studyroomwrite")
-	public String studyroom(HttpServletRequest req, Model model) {
-		System.out.println("studyroomwrite");
-		return "studyroomwrite";
-	}
+	
+	
 }
