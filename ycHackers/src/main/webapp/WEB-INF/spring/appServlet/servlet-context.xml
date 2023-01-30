@@ -83,7 +83,6 @@
 	<beans:bean name="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
 	<beans:bean name="uDao" class="com.ych.pjt.dao.UserDao"/>
-	<beans:bean name="iDao" class="com.ych.pjt.dao.InfoDao"/>
 	<beans:bean name="adDao" class="com.ych.pjt.dao.AdminDao"/>	
 	<beans:bean name="rDao" class="com.ych.pjt.dao.ResDao"/>	
 	<beans:bean name="cDao" class="com.ych.pjt.dao.CafeDao"/>	
