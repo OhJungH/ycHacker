@@ -29,6 +29,17 @@
     background-color: #f46d5d14;
     padding: 1rem;
 }
+#toolbar-container{
+	max-width:100%;	
+}
+#infoEditor{
+	max-width:100%;
+	min-height: 10rem;
+	height: fit-content;
+	border:1px solid gray;
+	line-height:0.8rem;
+	background-color:#fff;
+}
 #submitBtn{
     color:#000;
     border-color: #fff4f3;
@@ -39,7 +50,6 @@
 #validateM{
     color:red;
     font-size: 0.8rem;
-    justify-content:center;
 }
 /*hover*/
 #submitBtn:hover{
