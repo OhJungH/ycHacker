@@ -7,11 +7,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Date;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,20 +29,21 @@ import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.ych.pjt.command.ChangeGradeCommand;
 import com.ych.pjt.command.IYchCommand;
-import com.ych.pjt.command.ResCommand;
 import com.ych.pjt.command.TempUserCommand;
+import com.ych.pjt.command.UserGradeCommand;
 import com.ych.pjt.command.UserJoinCommand;
 import com.ych.pjt.command.UserMainDataCommand;
+import com.ych.pjt.command.UserSearchCommand;
 import com.ych.pjt.dao.UserDao;
 import com.ych.pjt.dto.TempUserDto;
-import com.ych.pjt.dto.UserDataDto;
 import com.ych.pjt.naver.NaverLoginBO;
 import com.ych.pjt.util.Constant;
 
@@ -428,6 +426,32 @@ public class UserController {
 		model.addAttribute("tempPw", name);
 		*/
 		return "socialLogin";
+	}
+
+	/*회원 권한 관련 request*/
+	@RequestMapping("/userGrade")
+	public String userGrade(HttpServletRequest req, Model model) {
+		System.out.println("userGrade");
+		com = new UserGradeCommand();
+		com.execute(req, model);
+		return "userGrade"; 
+	}
+	@RequestMapping("/userSearch")
+	public String userSearch(HttpServletRequest req, Model model) {
+		System.out.println("userSearch");
+		com = new UserSearchCommand();
+		com.execute(req, model);
+		return "userGrade";
+	}
+	@RequestMapping(value="/changeGrade",method = RequestMethod.POST)
+	public String changeGrade(HttpServletRequest req, Model model) {
+		// grade change
+		com = new ChangeGradeCommand();
+		com.execute(req, model);
+		// user grade List
+		com = new UserGradeCommand();
+		com.execute(req, model);
+		return "userGrade";
 	}
 
 }

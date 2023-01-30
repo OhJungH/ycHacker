@@ -7,4 +7,9 @@
 		<select id="cafeList" resultType="com.ych.pjt.dto.CafeDto">
 			SELECT * FROM CAFELIST ORDER BY CAFENO DESC
 		</select>
+		
+		<insert id="studyroomWrite" parameterType="com.ych.pjt.dto.CafeDto">
+			insert into CAFELIST(CAFENAME, CAFENO, CAFELOCATION, CAFEPRICE, CAFEIMAGE, CAFEMEMBER, CAFELIKE, CAFEINTRO, CAFETEL, CAFETIME)
+			values(#{cafeName},#{cafeLocation},#{cafePrice},#{cafeImage},0, 0, #{cafeIntro} ,0 ,#{cafeTime})
+		</insert>
 </mapper>
