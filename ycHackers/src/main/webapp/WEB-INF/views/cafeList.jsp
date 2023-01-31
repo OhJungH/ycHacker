@@ -60,9 +60,9 @@
 	<c:forEach items="${cafeList}" var="dto">
 		<div class="col md-4" style="height:auto;">
 			<div class="card" style="width:250px;">
-				<img class="card-img-top" src="upimage/${dto.Photo}" alt="Card image" style="max-width:250px; height:250px;">
+				<img class="card-img-top" src="upimage/${dto.cafeImage}" alt="Card image" style="max-width:250px; height:250px;">
 				<div class="card-body">
-				<a href="cafeDetail?cafeNo=${dto.cafeNo}" class="pclick stretched-link">
+				<a href="cafeDetail?cafeNo=${dto.cafeTel}" class="pclick stretched-link">
 				소개글 : ${dto.cafeIntro}</a>
 				</div>
 			</div>

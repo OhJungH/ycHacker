@@ -53,11 +53,9 @@ public class CafeController {
 		String cafeName = mphr.getParameter("cafeName");
 		String cafeLocation = mphr.getParameter("cafeLocation");
 		String cafePrice = mphr.getParameter("cafePrice");
-		String cafeMember1 = mphr.getParameter("cafeMember");
-		int cafeMember = Integer.parseInt(cafeMember1);
+		String cafeMember = mphr.getParameter("cafeMember");
 		String cafeIntro = mphr.getParameter("cafeIntro");
-		String cafeTel1 = mphr.getParameter("cafeTel");
-		int cafeTel = Integer.parseInt(cafeTel1);
+		String cafeTel = mphr.getParameter("cafeTel");
 		String cafeTime = mphr.getParameter("cafeTime");
 		String cafeImage = null;
 		MultipartFile mfti = mphr.getFile("cafeImage");
@@ -69,7 +67,7 @@ public class CafeController {
 		long fileSize = mfti.getSize();
 		String safeFile = path + prename + originFileName;
 		cafeImage = prename + originFileName;
-		CafeDto cdto = new CafeDto(cafeName, cafeLocation, cafePrice, cafeImage, 0, 0, cafeIntro, 0, cafeTime);
+		CafeDto cdto = new CafeDto(cafeName, cafeLocation, cafePrice, cafeImage, cafeMember, 0, cafeIntro, cafeTel, cafeTime);
 		mphr.setAttribute("cdto", cdto);
 		com = new StudyroomWriteCommand();
 		com.execute(mphr, model);

@@ -173,8 +173,8 @@ $(document).ready(function() {
 		let form = new FormData($('#studyroomWrite')[0]);
 		event.preventDefault();
 		$.ajax({
-			url : $("#studyroomwWrite").attr("action"),
-			type : $("#studyroowWrite").attr("method"),
+			url : $("#studyroomWrite").attr("action"),
+			type : $("#studyroomWrite").attr("method"),
 			data : form,
 			processData : false,
 			contentType : false,
@@ -195,9 +195,9 @@ $(document).ready(function() {
 	$("#gocafeList").click(function(event) {
 		event.preventDefault();
 		$.ajax({
-			url : "cafeList",
+			url : $("#cafeList").attr("href"),
 			type : "get",
-			data : formData,
+			data : "",
 			success : function(data) {
 				$("#mainRagion").html(data);
 			},
