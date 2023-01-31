@@ -2,7 +2,7 @@ package com.ych.pjt.dto;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-
+//using CK Editor
 public class InfoBoardDto {
 	private int infoNum;
 	private String infoType;

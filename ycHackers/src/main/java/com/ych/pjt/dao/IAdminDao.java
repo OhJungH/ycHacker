@@ -14,6 +14,6 @@ public interface IAdminDao {
 	public ArrayList<InfoBoardDto> infoBoardHome();
 	public ArrayList<InfoBoardDto> infoBoardManage();
 	public ArrayList<InfoBoardDto> infoPageList(String pageNum);
-	
+	public void infoWrite(InfoBoardDto dto);
 	
 }

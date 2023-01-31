@@ -50,7 +50,7 @@
 	<p>6. 점검이 끝났다면 내용을 저장/게시해주세요. </p>
 </div>
 <div id="infoWriteContainer">
-	<form id="infoWriteFrm" name="infoWriteFrm" action="infowRite?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+	<form id="infoWriteFrm" name="infoWriteFrm" action="infoWrite?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 		<div>
 			<input type="hidden" name="infoNum" value=0/>
 			<p>
@@ -139,7 +139,7 @@
     .create( document.querySelector('#infoEditor'),{    	    	
     	language: 'ko',	       	    	
     	ckfinder: { //이미지 처리 모듈
-	   		uploadUrl: 'ckedit' //요청경로	   		
+	   		uploadUrl: 'infoCKedit' //요청경로	   		
 	   	},//기능 버튼 선택
 	   	toolbar: ['ckfinder', '|','imageUpload', '|', 'heading', '|', 'bold', 'italic','link', 'bulletedList',
 	   		'numberedList', 'blockQuote', '|', 'undo','redo','Outdent','Indent','fontsize',
@@ -179,9 +179,21 @@ document.getElementById("checkBtn").addEventListener("click",(e)=>{
 	}
 	if(fCon){
 		console.log("ajax: infoWriteFrm.submitBtn");
-		//여기에 ajax처리(submitBtn으로
-		$.ajax({
-			
+		//여기에 ajax처리(submitBtn으로)
+		$("#infoWriteFrm").submit(function(e){
+			e.preventDefault();
+			$.ajax({
+				url:$("#infoWriteFrm").attr("action"),
+				type:"post",
+				data:$("#infoWriteFrm").serialize(),
+				success : function(data) {
+					$("#adminContainer").html(data);
+					console.log(data);
+				},
+				error : function() {
+					alert("에러입니다.");
+				}
+			});
 		});
 	}else{
 		console.log("사용자가 제출을 거부");
