@@ -51,6 +51,12 @@ public class AdminDao implements IAdminDao {
 		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoPageList", startN);
 		return dtos;
 	}
+	@Override
+	public void infoWrite(InfoBoardDto dto) {
+		System.out.println("infoformation Board Write method: "+dto.getInfoTitle());
+		int res = sqlSession.insert("infoWrite", dto);
+		System.out.println("infoWrite result: "+res);
+	}
 
 
 

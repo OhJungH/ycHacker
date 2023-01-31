@@ -33,5 +33,8 @@
 <select id="infoPageList" resultType="com.ych.pjt.dto.InfoBoardDto">
 	SELECT * FROM InfoData ORDER BY INFONUM DESC LIMIT #{startN}, 10
 </select>
-	
+<insert id="infoWrite" parameterType="com.ych.pjt.dto.InfoBoardDto">
+	INSERT INTO InfoData () 
+	VALUES ()
+</insert>
 </mapper>
