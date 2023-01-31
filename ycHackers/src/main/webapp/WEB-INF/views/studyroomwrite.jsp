@@ -199,7 +199,7 @@ $(document).ready(function() {
 			type : "get",
 			data : formData,
 			success : function(data) {
-				$("#body").html(data);
+				$("#mainRagion").html(data);
 			},
 			error : function() {
 				alert("에러입니다.");
