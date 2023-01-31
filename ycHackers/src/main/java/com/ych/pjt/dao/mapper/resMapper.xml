@@ -14,7 +14,4 @@ VALUES((SELECT nextval('resseq') FROM DUAL), #{resName},#{resBirth},#{resPhone},
 SELECT * FROM restbl ORDER BY RESNUM
 </select>
 
-<select id="myResInfoPageList" resultType="com.ych.pjt.dto.ResDto">
-	SELECT * FROM restbl ORDER BY LIMIT 10
-</select>
 </mapper>

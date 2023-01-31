@@ -83,13 +83,23 @@
 				</label>
 				<input id="infoTitle" name="infoTitle" type="text" class="form-control" required/>
 			</div>
-			<div class="form-group">
+			<!-- content input(display none) -->
+			<div class="form-group d-none">
 				<label for="infoContent">
 					<i class="fa-play fas"></i>
 					내용
 				</label>
-				<textarea class="form-control ck-content" id="infoContent" name="infoContent"></textarea> 
+				<textarea class="form-control ck-content" id="infoContent" name="infoContent" required></textarea> 
 			</div>
+			<!-- info content preview -->
+			<div class="contentPreviewContainer">
+				<p class="previewLabel">
+					<i class="fa-play fas"></i>내용
+				</p>
+				<div id="toolbar-container"></div>
+				<div id="infoEditor" class="ck-content"></div>
+			</div>
+			<button id="editSub" type="submit" value="ckedit" style="visibility:hidden;">edit</button>
 			<p>
 				<i class="fa-play fas"></i>
 				바로 게시하시겠습니까?
@@ -111,8 +121,11 @@
 				모든 내용을 확인했습니다.
 			</label>
 		</div>
-		<p id="validateM"></p>
-		<button id="checkBtn" class="btn btn-outline-warning btn-block" type="button">저장/게시하겠습니다.</button>
+		<p id="validateM">저장하지 않고 페이지를 벗어나면 작성한 내용이 사라집니다!!</p>
+		<!-- validation button(CK editor > validation > submit) -->
+		<button id="editBtn" class="btn btn-outline-warning btn-block" type="button">저장/게시하겠습니다.</button>
+		<!-- invisible button -->
+		<button id="checkBtn" class="d-none" type="submit"></button>
 		<button id="submitBtn" class="d-none" type="submit"></button>
 	</form>
 </div>
@@ -120,9 +133,35 @@
 <!-- custom script files -->
 <script src="js/infoBoardWRadioStyle.js"></script>
 <script src="js/infoBoardWValidation.js"></script>
-
+<!-- CK editor module -->
+<script type="module">	
+ DecoupledEditor
+    .create( document.querySelector('#infoEditor'),{    	    	
+    	language: 'ko',	       	    	
+    	ckfinder: { //이미지 처리 모듈
+	   		uploadUrl: 'ckedit' //요청경로	   		
+	   	},//기능 버튼 선택
+	   	toolbar: ['ckfinder', '|','imageUpload', '|', 'heading', '|', 'bold', 'italic','link', 'bulletedList',
+	   		'numberedList', 'blockQuote', '|', 'undo','redo','Outdent','Indent','fontsize',
+	   		'fontfamily','insertTable','alignment', '|', 'fontColor', 'fontBackgroundColor']			
+    })       
+    .then(function(editorD) {
+    	//window.editorResize = editor;
+    	const toolbarContainer = document.querySelector( '#toolbar-container' );
+        toolbarContainer.appendChild( editorD.ui.view.toolbar.element );        
+    });
+</script>
 <script>    
-//내용에 CKEditor => jsp에서	
+//button > CKeditor > validation > submit
+function beforeSub(){
+	$("#infoEditor svg").remove();
+	let contentVal = $("#infoEditor").html();
+	$("#infoContent").html(contentVal);
+	setTimeout(function(){
+		$("#checkBtn").trigger("click");
+	},1000);
+}
+document.querySelector("#editBtn").addEventListener("click",beforeSub);
 
 //submit할때 confirm
 let fCon=true;
@@ -139,7 +178,11 @@ document.getElementById("checkBtn").addEventListener("click",(e)=>{
 		return false;
 	}
 	if(fCon){
-		console.log("ajax: infoWriteFrm.submitBtn");//여기에 ajax처리(submitBtn으로
+		console.log("ajax: infoWriteFrm.submitBtn");
+		//여기에 ajax처리(submitBtn으로
+		$.ajax({
+			
+		});
 	}else{
 		console.log("사용자가 제출을 거부");
 		document.querySelector("#validateM").innerHTML="제출을 거부했습니다.";
