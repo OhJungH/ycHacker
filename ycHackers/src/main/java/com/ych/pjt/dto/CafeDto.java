@@ -6,16 +6,16 @@ public class CafeDto {
 	private String cafeLocation;
 	private String cafePrice;
 	private String cafeImage;
-	private int cafeMember;
+	private String cafeMember;
 	private int cafeLike;
 	private String cafeIntro;
-	private int cafeTel;
+	private String cafeTel;
 	private String cafeTime;
 	public CafeDto() {
 		super();
 	}
-	public CafeDto(String cafeName, String cafeLocation, String cafePrice, String cafeImage, int cafeMember,
-			int cafeLike, String cafeIntro, int cafeTel, String cafeTime) {
+	public CafeDto(String cafeName, String cafeLocation, String cafePrice, String cafeImage, String cafeMember,
+			int cafeLike, String cafeIntro, String cafeTel, String cafeTime) {
 		super();
 		this.cafeName = cafeName;
 		this.cafeLocation = cafeLocation;
@@ -51,10 +51,10 @@ public class CafeDto {
 	public void setCafeImage(String cafeImage) {
 		this.cafeImage = cafeImage;
 	}
-	public int getCafeMember() {
+	public String getCafeMember() {
 		return cafeMember;
 	}
-	public void setCafeMember(int cafeMember) {
+	public void setCafeMember(String cafeMember) {
 		this.cafeMember = cafeMember;
 	}
 	public int getCafeLike() {
@@ -69,10 +69,10 @@ public class CafeDto {
 	public void setCafeIntro(String cafeIntro) {
 		this.cafeIntro = cafeIntro;
 	}
-	public int getCafeTel() {
+	public String getCafeTel() {
 		return cafeTel;
 	}
-	public void setCafeTel(int cafeTel) {
+	public void setCafeTel(String cafeTel) {
 		this.cafeTel = cafeTel;
 	}
 	public String getCafeTime() {
