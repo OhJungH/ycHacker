@@ -23,7 +23,7 @@ public class InfoBoardWriteCommand implements IYchCommand {
 		int infoCondition=0;
 		if(infoConditionST.equals("display")) {
 			infoCondition=10;
-		}else if(infoConditionST.equals("")){
+		}else if(infoConditionST.equals("display-none")){
 			infoCondition=-10;
 		}
 		System.out.println("infoBoardData: "+infoType+"/"+infoAuthor+"("+infoAuth+")/"+infoTitle+"/"+infoCondition);

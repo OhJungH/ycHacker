@@ -33,7 +33,7 @@
 <body>
 
 <div class="adminNavContainer">
-	<ul class="nav navbar flex-column adminNav">
+	<ul class="adminNav nav navbar flex-column" style="justify-content: flex-start;">
 		<li class="nav-item">
 			<a class="nav-link" href="infoBoardManage" id="infoBoardManage">안내사항관리</a>
 		</li>

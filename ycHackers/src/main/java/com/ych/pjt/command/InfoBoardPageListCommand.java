@@ -19,6 +19,7 @@ public class InfoBoardPageListCommand implements IYchCommand {
 		System.out.println("infoBoard page List command: "+pageNum);
 		ArrayList<InfoBoardDto> dtos = adDao.infoPageList(pageNum);
 		model.addAttribute("listContent", dtos);
+		model.addAttribute("listSize",dtos.size());
 	}
 
 }
