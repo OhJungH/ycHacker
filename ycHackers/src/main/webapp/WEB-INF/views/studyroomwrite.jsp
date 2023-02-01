@@ -52,25 +52,16 @@
 		<input type="text" id="cafeLocation" style="width:350px;" name="cafeLocation"><br/><br/>
 		
 		<p style="display:inline-block;">인원 :</p>
-		<c:set var="men" value='<%=new String[] {"1인", "2인", "3인", "4인", "5인"}%>'/>
-		<select name="cafeMember" id="cafeMember">
-			<option>인원</option>
-			<c:forEach var="mens" items="${men}">
-				<option>${mens}</option>
-			</c:forEach>
-		</select><br/><br/>
-		<p style="display:inline-block;">시간 :</p>
-		<c:set var="time" value='<%=new String[] {"1시간","2시간","3시간","4시간","5시간"}%>'/>
-		<select name="cafeTime" id="cafeTime">
-			<option>시간</option>
-			<c:forEach var="times" items="${time}">
-				<option>${times}</option>
-			</c:forEach>
-		</select><br/>
-		<p style="display:inline-block;">스터디룸 연락처 : </p>
-		<input type="text" id="cafeTel" style="width:250px; display:inline-block;" name="cafeTel"><br/><br/>
+		<input name="cafeMember" id="cafeMember">
+		<br/><br/>
+		<div>
+		<p style="float:left;"> 시간 :&nbsp;</p>
+		<input name="cafeTime" id="cafeTime" style="float:left; margin-right:30px; width:150px;">
 		<p style="float:left; margin-right:20px;">금 액 :</p>
-		<input type="text" id="cafePrice" style="width:350px;" name="cafePrice"><br/>
+		<input type="text" id="cafePrice" style="width:150px;" name="cafePrice"><br/><br/>
+		</div>
+		<p style="display:inline-block;">스터디룸 연락처 : </p>
+		<input type="text" id="cafeTel" style="width:250px; margin-left:30px; display:inline-block;" name="cafeTel"><br/><br/>
 	</div>
 	<div class="content" style="background-color: white; margin-top:30px; margin-right: 130px;">
 		<div id="recycle" style="margin-top: 200px;">
