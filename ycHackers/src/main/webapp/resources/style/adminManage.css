@@ -1,10 +1,29 @@
-#infoBoardWriteForm{
-	
-}
+
 #infoListTbl{
     margin-top:1.5rem;
 }
 
-.infoManagerContainer{
-	
+#infoListTbl td, #infoListTbl th {
+    font-size: small;
+    text-align: center;
+}
+
+#infoListTbl td a {
+    color: #000;
+}
+
+#infoListTbl th:nth-child(2) {
+    width: 30%;
+}
+tr[class="info"]{
+	background-color: #66b7ff96;
+}
+tr[class="result"]{
+	background-color: #ed143d6e;
+}
+tr[class="event"]{
+	background-color: #0ded0030;
+}
+td[class="-10"]{
+	background-color: #000;
 }

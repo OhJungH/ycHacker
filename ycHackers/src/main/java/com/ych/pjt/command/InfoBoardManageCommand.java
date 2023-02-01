@@ -17,6 +17,7 @@ public class InfoBoardManageCommand implements IYchCommand {
 		AdminDao adDao = Constant.adDao;
 		ArrayList<InfoBoardDto> dtos = adDao.infoBoardManage();
 		model.addAttribute("infoBoardList",dtos);
+		model.addAttribute("listSize",dtos.size());
 	}
 
 }

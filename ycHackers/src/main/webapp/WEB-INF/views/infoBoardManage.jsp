@@ -55,11 +55,21 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${infoBoardList}" var="infoDto">
-				<tr>
+				<tr class="${infoDto.infoType}">
 					<td>${infoDto.infoNum}</td>
-					<td>${infoDto.infoTitle}</td>
-					<td>${infoDto.infoDate}</td>
-					<td>${infoDto.infoHit}</td>
+					<td>
+						<a class="infoP" href="infoDetails?infoNum=${infoDto.infoNum}">
+							${infoDto.infoTitle}
+						</a>
+					</td>
+					<td>
+						${infoDto.infoDate}(${infoDto.infoIndent})
+					</td>
+					<td>
+						${infoDto.infoAuthor}
+						(${infoDto.infoAuth})
+					</td>
+					<td class="${infoDto.infoCondition}">${infoDto.infoHit}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -92,7 +102,7 @@ $(document).ready(function() {
 $(function(){
 	//twbsPagination(): 외부의 js파일을 적용시킴
 	window.pagObj = $("#pagination").twbsPagination({
-		totalPages: ${infoBoardList}.size, //총 페이지 수
+		totalPages: Math.floor(<c:out value="${listSize}"></c:out>/10)+1, //총 페이지 수
 		visiblePages: 10, //한 화면에서 볼수있는 페이지 수
 		onPageClick: function(event, page){//페이지 이동 클릭하면 발생시킬 기능
 			console.info(page + ' (from options)');
@@ -127,7 +137,7 @@ $(function(){
 					purl = "infoPList?pageNo=" + pageNo2;
 				}
 				else if(pageNo == "Last") {
-					pageNo2 = ${infoBoardList}.size;//마지막 페이지는 어떻게?
+					pageNo2 = Math.floor(<c:out value="${listSize}"></c:out>/10)+1;//마지막 페이지는 어떻게?
 					purl = "infoPList?pageNo=" + pageNo2;
 				}
 				else {
