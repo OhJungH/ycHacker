@@ -54,17 +54,21 @@
 		<p style="display:inline-block;">인원 :</p>
 		<input name="cafeMember" id="cafeMember">
 		<br/><br/>
-		<div>
-		<p style="float:left;"> 시간 :&nbsp;</p>
-		<input name="cafeTime" id="cafeTime" style="float:left; margin-right:30px; width:150px;">
-		<p style="float:left; margin-right:20px;">금 액 :</p>
-		<input type="text" id="cafePrice" style="width:150px;" name="cafePrice"><br/><br/>
+		<div id="recycle">
+			<div class="step1">
+				<p style="float:left;"> 시간 :&nbsp;</p>
+				<input name="cafeTime" id="cafeTime" style="float:left; margin-right:30px; width:150px;">
+				<p style="float:left; margin-right:20px;">금 액 :</p>
+				<input type="text" id="cafePrice" style="width:150px;" name="cafePrice">
+				<br/><br/>
+			</div>
 		</div>
+		<button id="Btn" type="button">추가</button>
 		<p style="display:inline-block;">스터디룸 연락처 : </p>
 		<input type="text" id="cafeTel" style="width:250px; margin-left:30px; display:inline-block;" name="cafeTel"><br/><br/>
 	</div>
 	<div class="content" style="background-color: white; margin-top:30px; margin-right: 130px;">
-		<div id="recycle" style="margin-top: 200px;">
+		<div id="recycle2" style="margin-top: 200px;">
 			<div id="Item1" class="step" style="display: inline-block;">
 				<button type="button" class="btn btn-black delete" style="float:right;">삭제</button>
 				<p style="display: inline-block; vertical-align: top; font-size: 25px; color: Yellowgreen;" class="title">내부 사진1</p>
@@ -118,6 +122,19 @@ $(document).ready(function() {
 	$(document).on("click", "img.imgs", function(event) {
 		let imgFiles = $(event.target).next();
 		imgFiles.trigger("click");
+	});
+	
+	$("#Btn").click(function() {
+		let steps = document.getElementsByClassName("step1").length+1;
+		let newDiv = document.createElement("div");
+		newDiv.setAttribute("id","Item"+steps);
+		newDiv.setAttribute("class","step1");
+		newDiv.innerHTML = 
+			"<p style='float:left;'> 시간 :&nbsp;</p>" + 
+			"<input name='cafeTime' id='"+steps+"' style='float:left; margin-right:30px; width:150px;'>"+
+			"<p style='float:left; margin-right:20px;'>금 액 :</p>"+
+			"<input type='text' id='"+steps+"' style='width:150px;' name='cafePrice'><br/><br/>";
+		$("#recycle2").append(newDiv);
 	});
 	
 	$("#submit").on("click", function() {
