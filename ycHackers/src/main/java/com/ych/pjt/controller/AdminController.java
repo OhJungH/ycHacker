@@ -109,7 +109,7 @@ public class AdminController {
 		editorData.put("uploaded", true);
 		//url: protocol(scheme)://도메인(서버주소:포트)/request 경로/파일명
 		//실제에선 image_request_path사용
-		String requestURL=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+tomcat_request_path+changeFileName;
+		String requestURL=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+image_request_path+changeFileName;
 		editorData.put("url",requestURL);
 		System.out.println("##uploaded URL: "+(String)editorData.get("url"));
 		
@@ -119,12 +119,12 @@ public class AdminController {
 		res.getWriter().print(editorData.toString());
 	}
 	@RequestMapping(value="/infoWrite",produces="application/text;charset=UTF8")
-	public String infoWrite(InfoBoardDto dto, HttpServletRequest req, Model model) {
+	public String infoWrite(HttpServletRequest req, Model model) {
 		System.out.println("infoWrite request");
-		req.setAttribute("infoDto", dto);
 		com= new InfoBoardWriteCommand();
 		com.execute(req, model);
-		System.out.println("infoBoard write Complete: "+dto.getInfoTitle());
+		System.out.println("infoBoard write Complete: "+req.getParameter("infoTitle"));
+
 		com = new InfoBoardManageCommand();
 		com.execute(req, model);
 		System.out.println("(infoWrite request)infoBoardList");

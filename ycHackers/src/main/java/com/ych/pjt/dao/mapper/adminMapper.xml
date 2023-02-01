@@ -34,7 +34,7 @@
 	SELECT * FROM InfoData ORDER BY INFONUM DESC LIMIT #{startN}, 10
 </select>
 <insert id="infoWrite" parameterType="com.ych.pjt.dto.InfoBoardDto">
-	INSERT INTO InfoData () 
-	VALUES ()
+	INSERT INTO InfoData (INFONUM,INFOAUTHOR,INFOAUTH,INFOTITLE,INFOCONTENT,INFOCONDITION) 
+	VALUES ((SELECT nextval('infoseq') FROM DUAL),#{infoAuthor},#{infoAuth},#{infoTitle},#{infoContent},#{infoCondition})
 </insert>
 </mapper>

@@ -19,7 +19,7 @@
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <title>공지사항 입력</title>
 <!--jquery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <!--propper jquery -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <!--latest javascript -->
@@ -37,6 +37,7 @@
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="user_id"/>
+	<sec:authentication property="principal.authorities" var="user_authority"/>
 </sec:authorize>
 <h3 class="title">안내사항 작성하기</h3>
 <hr/>
@@ -50,7 +51,8 @@
 	<p>6. 점검이 끝났다면 내용을 저장/게시해주세요. </p>
 </div>
 <div id="infoWriteContainer">
-	<form id="infoWriteFrm" name="infoWriteFrm" action="infoWrite?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+	<form id="infoWriteFrm" name="infoWriteFrm" action="infoWrite" method="post" enctype="multipart/form-data">
+			<input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden">
 		<div>
 			<input type="hidden" name="infoNum" value=0/>
 			<p>
@@ -75,7 +77,8 @@
 					<span id="infoType3Span">이벤트</span>
 				</label>
 			</div>
-			<input type="hidden" name="infoAuthor" value="${username}"/>
+			<input type="hidden" name="infoAuthor" value="${user_id}"/>
+			<input type="hidden" name="infoAuth" value="${user_authority}"/>
 			<div class="form-group">
 				<label for="infoTitle">
 					<i class="fa-play fas"></i>
@@ -85,10 +88,6 @@
 			</div>
 			<!-- content input(display none) -->
 			<div class="form-group d-none">
-				<label for="infoContent">
-					<i class="fa-play fas"></i>
-					내용
-				</label>
 				<textarea class="form-control ck-content" id="infoContent" name="infoContent" required></textarea> 
 			</div>
 			<!-- info content preview -->
@@ -152,55 +151,65 @@
     });
 </script>
 <script>    
-//button > CKeditor > validation > submit
-function beforeSub(){
-	$("#infoEditor svg").remove();
-	let contentVal = $("#infoEditor").html();
-	$("#infoContent").html(contentVal);
-	setTimeout(function(){
-		$("#checkBtn").trigger("click");
-	},1000);
-}
-document.querySelector("#editBtn").addEventListener("click",beforeSub);
-
-//submit할때 confirm
-let fCon=true;
-document.getElementById("checkBtn").addEventListener("click",(e)=>{
-	e.preventDefault();
-	if(validateData()){
-		fCon=confirm("입력내용을 저장하시겠습니까?");
-	}else{
-		alert("내용을 다시 확인해주세요");
-		return false;
-	}
-	if(document.querySelector("input[id=submitCheck]:checked")==null||document.querySelector("input[id=submitCheck]:checked")==""){
-		alert("내용을 확인하고 체크박스를 눌러주세요.");
-		return false;
-	}
-	if(fCon){
-		console.log("ajax: infoWriteFrm.submitBtn");
-		//여기에 ajax처리(submitBtn으로)
-		$("#infoWriteFrm").submit(function(e){
-			e.preventDefault();
-			$.ajax({
-				url:$("#infoWriteFrm").attr("action"),
-				type:"post",
-				data:$("#infoWriteFrm").serialize(),
-				success : function(data) {
-					$("#adminContainer").html(data);
-					console.log(data);
-				},
-				error : function() {
-					alert("에러입니다.");
-				}
-			});
+$(document).ready(function(){
+	//submit
+	$("#infoWriteFrm").submit(function(e){
+		e.preventDefault();
+		$.ajax({
+			url:$("#infoWriteFrm").attr("action"),
+			type:"post",
+			data:$("#infoWriteFrm").serialize(),
+			success : function(data) {
+				console.log(data);
+				$("#adminContainer").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
 		});
-	}else{
-		console.log("사용자가 제출을 거부");
-		document.querySelector("#validateM").innerHTML="제출을 거부했습니다.";
+	});
+	//button > CKeditor > validation > submit
+	function beforeSub(){
+		$("#infoEditor svg").remove();
+		let contentVal = $("#infoEditor").html();
+		$("#infoContent").html(contentVal);
+		setTimeout(function(){
+			$("#checkBtn").trigger("click");
+		},1000);
 	}
-});
-</script>
+
+	document.querySelector("#editBtn").addEventListener("click",beforeSub);
+
+	//submit할때 confirm
+	let fCon=false;
+	document.getElementById("checkBtn").addEventListener("click",(e)=>{
+		e.preventDefault();
+		if(validateData()){
+			fCon=confirm("입력내용을 저장하시겠습니까?");
+		}else{
+			alert("내용을 다시 확인해주세요");
+			return false;
+		}
+		if(document.querySelector("input[id=submitCheck]:checked")==null||document.querySelector("input[id=submitCheck]:checked")==""){
+			alert("내용을 확인하고 체크박스를 눌러주세요.");
+			return false;
+		}
+		
+		console.log("fCon: "+fCon);
+		if(fCon){
+			console.log("ajax: infoWriteFrm.submitBtn");
+//			document.cookie = "SameSite=None; Secure";
+			//여기에 ajax처리
+			document.querySelector("#submitBtn").click();
+		}else{
+			console.log("사용자가 제출을 거부");
+			document.querySelector("#validateM").innerHTML="제출을 거부했습니다.";
+		}
+
+
+	});
+
+});</script>
 
 </body>
 </html>
