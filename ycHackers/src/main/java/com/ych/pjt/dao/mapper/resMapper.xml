@@ -14,4 +14,7 @@ VALUES((SELECT nextval('resseq') FROM DUAL), #{resName},#{resBirth},#{resPhone},
 SELECT * FROM restbl ORDER BY RESNUM
 </select>
 
+<select id="resModifyView" resultType="com.ych.pjt.dto.ResDto">
+SELECT * FROM restbl where RESNUM = #{resNum}
+</select>
 </mapper>
