@@ -100,6 +100,20 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$("#cafeDetail").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#cafeDetail").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#cafeContainer").html(data);
+			},
+			error : function() {
+				alert("에러~");
+			}
+		});
+	});
 });
 </script>
 </body>

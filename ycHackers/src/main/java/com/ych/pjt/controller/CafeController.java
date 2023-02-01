@@ -88,4 +88,10 @@ public class CafeController {
 			return "write-failed";
 		}
 	}
+	
+	@RequestMapping("/cafeDetail")
+	public String cafeDetail(HttpServletRequest req, Model model) {
+		System.out.println("cafeDetail");
+		return "cafeDetail";
+	}
 }
