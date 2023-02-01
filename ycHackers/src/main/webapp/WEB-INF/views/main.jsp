@@ -29,6 +29,9 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- CKEditor API -->
+<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/decoupled-document/ckeditor.js"></script> 
+<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
 <!-- custom style sheet -->
 <link rel="stylesheet" href="style/footer.css"/>
 <link rel="stylesheet" href="style/top.css"/>
@@ -39,28 +42,36 @@
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="user_id"/>
 </sec:authorize>
-<nav class="navbar navbar-expand-sm">
+<nav class="navbar navbar-expand-sm mainNav">
 	<button class="navbar-toggler btn btn-block" type="button" data-toggle="collapse" data-target="#collapsiblebar">
 		<span class="navbar-toggler-icon text-dark"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="collapsiblebar">
 		<ul class=" nav justify-content-center">
 			<li class="nav-item">
+				<a class="nav-link" href="home">home</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" href="info">안내</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="search">검색</a>
+				<a class="nav-link" href="cafeList" id="cafeList">검색</a>
 			</li>
-			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE')">
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 				<li class="nav-item">
-					<a class="nav-link" href="manager">관리자</a>
+					<a class="nav-link" href="admin" id="admin">관리자</a>
+				</li>
+			</sec:authorize>
+			<sec:authorize access="hasAnyRole('ROLE_MANAGER')">
+				<li class="nav-item">
+					<a class="nav-link" href="studyroomwrite" id="studyroomwrite">스터디룸 등록</a>
 				</li>
 			</sec:authorize>
 		</ul>
 		<div id="myInfoBox">
 			<p class="myInfoP">
 				ID: 
-				<a class="myInfoLink" href="#">${userDto.userId}</a><br/>
+				<a class="myInfoLink" href="myPageView">${userDto.userId}</a><br/>
 			</p>
 			<p class="myInfoP">
 				등급: 
@@ -72,12 +83,14 @@
 		</div>
 	</div><hr/>
 </nav>
+
+
 <section>
 	<div id="mainRagion">
 		<div style="text-align: center;">
 			<h3>공지사항</h3>
 		</div>
-		<table class="table table-hover">
+		<table class="table table-hover mainTBL">
 			<thead>
 				<tr>
 					<th>글 번호</th>
@@ -157,8 +170,50 @@
 	</div>
 </div>
 <script>
-$(document).reaady(function(){
-    
+$(document).ready(function(){
+	$("#cafeList").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#cafeList").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	$("#admin").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#admin").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	$("#studyroomwrite").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#studyroomwrite").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	
 });
 </script>
 

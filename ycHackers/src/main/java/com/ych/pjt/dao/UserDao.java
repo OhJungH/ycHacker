@@ -3,6 +3,7 @@ package com.ych.pjt.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ych.pjt.dto.TempUserDto;
 import com.ych.pjt.dto.UserDataDto;
 
 public class UserDao implements IUserDao {
@@ -41,4 +42,27 @@ public class UserDao implements IUserDao {
 		UserDataDto dto = sqlSession.selectOne("userMainData",userId);
 		return dto;
 	}
+
+	@Override
+	public void tempUserDB(TempUserDto dto) {
+		String userId = dto.getUserId();
+		System.out.println("checking SNS user method: "+userId);
+		TempUserDto duplicationCheck = sqlSession.selectOne("tempUserDB", userId);
+		if(duplicationCheck==null) tempUserJoin(dto);
+	}
+	@Override
+	public void tempUserJoin(TempUserDto dto) {
+		System.out.println("SNS user join method");
+		int res = sqlSession.insert("tempUserJoin",dto);
+		System.out.println("tempJoin result: "+res);
+	}
+
+	@Override
+	public TempUserDto tempUserLogin(String userId) {
+		System.out.println("SNS user log in method: "+userId);
+		TempUserDto dto = sqlSession.selectOne("tempUserLogin", userId);
+		System.out.println("result: "+dto.getUserId());
+		return dto;
+	}
+	
 }

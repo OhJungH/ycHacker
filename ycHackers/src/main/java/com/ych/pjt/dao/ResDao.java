@@ -1,5 +1,7 @@
 package com.ych.pjt.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +16,7 @@ public class ResDao implements IResDao {
 		System.out.println("res method");
 		String result = null;
 		try {
-			int res = sqlSession.insert("Res",dto);
+			int res = sqlSession.insert("res",dto);
 			if(res > 0){
 				result="success";
 			}
@@ -27,6 +29,23 @@ public class ResDao implements IResDao {
 			result="failed";
 		}
 		
+		return result;
+	}
+	/* 내 예약 정보 */
+	@Override
+	public ArrayList<ResDto> myResInfo() {
+		System.out.println("myResInfo list");
+		ArrayList<ResDto> dtos = (ArrayList)sqlSession.selectList("myResInfo");
+		return dtos;
+	}
+	
+	@Override
+	public ArrayList<ResDto> myResInfoPageList(String pageNo) {
+		System.out.println("pagelist : " + pageNo);
+		int page = Integer.parseInt(pageNo);
+		int startNo = (page-1) *10+1;
+		System.out.println("startNo : "  + startNo);
+		ArrayList<ResDto> result = (ArrayList)sqlSession.selectList("myResInfoPageList",startNo);
 		return result;
 	}
 }

@@ -1,3 +1,4 @@
+<%@page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -30,13 +31,66 @@
 <!--custom Style-->
     <link rel="stylesheet" href="style/home.css"/>
     <link rel="stylesheet" href="style/footer.css"/>
+    <link rel="stylesheet" href="style/infoBoardHome.css"/>
 </head>
 <body>
 
 <div id="homeInfoContainer">
-	info Board Container
+    <a class="btn btn-block" id="homeBar" href="home">홈으로</a>
+    <div class="homeTitle">
+            <h1>안 내 사 항</h1><hr style="margin: 0;">
+			<p style="color: chocolate;font-size: 0.8rem;">
+				로그인을해야 댓글을 사용할 수 있습니다.
+			</p>
+    </div>
+	<div class="card-columns infoCardDeck">
+		<c:forEach items="${infoHomeList}" var="dto">
+			<div class="card infoCard introCard${dto.infoType}">
+				<div class="card-body text-center infoCardBody">
+					<c:choose>
+						<c:when test="${dto.infoType} eq 'info'">
+							<span class="badge badge-info">공지사항</span><br/>
+						</c:when>
+						<c:when test="${dto.infoType} eq 'result'">
+							<span class="badge badge-danger">신고처리</span><br/>
+						</c:when>
+						<c:when test="${dto.infoType} eq 'event'">
+							<span class="badge badge-success">이벤트</span><br/>
+						</c:when>
+					</c:choose>
+					<h4 class="d-inline">${dto.infoNum}. ${dto.infoTitle}(${dto.infoIndent})</h4><br/>
+					<span class="card-text">${dto.infoContent}(${dto.infoHit})</span><br/>
+					<a href="infoDetails?infoNum=${dto.infoNum}" class="infoDetails card-link stretched-link">내용보기</a>				
+				</div>	
+			</div>
+		</c:forEach>
+	
+		<div class="card infoCard introCardinfo">
+			<div class="card-body text-center infoCardBody">
+				<span class="badge badge-info">공지사항</span><br/>
+				<h4 class="d-inline">1. 글 제목(29)</h4><br/>
+				<span class="card-text">내용이 길면 생략됩니다.(25)</span><br/>
+				<a href="infoDetails?infoNum=infonum" class="infoDetails card-link stretched-link">내용보기</a>
+			</div>	
+		</div>
+		<div class="card infoCard introCardresult">
+			<div class="card-body text-center infoCardBody">
+				<span class="badge badge-danger">신고처리</span><br/>
+				<h4 class="d-inline">infoNum. infoTitle (infoIdent)</h4><br/>
+				<span class="card-text">infoContent(20자)...(infoStep)</span><br/>
+				<a href="infoDetails?infoNum=infonum" class="infoDetails card-link stretched-link">내용보기</a>
+			</div>
+		</div>
+		<div class="card infoCard introCardevent">
+			<div class="card-body text-center infoCardBody">
+				<span class="badge badge-success">이벤트</span><br/>
+				<h4 class="d-inline">3. infoTitle (infoIdent)</h4><br/>
+				<span class="card-text">infoContent(20자)...(infoStep)</span><br/>
+				<a href="infoDetails?infoNum=infonum" class="infoDetails card-link stretched-link">내용보기</a>
+			</div>
+		</div>
+	</div>
 </div>
-<script src="js/clock.js"></script>
 <div id="footer">
 	<div class="footerBox">
 	<p id="footerPageName" class="footerLabel">YCHackers</p>

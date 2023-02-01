@@ -5,6 +5,7 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,21 +16,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
 <title>JSP</title>
-<!--bootstrap-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!--propper jquery -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <!--latest javascript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<!--fontawesome icon-->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
-	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<!--google icon -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!--bootstrap-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <!-- custom style -->
-<link rel="stylesheet" href="html/Reservation.html"/>
+<link rel="stylesheet" href="style/footer.css"/>
+<link rel="stylesheet" href="style/top.css"/>
 </head>
 <body>
 <div class="container" style="text-align:center">
@@ -65,7 +62,7 @@
 	</div>	
 </nav>
 <div>
-	<form action="Res" method="post">
+	<form action="resForm" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resNum">회원번호</label>
@@ -97,7 +94,11 @@
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="payments">결제</label>
-			<input type="text" id="payments" name="payments" style="width:500px;">
+			<input type="text" id="payMents" name="payMents" style="width:500px;">
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="cafePhone">카페번호</label>
+			<input type="text" id="cafePhone" name="cafePhone" style="width:500px;">
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resComments">요청사항</label>
@@ -105,7 +106,8 @@
 		</div>
 		<div class="container" style="text-align:center;">
 			<button type="submit" class="btn btn-success">예약하기</button>
-			<button type="submit" class="btn btn-danger">취소하기</button>
+			<button type="submit" class="btn btn-danger">예약취소</button>
+			<button type="submit" class="btn btn-primary">메인으로</button>
 		</div>
 	</form>
 </div>
@@ -136,5 +138,6 @@
         </p>
     </div>
 </div>
+
 </body>
 </html>

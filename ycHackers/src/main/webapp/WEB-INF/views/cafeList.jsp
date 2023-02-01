@@ -28,78 +28,70 @@
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 </head>
 <body>
 
-<form action="cafeDetail" method="get" id="cafeSearch" name="cafeSearch">
-	<input type="hidden" value="search" name="viewType">
-	<input hidden="hidden" value="total" id="searchWhat" name="searchWhat">
-	<input hidden="hidden" value="location" id="chose" name="chose">
-			<div class="dropdown">
-				<div class="dropdown-menu">
-					<a class="dropdown-item search" id="total" style="display:none;">전체검색</a>
-					<a class="dropdown-item search" id="location">지역</a>
-					<a class="dropdown-item searhc" id="people">인원</a>
+<div class="cafeSearch" style="margin-bottom:50px;">
+	<form action="cafeList" method="get" id="searchFrm">
+		<input type="hidden" value="search" name="cafeSearch">
+		<div class="input-group" style="width:40%;height:50px; margin:auto;">
+			<input hidden="hidden" value="cafeName" id="searchWhat" name="searchWhat">
+			<input hidden="hidden" value="cafeLocation" id="location" name="location">
+			<div class="input-group-prepend d-inline">
+				<div class="dropdown d-inline">
+					<button type="button" class="btn btn-primary dropdown-toggle search" data-toggle="dropdown" style=" display : inline-block; height:50px;">전체검색</button>
+					<div class="dropdown-menu">
+						<a  class="dropdown-item search" id="totalSearch" style="display : none">전체검색</a>
+						<a  class="dropdown-item search" id="location">지역</a>
+						<a  class="dropdown-item search" id="people">인원</a>
+					</div>
 				</div>
-			</div>	
-	<div style = "text-align: center;">
-	<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" style= "width:70px; height:50px; ">제목</button>
-	<input type="text" style="width: 550px; height:50px;">
-		
-			<button type="submit" class="btn btn-dark" id="searchSubmit" style="height:50px; ">검색</button>
-		
-	</div>
-</form>
-
-<div id="mainRegion" class="container mt-3">
-	<div class="row mb-3" style="float:left; margin-left:-50px; margin-bottom:100px">
-			<div class="col-md-4" style="height:auto;">
-				<div class="card" style="width:300px;">
-					<img class="card-img-top" src="upimage/${dto.rPhoto}" alt="Card image" style="max-width:280px; height:280px;">
-				</div>
-					<span style="white-space:nowrap;">스터디룸 소개글</span>
 			</div>
-	</div>
+			<input class="form-control" id="search" name="search" type="text" style="height:50px;">
+				<div class="input-group-append">
+					<button class="btn btn-outline-success" type="submit" id="searchSubmit">검색</button>
+				</div>
+		</div>
+	</form>
+</div>
+
+<div class="row mb-3">
+	<c:forEach items="${cafeList}" var="dto">
+		<div class="col md-4" style="height:auto;">
+			<div class="card" style="width:250px;">
+				<img class="card-img-top" src="upimage/${dto.cafeImage}" alt="Card image" style="max-width:250px; height:250px;">
+				<div class="card-body">
+				<a href="cafeDetail?cafeNo=${dto.cafeTel}" class="pclick stretched-link">
+				소개글 : ${dto.cafeIntro}</a>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
 </div>
 
 <script>
 $(document).ready(function() {
-	$("#cafeDetail").click(function(event) {
-		event.preventDefault();
-		$.ajax({
-			url : "cafeDetail?chose=location",
-			type : "get",
-			data {
-			viewType : "all"
-			},
-			success : function(data) {
-				$("#mainRagion").html(data);
-			},
-			error : function() {
-				alert("에러");
-			}
-		});
-	});
 	$("a.search").on("click", function(event) {
 		$("a.search").attr("style", "display : inline;");
 		$("button.search").text($(event.target).text());
 		$("#searchWhat").attr("value", $(event.target).attr("id"));
-		$(event.target).attr("style". "display: none;");
+		$(event.target).attr("style", "display: none;");
 	});
 	$("#searchSubmit").on("click", function() {
-		let search = $("serach").val();
+		let search = $("search").val();
 		if(search =="") {
-			alert("검색어를 입력");
+			alert("검색어를 입력해주세요.");
 			return false;
 		}
 		return true;
 	});
-	$("#cafeSearch").on("submit", function(event) {
+	$("#searchFrm").on("submit", function(event) {
 		event.preventDefault();
 		$.ajax({
-			url : $("#cafeSearch").attr("action"),
-			type : $("#cafeSearch").attr("method"),
-			data : $("#cafeSearch").serialize(),
+			url : $("#searchFrm").attr("action"),
+			type : $("#searchFrm").attr("method"),
+			data : $("#searchFrm").serialize(),
 			success : function(data) {
 				$("#mainRagion").html(data);
 			},

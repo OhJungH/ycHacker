@@ -30,7 +30,7 @@ CREATE TABLE `studyroom`.`cafelist` (
 <<<<< InfoBoard tbl
  CREATE TABLE studyroom.InfoData
 (
-	INFONUM BIGINT NOT NULL PRIMARY KEY,
+    INFONUM BIGINT NOT NULL PRIMARY KEY,
     INFOTYPE VARCHAR(10),
     INFOAUTHOR VARCHAR(30),
     INFOAUTH VARCHAR(20),
@@ -45,14 +45,15 @@ CREATE TABLE `studyroom`.`cafelist` (
 );
 >>>>>
 <<<<< ResTBL tbl
-CREATE TABLE ResTBL
-(
+create table studyroom.restbl(
 	resnum int not null primary key,
 	resname varchar(20),
 	resbirth date,
 	resphone varchar(20),	
+	resdate date,
 	restime varchar(20),
 	resmember int,
+	payments varchar(20),
 	rescomments varchar(3000),
 	cafephone varchar(20)	
 );
@@ -101,17 +102,38 @@ DELIMITER $$
 >>>>>
 
 <<<<< ResTBL tbl
-CREATE TABLE ResTBL(
-	RESNUM INT NOT NULL PRIMARY KEY,
-	RESNAME VARCHAR(20),
-	RESBIRTH DATE,
-	RESPHONE VARCHAR20),	
-	RESTIME VARCHAR(20),
-	RESMEMBER INT,
-	RESCOMMENTS VARCHAR(3000),
-	CAFEPHONE VARCHAR(20)	
+create table restbl(
+	resnum int not null primary key,
+	resname varchar(20),
+	resbirth date,
+	resphone varchar(20),	
+	resdate date,
+	restime varchar(20),
+	resmember int,
+	payments varchar(20),
+	rescomments varchar(3000),
+	cafephone varchar(20)	
 );
 >>>>>
 
-<<<<< admin 계정 가입 후 변경
+>>>>>TempUser data table
+  CREATE TABLE studyroom.TempUser
+(
+	USERNUM BIGINT NOT NULL PRIMARY KEY,
+    USERID VARCHAR(30) NOT NULL,
+    USERPW VARCHAR(100) NOT NULL,
+    USERAUTH VARCHAR(20) DEFAULT 'ROLE_TEMPUSER',
+    USERNAME VARCHAR(20),
+    USERPHONE VARCHAR(20),
+    USERBIRTH DATE,
+    USERLOCATION INT,
+    USERGENDER INT,
+	USERDATE timestamp DEFAULT NOW()
+);
+
+CALL create_sequence('snsuseq');
+<<<<<
+
+<<<<< admin 怨꾩젙 媛��엯 �썑 蹂�寃�
 UPDATE UserData SET USERAUTH='ROLE_ADMIN' WHERE USERNUM=3;
+>>>>>

@@ -1,0 +1,45 @@
+/*class*/
+.homeTitle {
+    text-align: center;
+}
+.infoCard{
+    box-shadow:3px 3px 5px black;
+    margin-top: 0.5rem;
+}
+.infoDetails{
+    color:#fff;
+    text-decoration: underline;
+}
+.infoCardBody{
+    padding: 5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    }
+/*id*/
+#homeInfoContainer{
+    background-color:ivory;
+    min-height: 40rem;
+}
+#homeBar{
+    background-color: cornsilk;
+}
+.infoCardDeck{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+/*hover*/
+.infoDetails:hover{/*card link*/
+    color:#000;
+}
+.introCardinfo:hover{/*공지*/
+    background-color:#94f1ff;
+}
+.introCardresult:hover{/*신고처리 결과*/
+    background-color:#ff9ea8;
+}
+.introCardevent:hover{/*이벤트*/
+    background-color:#78ff96;
+}

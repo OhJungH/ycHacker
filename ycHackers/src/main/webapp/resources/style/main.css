@@ -1,17 +1,18 @@
+@charset "UTF-8";
 #mainRagion{
     min-height: 80%;
 }
-#myInfoBox{
-    border: 0.1px solid #000;
-    padding-left: 1em;
+#mainRagion{
+	margin-top:10px;
+	margin-bottom:10px;
 }
 a{
     text-decoration: none;
     color: black;
 }
-table{
+.mainTBL{
     width:100%;
 }
-th, td{
+mainTBL th, mainTBL td{
     text-align: center;
 }

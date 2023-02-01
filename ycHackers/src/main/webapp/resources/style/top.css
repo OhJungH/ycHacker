@@ -10,12 +10,21 @@ a{
     text-decoration: none;
 }
 #myInfoBox{
-    width: 50%;
+    max-width: 30%;
+    width: fit-content;
     margin-left:auto;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-top: 1em;
+    border: 3px solid lightgray;
+    border-radius: 10px;
 }
 .myInfoLink{
     color:#000;
 }
 .nav-link{
    color:black; 
+}
+.mainNav{
+	background-color: cornsilk;
 }
