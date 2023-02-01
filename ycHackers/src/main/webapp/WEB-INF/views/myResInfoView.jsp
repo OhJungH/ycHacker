@@ -66,13 +66,17 @@
 					<td>${resDto.payMents}</td>
 					<td>${resDto.cafePhone}</td>
 					<td>${resDto.resComments}</td>
-					<td><a class="btn btn-primary fa fa-exchange-alt" href="resModifyView"></a></td>
-					<td><a class="btn btn-danger fa fa-trash" href="resCancelView"></a></td>
+					<td><a class="btn btn-primary fa fa-exchange-alt" href="resModifyView?resNum=${resDto.resNum}"></a></td>
+					<td><a class="btn btn-danger fa fa-trash" href="resCancelView?resNum=${resDto.resNum}"></a></td>
 				</tr>			
 			</c:forEach>
 		</tbody>		
 	</table>			
 </div>
-
+<!-- 
+	1. ajax처리가 안되어있음
+	2. 앵커 엘리먼트의 href가 특정되지 않습니다.
+	3. 앵커엘리먼트의 객체를 구별할 id나 class가 없습니다. 
+ -->
 </body>
 </html>

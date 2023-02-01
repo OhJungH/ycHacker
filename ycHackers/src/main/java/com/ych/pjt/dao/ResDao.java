@@ -38,14 +38,12 @@ public class ResDao implements IResDao {
 		ArrayList<ResDto> dtos = (ArrayList)sqlSession.selectList("myResInfo");
 		return dtos;
 	}
-	
+	/* 예약 수정 */
 	@Override
-	public ArrayList<ResDto> myResInfoPageList(String pageNo) {
-		System.out.println("pagelist : " + pageNo);
-		int page = Integer.parseInt(pageNo);
-		int startNo = (page-1) *10+1;
-		System.out.println("startNo : "  + startNo);
-		ArrayList<ResDto> result = (ArrayList)sqlSession.selectList("myResInfoPageList",startNo);
-		return result;
+	public ResDto resModifyView(int resNum) {
+		System.out.println("resModifyView dao");
+		ResDto dto = sqlSession.selectOne("resModifyView",resNum);
+		return dto;
 	}
+	
 }

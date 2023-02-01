@@ -61,51 +61,53 @@
        	</div>
 	</div>	
 </nav>
-
+<form action="resModifyView" method="post">
 <div class="form-group text-center text-info threeDEffect">
 	<label for="resNum">회원번호</label>
-	<input type="text" id="resNum" name="resNum" style="width:500px;">
+	<input type="text" id="resNum" name="resNum" value="${resDto.resNum}" style="width:500px;" readonly>
 </div>
 <div class="form-group text-center text-info threeDEffect">
 	<label for="resName">이름</label>
-	<input type="text" id="resName" name="resName" style="width:500px;">
+	<input type="text" id="resName" name="resName" value="${resDto.resName}" style="width:500px;" readonly>
 </div>
 <div class="form-group text-center text-info threeDEffect">
 	<label for="resBirth">생년월일</label>
-	<input type="date" id="resBirth" name="resBirth" style="width:500px;">
+	<input type="date" id="resBirth" name="resBirth" value="${resDto.resBirth}" style="width:500px;" readonly>
 </div>
 <div class="form-group text-center text-info threeDEffect">
 	<label for="resPhone">연락처</label>
-	<input type="text" id="resPhone" name="resPhone" style="width:500px;">
+	<input type="text" id="resPhone" name="resPhone" value="${resDto.resPhone}" style="width:500px;" readonly>
 </div>
 <div class="form-group text-center text-info threeDEffect">
 	<label for="resDate">예약날짜</label>
-	<input type="date" id="resDate" name="resDate" style="width:500px;">
+	<input type="date" id="resDate" name="resDate" value="${resDto.resDate}" style="width:500px;" readonly>
 </div>
 <div class="form-group text-center text-info threeDEffect">
 	<label for="resTime">예약시간</label>
-	<input type="text" id="resTime" name="resTime" style="width:500px;">
+	<input type="text" id="resTime" name="resTime" value="${resDto.resTime}" style="width:500px;" readonly>
 </div>
 <div class="form-group text-center text-info threeDEffect">
 	<label for="resMember">인원</label>
-	<input type="text" id="resMember" name="resMember" style="width:500px;">
+	<input type="text" id="resMember" name="resMember" value="${resDto.resMember}" style="width:500px;" readonly>
 </div>
 <div class="form-group text-center text-info threeDEffect">
 	<label for="payments">결제</label>
-	<input type="text" id="payMents" name="payMents" style="width:500px;">
+	<input type="text" id="payMents" name="payMents" value="${resDto.payMents}" style="width:500px;" readonly>
 </div>
 <div class="form-group text-center text-info threeDEffect">
 	<label for="cafePhone">카페번호</label>
-	<input type="text" id="cafePhone" name="cafePhone" style="width:500px;">
+	<input type="text" id="cafePhone" name="cafePhone" value="${resDto.cafePhone}" style="width:500px;" readonly>
 </div>
 <div class="form-group text-center text-info threeDEffect">
 	<label for="resComments">요청사항</label>
-	<input type="text" id="resComments" name="resComments" style="width:500px;">
+	<input type="text" id="resComments" name="resComments" value="${resDto.resComments}"  style="width:500px;" readonly>
 </div>
-<div class="container" style="text-align:center;">
-	<button type="submit" class="btn btn-success">예약변경</button>
+
+<div class="buttonBox" style="text-align:center;">
+	<button type="submit" class="btn btn-success" id="submit">예약변경</button>
 	<a class="btn btn-info" href="myResInfoView">이전으로</a>
 </div>
+</form>
 
 <div id="footer">
     <div class="footerBox">
@@ -134,5 +136,11 @@
         </p>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+
+});
+</script>
 </body>
 </html>

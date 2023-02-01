@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.MyResInfoCommand;
 import com.ych.pjt.command.ResCommand;
+import com.ych.pjt.command.ResModifyCommand;
 import com.ych.pjt.dao.ResDao;
 import com.ych.pjt.util.Constant;
 
@@ -43,8 +44,10 @@ public class ResController {
 	}
 	
 	@RequestMapping("/resModifyView")
-	public String resModifyView(HttpServletRequest req, Model model) {
+	public String resModifyView(HttpServletRequest req, Model model) {	
 		System.out.println("resModifyView request");
+		com = new ResModifyCommand();
+		com.execute(req, model);
 		return "resModifyView";
 	}
 	
