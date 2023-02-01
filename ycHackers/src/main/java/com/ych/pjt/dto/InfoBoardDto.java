@@ -51,6 +51,15 @@ public class InfoBoardDto {
 		this.infoTitle = infoTitle;
 		this.infoContent = infoContent;
 	}
+	public InfoBoardDto(String infoType, String infoAuthor, String infoAuth, String infoTitle, String infoContent, int infoCondition) {
+		super();
+		this.infoType = infoType;
+		this.infoAuthor = infoAuthor;
+		this.infoAuth = infoAuth;
+		this.infoTitle = infoTitle;
+		this.infoContent = infoContent;
+		this.infoCondition = infoCondition;
+	}
 	//getter/setter
 	public int getInfoNum() {
 		return infoNum;
