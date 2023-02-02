@@ -55,27 +55,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>{dto.infoNum}</td>
-					<td>
-						<a href="inforAdminView?infoNum={dto.infonum}">
-							{dto.infoTitle} ({dto.infoStep})
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="inforAdminView?infoNum=3">안내사항3</a></td>					</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="inforAdminView?infoNum=2">안내사항2</a></td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td><a href="inforAdminView?infoNum=1">안내사항1</a></td>
-				</tr>
+				<c:forEach items="${infoListMain}" var="infoDto">
+					<tr>
+						<td>${infoDto.infoNum}</td>
+						<td>
+							<a href="infor...View?infoNum=${infoDto.infoNum}">
+								${infoDto.infoTitle} (${infoDto.infoHit})
+							</a>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
+		<hr/>
+		<p style="font-size:0.4rem;">최근 10건의 저장본만 표시됩니다.</p>
 	</div>
 	<div class="dashBoardPreviewContainer">
 		<div>

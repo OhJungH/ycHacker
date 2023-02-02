@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- RWD -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MS -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
+<title>main</title>
+<!--jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!--propper jquery -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!--latest javascript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!--bootstrap-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!--font awesome icon 5.7-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<!--google icon -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- CKEditor API -->
+<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/decoupled-document/ckeditor.js"></script> 
+<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
+<!-- custom style sheet -->
+<link rel="stylesheet" href="../style/footer.css"/>
+<link rel="stylesheet" href="../style/top.css"/>
+<link rel="stylesheet" href="../style/main.css"/>
+<link rel="stylesheet" href="../style/infoBoardList.css"/>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm mainNav">
+	<button class="navbar-toggler btn btn-block" type="button" data-toggle="collapse" data-target="#collapsiblebar">
+		<span class="navbar-toggler-icon text-dark"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="collapsiblebar">
+		<ul class=" nav justify-content-center">
+			<li class="nav-item">
+				<a class="nav-link" href="home">home</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+					안내사항
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="infoBoard" id="infoBoard">공지사항</a>
+					<a class="dropdown-item" href="helpPage" id="helpInfo">도움말</a>
+				</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="cafeList" id="cafeList">검색</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="admin" id="admin">관리자</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="studyroomwrite" id="studyroomwrite">스터디룸 등록</a>
+			</li>
+		</ul>
+		<p class="mainLogo">
+			YCHackers
+		</p>
+		<div id="myInfoBox">
+			<p class="myInfoP">
+				ID: 
+				<a class="myInfoLink" href="myPageView">aaa@abc.com</a><br/>
+			</p>
+			<p class="myInfoP">
+				등급: 
+				<a class="myInfoLink" href="#">authority</a><br/>
+			</p>
+			<p class="myInfoP">
+				<a class="myInfoLink" href="logoutView?userNum=${userDto.userNum}">로그아웃</a>
+			</p>
+		</div>
+	</div><hr/>
+</nav>
+<section>
+	<div id="mainRagion">
+		<div id="infoBoardPage">
+			<div id="infoBoardNav">
+				<h3 id="infoBoardTitle">안내드립니다</h3>
+				<a id="infoBtn" class="infoBoardNav btn btn-outline-success" href="#">공지사항</a>
+				<a id="resultBtn" class="infoBoardNav btn btn-outline-danger" href="#">신고처리</a>
+				<a id="eventBtn" class="infoBoardNav btn btn-outline-info" href="#">이벤트</a>
+			</div>
+			<div id="infoBoardContainer">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>no</th>
+							<th>...</th>
+							<th class="d-none"></th>
+						</tr>
+					</thead>
+					<tbody id="infoTable">
+						<tr>
+							<td>1</td>
+							<td>...</td>
+							<td class="d-none">info</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>...</td>
+							<td class="d-none">result</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>...</td>
+							<td class="d-none">event</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>	
+	</div>
+</section>
+<div id="footer">
+	<div class="footerBox">
+		<p id="footerPageName" class="footerLabel">YCHackers</p>
+		<p id="footerCompany">
+			<span class="footerLabel">회사명</span> (사)양천구해커스
+		</p>
+		<p id="footerCompanyNum">
+			<span class="footerLabel">사업자번호</span> 000-00-00000
+		</p>
+		<p id="footerAddress">서울특별시 양천구 신정동 1319-4 양천중앙도서관 </p>
+		<a class="footerLink" id="companyIntro" href="companyIntro">회사소개</a>&emsp; 
+		<a class="footerLink" id="termsOfService" href="termsOfService">서비스이용약관</a> &emsp;
+		<a class="footerLink" id="privacyPolicy" href="privacyPolicy">개인정보처리방침</a>
+	</div>
+	<div class="footerBox">
+		<p>
+			<span class="footerLabel">등록문의</span> 000-0000-0000
+		</p>
+		<p>
+			<span class="footerLabel">기타문의</span> 000-0000-0000
+		</p>
+		<br/><br/>
+		<p>
+			<span id="footerCopy">COPYRIGHT &copy; 2022(주)양천구해커스 ALL RIGHTS RESERVED</span>
+		</p>
+	</div>
+</div>
+<script>
+	const infoBtn=document.querySelector("#infoBtn");
+	const resultBtn=document.querySelector("#resultBtn");
+	const eventBtn=document.querySelector("#eventBtn");
+	const helpBtn=document.querySelector("#helpBtn");
+
+	const infoTitle=document.querySelector("#infoBoardTitle");
+	const infoContainer=document.querySelector("#infoBoardContainer");
+	infoBtn.addEventListener("click",()=>{
+		infoTitle.innerHTML="공 지 사 항";
+		$("#infoTable tr").filter(function(){
+			$(this).toggle($(this).text().toLowerCase().indexOf("info") > -1);
+		});
+	});
+	resultBtn.addEventListener("click",()=>{
+		infoTitle.innerHTML="신 고 처 리";
+		$("#infoTable tr").filter(function(){
+			$(this).toggle($(this).text().toLowerCase().indexOf("result") > -1);
+		});
+	});
+	eventBtn.addEventListener("click",()=>{
+		infoTitle.innerHTML="이 벤 트";
+		$("#infoTable tr").filter(function(){
+			$(this).toggle($(this).text().toLowerCase().indexOf("event") > -1);
+		});
+	});
+</script>
+</body>
+</html>
