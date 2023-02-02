@@ -51,8 +51,14 @@
 			<li class="nav-item">
 				<a class="nav-link" href="home">home</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="info">안내</a>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+					안내사항
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="infoBoard" id="infoBoard">공지사항</a>
+					<a class="dropdown-item" href="helpPage" id="helpInfo">도움말</a>
+				</div>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="cafeList" id="cafeList">검색</a>
@@ -202,6 +208,21 @@ $(document).ready(function(){
 			}
 		});
 	});
+	$("#infoBoard").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#infoBoard").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+
 	$("#admin").click(function(event) {
 		event.preventDefault();
 		$.ajax({

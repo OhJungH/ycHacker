@@ -19,9 +19,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.ych.pjt.command.ChangeGradeCommand;
 import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.InfoBoardHomeCommand;
+import com.ych.pjt.command.InfoBoardListCommand;
 import com.ych.pjt.command.InfoBoardManageCommand;
 import com.ych.pjt.command.InfoBoardPageListCommand;
 import com.ych.pjt.command.InfoBoardWriteCommand;
+import com.ych.pjt.command.InfoListMainCommand;
 import com.ych.pjt.command.UserGradeCommand;
 import com.ych.pjt.command.UserSearchCommand;
 import com.ych.pjt.dao.AdminDao;
@@ -42,7 +44,9 @@ public class AdminController {
 	@RequestMapping("/admin")//admin page
 	public String admin(HttpServletRequest req,Model model) {
 		System.out.println("admin page request");
-		//공지 게시판 최근 5개 호출 command
+		//공지 게시판 최근 10개 호출 command
+		com=new InfoListMainCommand();
+		com.execute(req, model);
 		//page 정보 관련 data 호출 command
 		return "adminPage";
 	}	
@@ -53,6 +57,13 @@ public class AdminController {
 		com = new InfoBoardHomeCommand();
 		com.execute(req, model);
 		return "infoBoardHome";
+	}
+	@RequestMapping("/infoBoard")
+	public String infoBoardList(HttpServletRequest req,Model model) {
+		System.out.println("infoBoardList request");
+		com=new InfoBoardListCommand();
+		com.execute(req, model);
+		return "infoBoard";
 	}
 	@RequestMapping("/infoBoardManage")//관리자
 	public String infoBoardManage(HttpServletRequest req, Model model) {

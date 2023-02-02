@@ -1,0 +1,18 @@
+@charset "UTF-8";
+#infoBoardPage{
+    height: 100%;
+    text-align: center;
+}
+#infoBoardTitle{
+    font-weight: 900;
+}
+#infoBoardNav{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+#infoBoardContainer{
+
+}
+.infoBoardNav{
+    border:0;
+}
