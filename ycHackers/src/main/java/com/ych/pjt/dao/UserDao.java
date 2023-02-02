@@ -40,9 +40,22 @@ public class UserDao implements IUserDao {
 	public UserDataDto userMainData(String userId) {
 		System.out.println("userMainData method");
 		UserDataDto dto = sqlSession.selectOne("userMainData",userId);
+		dto=userAuthTransfer(dto);
 		return dto;
 	}
-
+	private UserDataDto userAuthTransfer(UserDataDto dto) {
+		String dbAuth = dto.getUserAuth();
+		String userAuth="";
+		System.out.println("auth check: "+dbAuth);
+		if(dbAuth.contains("_USER"))userAuth="정회원";
+		else if(dbAuth.contains("_TEMPUSER"))userAuth="SNS 로그인 회원";
+		else if(dbAuth.contains("_MANAGER"))userAuth="카페 매니저";
+		else if(dbAuth.contains("_ADMIN"))userAuth="페이지 운영자";
+		else userAuth=dbAuth;
+		System.out.println("auth transfer result: "+userAuth);
+		dto.setUserAuth(userAuth);
+		return dto;
+	}
 	@Override
 	public void tempUserDB(TempUserDto dto) {
 		String userId = dto.getUserId();

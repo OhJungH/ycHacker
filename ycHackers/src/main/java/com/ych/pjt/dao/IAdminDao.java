@@ -11,6 +11,7 @@ public interface IAdminDao {
 	public void changeGrade(UserDataDto dto);
 	public ArrayList<UserDataDto> userSearch();
 	
+	public ArrayList<InfoBoardDto> infoListMain();
 	public ArrayList<InfoBoardDto> infoBoardHome();
 	public ArrayList<InfoBoardDto> infoBoardManage();
 	public ArrayList<InfoBoardDto> infoPageList(String pageNum);
