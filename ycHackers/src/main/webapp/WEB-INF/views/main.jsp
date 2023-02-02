@@ -68,6 +68,9 @@
 				</li>
 			</sec:authorize>
 		</ul>
+		<p class="mainLogo">
+			YCHackers
+		</p>
 		<div id="myInfoBox">
 			<p class="myInfoP">
 				ID: 
@@ -102,23 +105,37 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td>
-						<a class="" href="#">test01</a>
-					</td>
-					<td>admin</td>
-					<td>23.01.01</td>
-					<td>0</td>
-				</tr>
+				<c:forEach items="${infoListMain}" var="infoDto">
+					<tr>
+						<td>${infoDto.infoNum}</td>
+						<td>
+							<c:choose>
+								<c:when test="${infoDto.infoType  eq 'info'}">
+									<span class="badge badge-info">공지사항</span><br/>
+								</c:when>
+								<c:when test="${infoDto.infoType eq 'result'}">
+									<span class="badge badge-danger">신고처리</span><br/>
+								</c:when>
+								<c:when test="${infoDto.infoType eq 'event'}">
+									<span class="badge badge-success">이벤트</span><br/>
+								</c:when>
+							</c:choose>
+						</td>
+							<td>
+							<a class="infoP" href="infoDetails?infoNum=${infoDto.infoNum}">${infoDto.infoTitle}(${infoDto.infoIndent})</a>
+						</td>
+						<td>${infoDto.infoAuthor}</td>
+						<td>${infoDto.infoDate}</td>
+						<td>${infoDto.infoHit}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<hr/>
 		<div style="text-align: center;">
 			<h3>TOP 10</h3>
 		</div>
-		<table class="table table-hover">
+		<table class="table table-hover mainTBL">
 			<thead>
 				<tr>
 					<th>순위</th>

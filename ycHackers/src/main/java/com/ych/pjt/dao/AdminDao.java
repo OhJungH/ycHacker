@@ -49,13 +49,19 @@ public class AdminDao implements IAdminDao {
 		int startN = (page-1)*10+1;
 		System.out.println("start page number: "+startN);
 		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoPageList", startN);
-		return dtos;
+		return dtos; 
 	}
 	@Override
 	public void infoWrite(InfoBoardDto dto) {
 		System.out.println("infoformation Board Write method: "+dto.getInfoTitle());
 		int res = sqlSession.insert("infoWrite", dto);
 		System.out.println("infoWrite result: "+res);
+	}
+	@Override
+	public ArrayList<InfoBoardDto> infoListMain() {
+		System.out.println("infoListMain method");
+		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoListMain");
+		return dtos;
 	}
 
 

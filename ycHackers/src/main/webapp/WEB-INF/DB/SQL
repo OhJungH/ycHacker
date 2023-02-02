@@ -44,8 +44,9 @@ CREATE TABLE `studyroom`.`cafelist` (
     INFOCONDITION VARCHAR(10)
 );
 >>>>>
-<<<<< ResTBL tbl
-create table studyroom.restbl(
+
+<<<<< ResTBL tbl(2023.01 update)
+create table restbl(
 	resnum int not null primary key,
 	resname varchar(20),
 	resbirth date,
@@ -58,6 +59,7 @@ create table studyroom.restbl(
 	cafephone varchar(20)	
 );
 >>>>>
+
 <<<<< sequences
   CREATE TABLE studyroom.sequences(
 	NAME VARCHAR(32),
@@ -98,21 +100,6 @@ DELIMITER $$
  (
 	(SELECT nextval('test') FROM DUAL),
 	'ID'
-);
->>>>>
-
-<<<<< ResTBL tbl
-create table restbl(
-	resnum int not null primary key,
-	resname varchar(20),
-	resbirth date,
-	resphone varchar(20),	
-	resdate date,
-	restime varchar(20),
-	resmember int,
-	payments varchar(20),
-	rescomments varchar(3000),
-	cafephone varchar(20)	
 );
 >>>>>
 

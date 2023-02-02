@@ -37,11 +37,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.ych.pjt.command.ChangeGradeCommand;
 import com.ych.pjt.command.IYchCommand;
+import com.ych.pjt.command.InfoListMainCommand;
 import com.ych.pjt.command.TempUserCommand;
 import com.ych.pjt.command.UserGradeCommand;
 import com.ych.pjt.command.UserJoinCommand;
 import com.ych.pjt.command.UserMainDataCommand;
 import com.ych.pjt.command.UserSearchCommand;
+import com.ych.pjt.dao.AdminDao;
 import com.ych.pjt.dao.UserDao;
 import com.ych.pjt.dto.TempUserDto;
 import com.ych.pjt.naver.NaverLoginBO;
@@ -63,6 +65,13 @@ public class UserController {
 	public void setuDao(UserDao uDao) {
 		this.uDao=uDao;
 		Constant.uDao=uDao;
+	}
+	//main표시때 사용할 DAO obj
+	private AdminDao adDao;
+	@Autowired
+	public void setAdDao(AdminDao adDao) {
+		this.adDao=adDao;
+		Constant.adDao=adDao;
 	}
 		//social login(naver, google)
 	private static String KAKAO_CLIENT_ID = "kakao developer 개인고유번호";
@@ -121,7 +130,10 @@ public class UserController {
 		//user data load
 		com= new UserMainDataCommand();
 		com.execute(req, model);
-		//board관련 load
+		//infoBoard data load
+		com=new InfoListMainCommand();
+		com.execute(req, model);
+		//cafe관련 load
 		
 		return "main";
 	}

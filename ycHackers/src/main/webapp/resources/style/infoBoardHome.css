@@ -29,7 +29,7 @@
 .infoCardDeck{
     padding-left: 0.75rem;
     padding-right: 0.75rem;
-    -webkit-column-count:4;
+    -webkit-column-count: 2;
 }
 /*hover*/
 .infoDetails:hover{/*card link*/
