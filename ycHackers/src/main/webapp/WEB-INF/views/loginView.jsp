@@ -48,7 +48,10 @@
 			</div>
 		</div>
 		<a href="joinViewHome" class="loginHelp" >아직 회원이 아니신가요?</a>
-		<a href="findInfo" class="loginHelp" >아이디/비밀번호가 기억이 안나나요?</a> &emsp;
+		<a href="findInfo" class="loginHelp" >아이디/비밀번호가 기억이 안나나요?</a> 
+		<a href="home" class="loginHelp" >
+			돌아가기<i class="fa fa-arrow-alt-circle-left"></i>
+		</a>&emsp;
 		<div class="custom-control custom-switch">
 			<input type="checkbox" class="custom-control-input" id="rememberMe" checked/>
 			<label class="custom-control-label" for="rememberMe">

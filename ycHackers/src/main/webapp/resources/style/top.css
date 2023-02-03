@@ -10,7 +10,7 @@ a{
     text-decoration: none;
 }
 #myInfoBox{
-    max-width: 30%;
+    max-width: 50%;
     width: fit-content;
     margin-left:auto;
     padding-right: 1em;
@@ -22,9 +22,50 @@ a{
 .myInfoLink{
     color:#000;
 }
+
+#myInfoLink {
+    font-weight: 700;
+}
 .nav-link{
    color:black; 
 }
 .mainNav{
 	background-color: cornsilk;
+}
+.mainLogo{
+	display:none;
+}
+@media screen and (min-width: 993px){
+	#myInfoBox{
+		margin-right: 9rem;
+		font-weight: 600;
+		border: solid #0000008c 0.7rem;
+	}
+	.mainNav .nav {
+	    margin-left: 10rem;
+	    font-size: 1.4rem;
+	    font-weight: 700;
+	}
+	.mainLogo{
+		display:inline-block;
+		font-size: 5rem;
+		margin: auto;
+		font-weight: bolder;
+	}
+}
+@media screen and (max-width: 575px){
+	#myInfoBox{
+		width:100%;
+		max-width: 100%;
+		height: fit-content;
+	}
+	.mainLogo{
+		display: block;
+		font-size: 1rem;
+		margin: auto;
+		font-weight: bolder;
+	}
+	#myInfoBox p {
+    	margin-bottom: 0.2rem;
+	}
 }

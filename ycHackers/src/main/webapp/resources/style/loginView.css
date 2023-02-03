@@ -30,9 +30,10 @@ body{
     margin: auto;
     border: #000 0.1px solid;
 }
-a{
-    text-decoration:none;
+.loginHelp {
+	color:#000;
 }
-a:hover{
-    text-decoration:none;
+.loginHelp:hover {
+	color:#000;
+	font-weight:800;
 }

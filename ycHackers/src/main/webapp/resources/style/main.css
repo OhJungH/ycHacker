@@ -7,53 +7,14 @@
 	margin-bottom:10px;
 	height: 90vw;
 }
-a{
-    text-decoration: none;
-    color: black;
-}
 
 .mainTBL{
     width:100%;
     font-size: 1vw;
 }
-.mainLogo{
-	display:none;
-}
+
+.mainTBL a {color: #000;}
+
 #mainTBL th, #mainTBL td{
     text-align: center;
-}
-@media screen and (min-width: 993px){
-	#myInfoBox{
-		margin-right: 9rem;
-		font-weight: 600;
-		border: solid #0000008c 0.7rem;
-	}
-	.mainNav .nav {
-	    margin-left: 10rem;
-	    font-size: 1.4rem;
-	    font-weight: 700;
-	}
-	.mainLogo{
-		display:inline-block;
-		font-size: 5rem;
-		margin: auto;
-		font-weight: bolder;
-	}
-}
-@media screen and (max-width: 575px){
-	#myInfoBox{
-		width:100%;
-		max-width: 100%;
-		height: fit-content;
-	}
-	.mainLogo{
-		display: block;
-		font-size: 1rem;
-		margin: auto;
-		font-weight: bolder;
-	}
-
-#myInfoBox p {
-    margin-bottom: 0.2rem;
-}
 }

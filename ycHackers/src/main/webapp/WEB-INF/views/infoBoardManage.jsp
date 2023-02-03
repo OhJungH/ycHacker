@@ -43,37 +43,39 @@
 		<i class="fas fa-pen"></i>
 		글 쓰기
 	</button>
-	<table id="infoListTbl" class="table table-border">
-		<thead>
-			<tr>
-				<th>no</th>
-				<th>제목</th>
-				<th>작성일(댓글))</th>
-				<th>작성자</th>
-				<th>조회</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${infoBoardList}" var="infoDto">
-				<tr class="${infoDto.infoType}">
-					<td>${infoDto.infoNum}</td>
-					<td>
-						<a class="infoP" href="infoDetails?infoNum=${infoDto.infoNum}">
-							${infoDto.infoTitle}
-						</a>
-					</td>
-					<td>
-						${infoDto.infoDate}(${infoDto.infoIndent})
-					</td>
-					<td>
-						${infoDto.infoAuthor}
-						(${infoDto.infoAuth})
-					</td>
-					<td class="${infoDto.infoCondition}">${infoDto.infoHit}</td>
+	<div class="infoManagerTableContainer">
+		<table id="infoListTbl" class="table table-border">
+			<thead>
+				<tr>
+					<th>no</th>
+					<th>제목</th>
+					<th>작성일(댓글))</th>
+					<th>작성자</th>
+					<th>조회</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach items="${infoBoardList}" var="infoDto">
+					<tr class="${infoDto.infoType}">
+						<td>${infoDto.infoNum}</td>
+						<td>
+							<a class="infoP" href="infoDetails?infoNum=${infoDto.infoNum}">
+								${infoDto.infoTitle}
+							</a>
+						</td>
+						<td>
+							${infoDto.infoDate}(${infoDto.infoIndent})
+						</td>
+						<td>
+							${infoDto.infoAuthor}
+							(${infoDto.infoAuth})
+						</td>
+						<td class="${infoDto.infoCondition}">${infoDto.infoHit}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </div>
 <!-- pagination -->
 <nav aria-label="page navigation">
@@ -149,7 +151,7 @@ $(function(){
 					data: "",
 					success: function(data){
 						console.log("게시판의" + pageNo + "페이지 입니다.");
-						$(".infoManagerContainer").html(data);
+						$("#infoManagerTableContainer").html(data);
 					},
 					error: function(){
 						alert("pagination 에러입니다.");
