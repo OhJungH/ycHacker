@@ -102,7 +102,6 @@
 		<table class="table table-hover mainTBL">
 			<thead>
 				<tr>
-					<th>글 번호</th>
 					<th>분류</th>
 					<th>제목</th>
 					<th>작성자</th>
@@ -113,7 +112,6 @@
 			<tbody>
 				<c:forEach items="${infoListMain}" var="infoDto">
 					<tr>
-						<td>${infoDto.infoNum}</td>
 						<td>
 							<c:choose>
 								<c:when test="${infoDto.infoType  eq 'info'}">
