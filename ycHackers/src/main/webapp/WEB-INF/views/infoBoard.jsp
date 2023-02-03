@@ -177,7 +177,7 @@ $(function(){
 	var resultBtn=document.querySelector("#resultBtn");
 	var eventBtn=document.querySelector("#eventBtn");
 
-	const infoTitle=document.querySelector("#infoBoardTitle");
+	var infoTitle=document.querySelector("#infoBoardTitle");
 	allBtn.addEventListener("click",(e)=>{
 		e.preventDefault();
 		infoTitle.innerHTML="안내드립니다";

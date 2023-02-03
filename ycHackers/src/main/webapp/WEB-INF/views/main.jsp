@@ -80,11 +80,11 @@
 		<div id="myInfoBox">
 			<p class="myInfoP">
 				ID: 
-				<a class="myInfoLink" href="myPageView">${userDto.userId}</a><br/>
+				<a id="myInfoLink" class="myInfoLink" href="myPageView">${userDto.userId}</a><br/>
 			</p>
 			<p class="myInfoP">
 				등급: 
-				<a class="myInfoLink" href="#">${userDto.userAuth}</a><br/>
+				<span class="myInfoLink">${userDto.userAuth}</span><br/>
 			</p>
 			<p class="myInfoP">
 				<a class="myInfoLink" href="logoutView?userNum=${userDto.userNum}">로그아웃</a>

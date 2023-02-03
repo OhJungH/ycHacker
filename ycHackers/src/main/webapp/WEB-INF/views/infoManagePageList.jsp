@@ -30,12 +30,6 @@
 </head>
 <body>
 
-<h3 class="title">안내 게시판 관리 페이지</h3>
-<hr/>
-<button id="infoBoardWriteForm" type="button" class="btn btn-outline-success btn-block">
-	<i class="fas fa-pen"></i>
-	글 쓰기
-</button>
 <table id="infoListTbl" class="table table-border">
 	<thead>
 		<tr>

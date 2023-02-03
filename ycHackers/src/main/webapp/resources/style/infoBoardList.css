@@ -10,6 +10,11 @@
     text-align: center;
     margin-bottom: 2rem;
 }
+
+#infoBoardContainer {
+    margin: auto;
+    width: 90%;
+}
 .infoBoardNav{
     border:0;
     margin-right: 3vw;
