@@ -10,9 +10,21 @@
     text-align: center;
     margin-bottom: 2rem;
 }
-#infoBoardContainer{
-
-}
 .infoBoardNav{
     border:0;
+    margin-right: 3vw;
+    margin-left: 3vw;
+}
+#infoTable td{
+	font-size: 1.8vw;
+}
+#infoTable a {
+    color: #000;
+}
+#infoPagination .page-link{
+	color:gray;
+}
+#infoPagination .page-item.active .page-link{
+	background-color: #000;
+	color:#fff;
 }

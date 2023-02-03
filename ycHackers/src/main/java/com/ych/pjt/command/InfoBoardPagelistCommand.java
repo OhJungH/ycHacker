@@ -10,18 +10,15 @@ import com.ych.pjt.dao.AdminDao;
 import com.ych.pjt.dto.InfoBoardDto;
 import com.ych.pjt.util.Constant;
 
-public class InfoBoardPageListCommand implements IYchCommand {
+public class InfoBoardPagelistCommand implements IYchCommand {
 
 	@Override
 	public void execute(HttpServletRequest req, Model model) {
 		AdminDao adDao = Constant.adDao;
 		String pageNum = req.getParameter("pageNo");
 		System.out.println("infoBoard page List command: "+pageNum);
-		ArrayList<InfoBoardDto> dtos = adDao.infoPageList(pageNum);
-		model.addAttribute("listContent", dtos);
+		ArrayList<InfoBoardDto> dtos = adDao.infoBoardPagelist(pageNum);
+		model.addAttribute("infoList", dtos);
 		model.addAttribute("listSize",dtos.size());
 	}
-
 }
-
-
