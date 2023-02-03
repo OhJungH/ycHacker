@@ -21,7 +21,8 @@ import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.InfoBoardHomeCommand;
 import com.ych.pjt.command.InfoBoardListCommand;
 import com.ych.pjt.command.InfoBoardManageCommand;
-import com.ych.pjt.command.InfoBoardPageListCommand;
+import com.ych.pjt.command.InfoBoardPagelistCommand;
+import com.ych.pjt.command.InfoManagePagelistCommand;
 import com.ych.pjt.command.InfoBoardWriteCommand;
 import com.ych.pjt.command.InfoListMainCommand;
 import com.ych.pjt.command.UserGradeCommand;
@@ -65,6 +66,14 @@ public class AdminController {
 		com.execute(req, model);
 		return "infoBoard";
 	}
+	@RequestMapping("/infoBoardPageList")
+	public String infoBoardPageList(HttpServletRequest req, Model model) {
+		String pageNum = req.getParameter("pageNo");
+		System.out.println("infoBoard page List request: "+pageNum);
+		com=new InfoBoardPagelistCommand();
+		com.execute(req, model);
+		return "infoBoardPageList";
+	}
 	@RequestMapping("/infoBoardManage")//관리자
 	public String infoBoardManage(HttpServletRequest req, Model model) {
 		System.out.println("infoBoardManage request");
@@ -76,9 +85,9 @@ public class AdminController {
 	public String infoPList(HttpServletRequest req, Model model) {
 		String pageNum = req.getParameter("pageNo");
 		System.out.println("infoBoard page request: "+pageNum);
-		com=new InfoBoardPageListCommand();
+		com=new InfoManagePagelistCommand();
 		com.execute(req, model);
-		return "infoBoardPList";
+		return "infoManagePageList";
 	}
 	@RequestMapping("/infoBoardWriteForm")
 	public String infoBoardWriteForm() {

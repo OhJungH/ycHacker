@@ -46,7 +46,8 @@ public class AdminDao implements IAdminDao {
 	public ArrayList<InfoBoardDto> infoPageList(String pageNum) {
 		System.out.println("infoBoard mangage page List method: "+pageNum);
 		int page = Integer.parseInt(pageNum);
-		int startN = (page-1)*10+1;
+		int startN = 0;
+		if(page!=1)startN=(page-1)*10+1;
 		System.out.println("start page number: "+startN);
 		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoPageList", startN);
 		return dtos; 
@@ -62,6 +63,43 @@ public class AdminDao implements IAdminDao {
 		System.out.println("infoListMain method");
 		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoListMain");
 		return dtos;
+	}
+	private ArrayList<InfoBoardDto> AuthorTransfer(ArrayList<InfoBoardDto> dtos){
+		String message="[AuthorTransfer] \n";
+		for(int i=0;i<dtos.size();i++) {
+			InfoBoardDto dto=dtos.get(i);
+			String dbAuthor = dto.getInfoAuth();
+			String userAuthor="";
+			if(dbAuthor.contains("_USER"))userAuthor="정회원";
+			else if(dbAuthor.contains("_TEMPUSER"))userAuthor="SNS 로그인 회원";
+			else if(dbAuthor.contains("_MANAGER"))userAuthor="카페 매니저";
+			else if(dbAuthor.contains("_ADMIN"))userAuthor="페이지 운영자";
+			else userAuthor=dbAuthor;
+			dto.setInfoAuth(userAuthor);
+			dtos.set(i, dto);
+			message+="index: "+i+"// db Auth: "+dbAuthor+" >>transfer>> userAuthor: "+userAuthor+"\n";
+		}
+		message+="[complete]: "+dtos.size()+" Data Transfer Objects";
+		System.out.println(message);
+		return dtos;
+	}
+	@Override
+	public ArrayList<InfoBoardDto> infoBoardList() {
+		System.out.println("infoBoarList method");
+		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoBoardList");
+		dtos = AuthorTransfer(dtos);
+		return dtos;
+	}
+	@Override
+	public ArrayList<InfoBoardDto> infoBoardPagelist(String pageNum) {
+		System.out.println("infoBoard page List method: "+pageNum);
+		int page = Integer.parseInt(pageNum);
+		int startN=0;
+		if(page!=1)startN=(page-1)*50+1;
+		System.out.println("start page number: "+startN);
+		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoBoardPagelist", startN);
+		dtos = AuthorTransfer(dtos);
+		return dtos; 
 	}
 
 
