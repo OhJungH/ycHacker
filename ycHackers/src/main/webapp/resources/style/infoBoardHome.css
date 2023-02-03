@@ -31,6 +31,14 @@
     padding-right: 0.75rem;
     -webkit-column-count: 2;
 }
+#infoModalDialog{
+    padding: 0;
+    height: 100vw;
+    max-width: 90vw;
+}
+#infoModalContent{
+    background: #fffffff2;
+}
 /*hover*/
 .infoDetails:hover{/*card link*/
     color:#000;
