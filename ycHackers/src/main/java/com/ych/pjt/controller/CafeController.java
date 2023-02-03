@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.ych.pjt.command.CafeDetailCommand;
 import com.ych.pjt.command.CafeListCommand;
 import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.StudyroomWriteCommand;
@@ -60,7 +61,7 @@ public class CafeController {
 		String cafeImage = null;
 		MultipartFile mfti = mphr.getFile("cafeImage");
 		
-		String path = "C:/Users/new/git/ych/ycHackers/src/main/webapp/resources/upImage";
+		String path = "C:/Users/new/git/ych/ycHackers/src/main/webapp/resources/image";
 		
 		String originFileName = mfti.getOriginalFilename();
 		long prename = System.currentTimeMillis();
@@ -92,6 +93,8 @@ public class CafeController {
 	@RequestMapping("/cafeDetail")
 	public String cafeDetail(HttpServletRequest req, Model model) {
 		System.out.println("cafeDetail");
+		com = new CafeDetailCommand();
+		com.execute(req, model);
 		return "cafeDetail";
 	}
 }

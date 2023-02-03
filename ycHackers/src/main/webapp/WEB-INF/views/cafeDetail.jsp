@@ -42,25 +42,25 @@ margin-left:40px;
 
 
 <div class="container" style="margin-left:50px; float:left;">
- <h1 style="margin-top:100px; margin-left:150px;">스터디룸 소개글</h1>
-  	<div id="demo" class="carousel slide" data-ride="carousel" style="width:850px; height:500px; margin-left:100px;">
-  		<div class="carousel-inner">
-  			<div class="carousel-item active">
-  				<img class="d-block w-100" src="https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="First slide">
+	 <h1 style="margin-top:100px; margin-left:150px;" value="${cafeDetail.cafeName}"></h1>
+	  	<div id="demo" class="carousel slide" data-ride="carousel" style="width:850px; height:500px; margin-left:100px;">
+	  		<div class="carousel-inner">
+	  			<div class="carousel-item active">
+	  				<img class="d-block w-100" src="https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="First slide">
+				</div>
+	  			<div class="carousel-item">
+	  				<img class="d-block w-100" src="https://images.pexels.com/photos/2544554/pexels-photo-2544554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Third slide">
+				</div>
+				
+				<a class="carousel-control-prev" href="#demo" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				</a>
+				<a class="carousel-control-next" href="#demo" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				</a>  				
 			</div>
-  			<div class="carousel-item">
-  				<img class="d-block w-100" src="https://images.pexels.com/photos/2544554/pexels-photo-2544554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Third slide">
-			</div>
-			
-			<a class="carousel-control-prev" href="#demo" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			</a>
-			<a class="carousel-control-next" href="#demo" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			</a>  				
+		<textarea style="margin-left:100px; margin-top:30px; resize:none; width:250px; height:200px;" value="${cafeDetail.cafeIntro}"></textarea>
 		</div>
-	<textarea style="margin-left:100px; margin-top:30px; resize:none; width:250px; height:200px;">스터디룸 설명</textarea>
-	</div>
 </div>
 	<div class="wrapper" style="margin-top:150px;">
 		<table style="border:1px solid #333; border-top:none; border-right:none;">

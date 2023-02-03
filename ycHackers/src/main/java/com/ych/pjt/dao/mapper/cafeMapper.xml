@@ -10,6 +10,10 @@
 		
 		<insert id="studyroomWrite" parameterType="com.ych.pjt.dto.CafeDto">
 			insert into CAFELIST(CAFENO,CAFENAME, CAFELOCATION, CAFEPRICE, CAFEIMAGE, CAFEMEMBER, CAFELIKE, CAFEINTRO, CAFETEL, CAFETIME)
-			values(0,#{cafeName},#{cafeLocation},#{cafePrice},#{cafeImage},#{cafeMember}, 0, #{cafeIntro} ,#{cafeTel} ,#{cafeTime})
+			values((SELECT nextval('cafeseq') FROM DUAL), #{cafeName},#{cafeLocation},#{cafePrice},#{cafeImage},#{cafeMember}, 0, #{cafeIntro} ,#{cafeTel} ,#{cafeTime})
 		</insert>
+		
+		<select id="cafeDetail" resultType="com.ych.pjt.dto.CafeDto">
+			SELECT * FROM CAFELIST ORDER BY CAFENO DESC
+		</select>
 </mapper>

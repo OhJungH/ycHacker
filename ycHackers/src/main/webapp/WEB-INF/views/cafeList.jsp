@@ -63,7 +63,7 @@
 				<img class="card-img-top" src="upimage/${dto.cafeImage}" alt="Card image" style="max-width:250px; height:250px;">
 				<div class="card-body">
 				<a href="cafeDetail?cafeNo=${dto.cafeTel}" class="pclick stretched-link">
-				소개글 : ${dto.cafeIntro}</a>
+				${dto.cafeIntro}</a>
 				</div>
 			</div>
 		</div>

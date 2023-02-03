@@ -30,4 +30,5 @@ public class CafeDao implements ICafeDao {
 		}
 		return result;
 	}
+	
 }
