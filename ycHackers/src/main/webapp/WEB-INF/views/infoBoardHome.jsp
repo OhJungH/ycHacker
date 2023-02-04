@@ -60,7 +60,7 @@
 					</c:choose>
 					<h4 class="d-inline">${dto.infoNum}. ${dto.infoTitle}(${dto.infoIndent})</h4><br/>
 					<span class="card-text">조회수(${dto.infoHit})</span><br/>
-					<a href="infoDetails?infoNum=${dto.infoNum}" class="infoDetails card-link stretched-link">내용보기</a>				
+					<a href="infoDetailsHome?infoNum=${dto.infoNum}" class="infoDetails card-link stretched-link">내용보기</a>				
 				</div>	
 			</div>
 		</c:forEach>
@@ -92,8 +92,50 @@
 		</p>
 	</div>
 </div>
+<button id="infoModalBtn" type="button" class="d-none" data-toggle="modal" data-target="#infoModal"></button>
+<!-- 공지게시판 modal-->
+<div class="modal" id="infoModal">
+    <div id="infoModalDialog" class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div id="infoModalContent" class="modal-content">
+		</div>
+	</div>
+</div>
+
+<!-- CK editor module -->
+<script type="module">	
+ DecoupledEditor
+    .create(document.querySelector('#ckeditor'),{    	    	
+    	language: 'ko',	       	    	
+    	ckfinder: {
+	   		uploadUrl: 'ckedit' 		
+	   	},
+	   	toolbar: ['ckfinder', '|','imageUpload', '|', 'heading', '|', 'bold', 'italic','link', 'bulletedList',
+	   		'numberedList', 'blockQuote', '|', 'undo','redo','Outdent','Indent','fontsize',
+	   		'fontfamily','insertTable','alignment', '|', 'fontColor', 'fontBackgroundColor']			
+    })       
+    .then(function(editorD) {
+    	//window.editorResize = editor;
+    	const toolbarContainer = document.querySelector( '#toolbar-container' );
+        toolbarContainer.appendChild( editorD.ui.view.toolbar.element );        
+    });
+</script>
 <script>
 $(document).ready(function(){
+	const infoBtn=document.querySelector("#infoModalBtn");
+	$(".infoDetails").click(function(e){
+		e.preventDefault();
+		let thisE = $(e.target);
+		let url = thisE.attr("href");
+		
+		$.ajax({
+			url:url,
+			type:"get",
+			success: function(data){
+				$("#infoModalContent").html(data);
+				infoBtn.click();
+			}
+		});
+	});
 });
 </script>
 </body>
