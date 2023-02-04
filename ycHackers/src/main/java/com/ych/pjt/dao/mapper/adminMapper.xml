@@ -19,6 +19,9 @@
 <select id="infoBoardHome" resultType="com.ych.pjt.dto.InfoBoardDto">
 	SELECT * FROM InfoData WHERE INFOCONDITION="10" ORDER BY INFONUM DESC
 </select> 
+<select id="infoDetailsHome" resultType="com.ych.pjt.dto.InfoBoardDto">
+	SELECT * FROM InfoData WHERE INFONUM=#{infoNum}
+</select>
 <select id="infoBoardManage" resultType="com.ych.pjt.dto.InfoBoardDto">
 	<!-- ORACLE SQL
 	<![CDATA[
@@ -46,4 +49,6 @@
 <select id="infoBoardPagelist" resultType="com.ych.pjt.dto.InfoBoardDto">
 	SELECT * FROM InfoData WHERE INFOCONDITION="10" ORDER BY INFONUM DESC LIMIT #{startN}, 50
 </select>
+
+
 </mapper>

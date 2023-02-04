@@ -83,6 +83,22 @@ public class AdminDao implements IAdminDao {
 		System.out.println(message);
 		return dtos;
 	}
+	private InfoBoardDto AuthorTransfer(InfoBoardDto dto){
+		String message="[AuthorTransfer] \n";
+			String dbAuthor = dto.getInfoAuth();
+			String userAuthor="";
+			if(dbAuthor.contains("_USER"))userAuthor="정회원";
+			else if(dbAuthor.contains("_TEMPUSER"))userAuthor="SNS 로그인 회원";
+			else if(dbAuthor.contains("_MANAGER"))userAuthor="카페 매니저";
+			else if(dbAuthor.contains("_ADMIN"))userAuthor="페이지 운영자";
+			else userAuthor=dbAuthor;
+			dto.setInfoAuth(userAuthor);
+			message+="db Auth: "+dbAuthor+" >>transfer>> userAuthor: "+userAuthor+"\n";
+		message+="[complete]";
+		System.out.println(message);
+		return dto;
+	}
+
 	@Override
 	public ArrayList<InfoBoardDto> infoBoardList() {
 		System.out.println("infoBoarList method");
@@ -100,6 +116,13 @@ public class AdminDao implements IAdminDao {
 		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoBoardPagelist", startN);
 		dtos = AuthorTransfer(dtos);
 		return dtos; 
+	}
+	@Override
+	public InfoBoardDto infoDetailsHome(int infoNum) {
+		System.out.println("infoDetailsHome method: "+infoNum);
+		InfoBoardDto dto = sqlSession.selectOne("infoDetailsHome", infoNum);
+		dto=AuthorTransfer(dto);
+		return dto;
 	}
 
 

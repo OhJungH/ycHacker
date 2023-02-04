@@ -22,6 +22,7 @@
 		<!-- permitAll: 모두 접근 -->
 		<intercept-url pattern="/processLogin" access="permitAll"/>
 		<intercept-url pattern="/images/**" access="permitAll"/>
+		<intercept-url pattern="/editUpload/**" access="permitAll"/>
 		<intercept-url pattern="/js/**" access="permitAll"/>
 		<intercept-url pattern="/style/**" access="permitAll"/>	
 		<!-- isAnonymous(): 로그인 안한 상태(비회원)만 접근 -->	

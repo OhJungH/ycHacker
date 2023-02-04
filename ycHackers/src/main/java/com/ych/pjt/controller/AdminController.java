@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -24,6 +25,7 @@ import com.ych.pjt.command.InfoBoardManageCommand;
 import com.ych.pjt.command.InfoBoardPagelistCommand;
 import com.ych.pjt.command.InfoManagePagelistCommand;
 import com.ych.pjt.command.InfoBoardWriteCommand;
+import com.ych.pjt.command.InfoDetailsCommand;
 import com.ych.pjt.command.InfoListMainCommand;
 import com.ych.pjt.command.UserGradeCommand;
 import com.ych.pjt.command.UserSearchCommand;
@@ -114,7 +116,6 @@ public class AdminController {
 		String safeFilePath1=resources_path+uuid+originFileName;
 		String safeFilePath2=tomcat_path+uuid+originFileName;
 		System.out.println("##save file path: "+safeFilePath1);
-		
 		String changeFileName=uuid+originFileName;
 		try {
 			mf.transferTo(new File(safeFilePath1));
@@ -127,9 +128,12 @@ public class AdminController {
 		JSONObject editorData = new JSONObject();
 		//upload: true
 		editorData.put("uploaded", true);
+
+		//노트엔 이렇게 적힘 
 		//url: protocol(scheme)://도메인(서버주소:포트)/request 경로/파일명
-		//실제에선 image_request_path사용
-		String requestURL=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+image_request_path+changeFileName;
+		//https://localhost:8443/pjt/editUpload/0f5f307b-4c20-495a-9d54-8c4a7f40263aimg_avatar3.png
+		//req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+image_request_path+changeFileName
+		String requestURL="editUpload/"+changeFileName;
 		editorData.put("url",requestURL);
 		System.out.println("##uploaded URL: "+(String)editorData.get("url"));
 		
@@ -150,6 +154,13 @@ public class AdminController {
 		System.out.println("(infoWrite request)infoBoardList");
 		return "infoBoardManage";
 	}
-	
-	
+	@RequestMapping(value="/infoDetailsHome",produces="application/text;charset=UTF8")
+	@ResponseBody
+	public String infoDetailsHome(HttpServletRequest req, Model model) {
+		System.out.println("infoDetailsHome request > infoModal");
+		com = new InfoDetailsCommand();
+		com.execute(req, model);
+		String modalData = (String)req.getAttribute("modalData");
+		return modalData;
+	}
 }

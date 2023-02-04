@@ -38,6 +38,8 @@
 }
 #infoModalContent{
     background: #fffffff2;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 /*hover*/
 .infoDetails:hover{/*card link*/
