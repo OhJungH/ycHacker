@@ -28,6 +28,7 @@
 		<intercept-url pattern="/" access="isAnonymous()"/>
 		<intercept-url pattern="/home" access="isAnonymous()"/>
 		<intercept-url pattern="/infoBoardHome" access="isAnonymous()"/>
+		<intercept-url pattern="/infoDetailsHome" access="isAnonymous()"/>
 		<intercept-url pattern="/joinViewHome" access="isAnonymous()"/>
 		<intercept-url pattern="/join" access="isAnonymous()"/>			
 		<intercept-url pattern="/login" access="isAnonymous()"/>
