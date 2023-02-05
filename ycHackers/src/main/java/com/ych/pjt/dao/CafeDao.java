@@ -30,5 +30,15 @@ public class CafeDao implements ICafeDao {
 		}
 		return result;
 	}
+
+
+	@Override
+	public CafeDto cafeDetail(String cafeName) {
+		// TODO Auto-generated method stub
+		CafeDto dto = sqlSession.selectOne("cafeDetail",cafeName);
+		return dto;
+	}
+
+
 	
 }

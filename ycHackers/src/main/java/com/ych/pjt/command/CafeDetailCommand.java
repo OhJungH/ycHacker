@@ -1,7 +1,5 @@
 package com.ych.pjt.command;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
@@ -16,6 +14,10 @@ public class CafeDetailCommand implements IYchCommand {
 	public void execute(HttpServletRequest req, Model model) {
 		
 		CafeDao cdao = Constant.cDao;
+		String cafeName = req.getParameter("cafeName");
+		
+		CafeDto dto = cdao.cafeDetail(cafeName);
+		req.setAttribute("cafeDetail", dto);
 	}
 
 }
