@@ -42,7 +42,7 @@ margin-left:40px;
 
 
 <div class="container" style="margin-left:50px; float:left;">
-	 <h1 style="margin-top:100px; margin-left:150px;" value="${cafeDetail.cafeName}"></h1>
+	<h1>${cafeDetail.cafeName}</h1>
 	  	<div id="demo" class="carousel slide" data-ride="carousel" style="width:850px; height:500px; margin-left:100px;">
 	  		<div class="carousel-inner">
 	  			<div class="carousel-item active">
@@ -59,7 +59,7 @@ margin-left:40px;
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				</a>  				
 			</div>
-		<textarea style="margin-left:100px; margin-top:30px; resize:none; width:250px; height:200px;" value="${cafeDetail.cafeIntro}"></textarea>
+		<textarea style="margin-left:100px; margin-top:30px; resize:none; width:250px; height:200px;">${cafeDetail.cafeIntro}</textarea>
 		</div>
 </div>
 	<div class="wrapper" style="margin-top:150px;">

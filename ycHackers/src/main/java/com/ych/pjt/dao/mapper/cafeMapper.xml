@@ -13,7 +13,7 @@
 			values((SELECT nextval('cafeseq') FROM DUAL), #{cafeName},#{cafeLocation},#{cafePrice},#{cafeImage},#{cafeMember}, 0, #{cafeIntro} ,#{cafeTel} ,#{cafeTime})
 		</insert>
 		
-		<select id="cafeDetail" resultType="com.ych.pjt.dto.CafeDto">
-			SELECT * FROM CAFELIST ORDER BY CAFENO DESC
+		<select id="cafeDetail" parameterType="string" resultType="com.ych.pjt.dto.CafeDto">
+			SELECT * FROM CAFELIST WHERE CAFENAME= #{CAFENAME}
 		</select>
 </mapper>

@@ -8,6 +8,7 @@ public interface ICafeDao {
 
 	public ArrayList<CafeDto> cafeList();
 	public String studyroomWrite(CafeDto dto);
+	public CafeDto cafeDetail(String cafeName);
 
 
 

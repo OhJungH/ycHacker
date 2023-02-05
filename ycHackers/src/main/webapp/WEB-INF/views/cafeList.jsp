@@ -56,9 +56,9 @@
 	</form>
 </div>
 
-<div class="row mb-3">
+<div class="row mb-3" style="margin-left:250px;">
 	<c:forEach items="${cafeList}" var="dto">
-		<div class="col md-4" style="height:auto;">
+		<div class="container-md-4"style="height:auto; margin-right:150px;">
 			<div class="card" style="width:250px;">
 				<img class="card-img-top" src="upimage/${dto.cafeImage}" alt="Card image" style="max-width:250px; height:250px;">
 				<div class="card-body">

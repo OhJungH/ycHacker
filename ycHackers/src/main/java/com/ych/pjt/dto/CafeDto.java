@@ -2,6 +2,7 @@ package com.ych.pjt.dto;
 
 public class CafeDto {
 
+	private int cafeNo;
 	private String cafeName;
 	private String cafeLocation;
 	private String cafePrice;
@@ -14,9 +15,10 @@ public class CafeDto {
 	public CafeDto() {
 		super();
 	}
-	public CafeDto(String cafeName, String cafeLocation, String cafePrice, String cafeImage, String cafeMember,
-			int cafeLike, String cafeIntro, String cafeTel, String cafeTime) {
+	public CafeDto(int cafeNo, String cafeName, String cafeLocation, String cafePrice, String cafeImage,
+			String cafeMember, int cafeLike, String cafeIntro, String cafeTel, String cafeTime) {
 		super();
+		this.cafeNo = cafeNo;
 		this.cafeName = cafeName;
 		this.cafeLocation = cafeLocation;
 		this.cafePrice = cafePrice;
@@ -26,6 +28,12 @@ public class CafeDto {
 		this.cafeIntro = cafeIntro;
 		this.cafeTel = cafeTel;
 		this.cafeTime = cafeTime;
+	}
+	public int getCafeNo() {
+		return cafeNo;
+	}
+	public void setCafeNo(int cafeNo) {
+		this.cafeNo = cafeNo;
 	}
 	public String getCafeName() {
 		return cafeName;
@@ -81,6 +89,7 @@ public class CafeDto {
 	public void setCafeTime(String cafeTime) {
 		this.cafeTime = cafeTime;
 	}
+	
 	
 	
 	
