@@ -32,6 +32,7 @@
 </head>
 <body>
 
+<div id="cafeContainer">
 <div class="cafeSearch" style="margin-bottom:50px;">
 	<form action="cafeList" method="get" id="searchFrm">
 		<input type="hidden" value="search" name="cafeSearch">
@@ -62,12 +63,13 @@
 			<div class="card" style="width:250px;">
 				<img class="card-img-top" src="upimage/${dto.cafeImage}" alt="Card image" style="max-width:250px; height:250px;">
 				<div class="card-body">
-				<a href="cafeDetail?cafeNo=${dto.cafeTel}" class="pclick stretched-link">
-				${dto.cafeIntro}</a>
+				<a href="cafeDetail?cafeName=${dto.cafeName}" class="cafeDetail pclick stretched-link" id="cafeDetail">
+				${dto.cafeName}</a>
 				</div>
 			</div>
 		</div>
 	</c:forEach>
+</div>
 </div>
 
 <script>
@@ -100,7 +102,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-	$("#cafeDetail").click(function(event) {
+	$(".cafeDetail").click(function(event) {
 		event.preventDefault();
 		$.ajax({
 			url : $("#cafeDetail").attr("href"),
