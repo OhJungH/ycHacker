@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>infoDetailsUser</title>
+    <title>main</title>
     <!--jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!--propper jquery -->
@@ -13,12 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <!--bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"/>
-    <!--이전 style sheet-->
     <link rel="stylesheet" href="../style/footer.css"/>
     <link rel="stylesheet" href="../style/top.css"/>
     <link rel="stylesheet" href="../style/main.css"/>
-    <!--this page-->
-    <link rel="stylesheet" href="../style/infoDetailsUser.css"/>
 </head>
 <body>
 
@@ -44,6 +41,9 @@
                     <a class="nav-link" href="cafeList" id="cafeList">검색</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="admin" id="admin">관리자</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="studyroomwrite" id="studyroomwrite">스터디룸 등록</a>
                 </li>
             </ul>
@@ -67,18 +67,8 @@
     </nav>
     <section>
         <div id="mainRagion">
-            <div id="infoDetails" class="infoBox infoB"><!--{infoDetailsUser.info/danger/success}-->
-                <div id="infoType">
-                    <span class="badge badge-info">공지사항</span>
-                </div>
-                <div id="infoNum" class="infoSpace">no.1</div>
-                <div id="infoDate" class="infoSpace">작성된 날짜: </div>
-                <div id="infoAuthor" class="infoSpace">작성자</div>
-               
-                <div id="infoTitle" class="infoSpace">제목: </div>
-                <div id="infoContent" class="infoSpace">컨텐츠</div>
-
-                <form id="infoReply"></form><!--db저장과 함께 javascript로 바로 띄우기-->
+            <div id="infoDetails">
+                
             </div>
         </div>
     </section>
