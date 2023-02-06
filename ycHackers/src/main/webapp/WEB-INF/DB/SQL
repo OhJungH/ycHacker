@@ -124,3 +124,19 @@ CALL create_sequence('snsuseq');
 <<<<< admin 怨꾩젙 媛��엯 �썑 蹂�寃�
 UPDATE UserData SET USERAUTH='ROLE_ADMIN' WHERE USERNUM=3;
 >>>>>
+
+<<<<InfoData TBL test data
+INSERT INTO infoData (INFONUM,INFOTYPE,INFOAUTHOR,INFOAUTH,INFODATE,INFOUPDATEDATE,INFOTITLE,INFOCONTENT,INFOGROUP,INFOINDENT,INFOHIT,INFOCONDITION) VALUES ((SELECT nextval('infoseq') FROM DUAL),'info','admin@naver.com','[ROLE_ADMIN]','2023-02-01 21:56:16','2023-02-01','테스트1) 공지사항: 안내멘트 1','<p>안녕하세요. </p><p>테스트용 공지사항입니다. </p><p>잘 보이나요? <strong>이것은 굵은 글씨</strong></p><p><i>이것은 기운 글씨</i></p><ul><li>ul</li></ul><p>the END</p>',1,0,1,10);
+
+INSERT INTO infoData (INFONUM,INFOTYPE,INFOAUTHOR,INFOAUTH,INFODATE,INFOUPDATEDATE,INFOTITLE,INFOCONTENT,INFOGROUP,INFOINDENT,INFOHIT,INFOCONDITION) 
+VALUES ((SELECT nextval('infoseq') FROM DUAL),'result','admin@naver.com','[ROLE_ADMIN]','2023-02-01 22:32:43','2023-02-01','테스트2) 신고처리: 신고 처리결과 안내','<p>안녕하세요. </p><p>신고처리 결과 안내드립니다. </p><p><br data-cke-filler="true"></p><ul style="list-style-type:circle;"><li><strong>5일 사용금지</strong></li></ul><p>김철수, 이영지, 최기영</p><ul style="list-style-type:circle;"><li><strong>한달 사용금지</strong></li></ul><p>둘리, 토마스</p><ul style="list-style-type:circle;"><li><strong>영구 사용금지</strong></li></ul><p>김이박</p><p><br data-cke-filler="true"></p><p>이용에 착오없으시길 바랍니다.</p>',2,0,1,10);
+
+INSERT INTO infoData (INFONUM,INFOTYPE,INFOAUTHOR,INFOAUTH,INFODATE,INFOUPDATEDATE,INFOTITLE,INFOCONTENT,INFOGROUP,INFOINDENT,INFOHIT,INFOCONDITION) 
+VALUES ((SELECT nextval('infoseq') FROM DUAL),'event','admin@naver.com','[ROLE_ADMIN]','2023-02-01 22:37:05','2023-02-01','테스트3) 이벤트: 신규 회원 출석 이벤트','<p>하루:</p><p>이틀: </p><p>삼일: </p><p>1주일:</p><p>2주일:</p><p>3주일:</p><p>4주일:</p><p>한달: </p>',3,0,2,10);
+
+INSERT INTO infoData (INFONUM,INFOTYPE,INFOAUTHOR,INFOAUTH,INFODATE,INFOUPDATEDATE,INFOTITLE,INFOCONTENT,INFOGROUP,INFOINDENT,INFOHIT,INFOCONDITION) 
+VALUES ((SELECT nextval('infoseq') FROM DUAL),'info','admin@naver.com','[ROLE_ADMIN]','2023-02-01 22:46:09','2023-02-01','테스트4) 공지사항: 저장은 하지만 게시는 안함','<p>이런건 게시할 수 없지</p><p>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p><p><strong>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</strong></p><p><i>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</i></p>',4,0,1,-10);
+
+INSERT INTO infoData (INFONUM,INFOTYPE,INFOAUTHOR,INFOAUTH,INFODATE,INFOUPDATEDATE,INFOTITLE,INFOCONTENT,INFOGROUP,INFOINDENT,INFOHIT,INFOCONDITION) 
+VALUES ((SELECT nextval('infoseq') FROM DUAL),'event','admin@naver.com','[ROLE_ADMIN]','2023-02-01 23:19:36','2023-02-01','테스트5) 이벤트: 사진을 포함한 글','<p>아녕하세요</p><p><br data-cke-filler="true"></p><figure class="image ck-widget ck-widget_with-resizer ck-widget_selected" contenteditable="false"><img src="editUpload/0f5f307b-4c20-495a-9d54-8c4a7f40263aimg_avatar3.png"><div class="ck ck-reset_all ck-widget__type-around"><div class="ck ck-widget__type-around__button ck-widget__type-around__button_before" title="Insert paragraph before block"></div><div class="ck ck-widget__type-around__button ck-widget__type-around__button_after" title="Insert paragraph after block"></div><div class="ck ck-widget__type-around__fake-caret"></div></div><div class="ck ck-reset_all ck-widget__resizer" style="height:16px;left:0px;top:0px;width:50px;"><div class="ck-widget__resizer__handle ck-widget__resizer__handle-top-left"></div><div class="ck-widget__resizer__handle ck-widget__resizer__handle-top-right"></div><div class="ck-widget__resizer__handle ck-widget__resizer__handle-bottom-right"></div><div class="ck-widget__resizer__handle ck-widget__resizer__handle-bottom-left"></div><div class="ck ck-size-view" style="display: none;"></div></div></figure><div class="ck-fake-selection-container" style="position: fixed; top: 0px; left: -9999px; width: 42px;">image widget</div>',5,0,3,10);
+>>>>
