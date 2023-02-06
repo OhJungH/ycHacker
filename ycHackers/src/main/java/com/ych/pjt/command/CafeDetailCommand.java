@@ -17,7 +17,7 @@ public class CafeDetailCommand implements IYchCommand {
 		String cafeName = req.getParameter("cafeName");
 		
 		CafeDto dto = cdao.cafeDetail(cafeName);
-		req.setAttribute("cafeDetail", dto);
+		model.addAttribute("cafeDetail", dto);
 	}
 
 }

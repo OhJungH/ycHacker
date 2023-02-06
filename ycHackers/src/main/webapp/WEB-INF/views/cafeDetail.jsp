@@ -40,9 +40,8 @@ margin-left:40px;
 </head>
 <body>
 
-
-<div class="container" style="margin-left:50px; float:left;">
-	<h1>${cafeDetail.cafeName}</h1>
+<div style="margin-left:50px; float:left;">
+	<h1 style="float:left;">${cafeDetail.cafeName}</h1><h3>연 락 처${cafeDetail.cafeTel}</h3>
 	  	<div id="demo" class="carousel slide" data-ride="carousel" style="width:850px; height:500px; margin-left:100px;">
 	  		<div class="carousel-inner">
 	  			<div class="carousel-item active">
@@ -59,7 +58,10 @@ margin-left:40px;
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				</a>  				
 			</div>
-		<textarea style="margin-left:100px; margin-top:30px; resize:none; width:250px; height:200px;">${cafeDetail.cafeIntro}</textarea>
+			<br/><br/>
+			<p>스터디룸 주소 : ${cafeDetail.cafeLocation}</p><br/>
+			<p>이용 가능 인원 : ${cafeDetail.cafeMember}</p>
+		<textarea style="margin-left:100px; margin-top:30px; resize:none; width:250px; height:200px;" readonly>${cafeDetail.cafeIntro}</textarea>
 		</div>
 </div>
 	<div class="wrapper" style="margin-top:150px;">
@@ -77,7 +79,7 @@ margin-left:40px;
 				<th style="padding:10px;">30000원</th>
 			</tr>
 		</table>
-	<button type="button" class="btn btn-primary" style="margin-top:30px; float:right; margin-right:320px;">예약하기</button>
+		<a href="resForm">예약하기</a>
 	</div>
 </body>
 </html>
