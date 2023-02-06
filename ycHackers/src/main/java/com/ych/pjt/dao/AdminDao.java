@@ -57,6 +57,12 @@ public class AdminDao implements IAdminDao {
 		System.out.println("infoformation Board Write method: "+dto.getInfoTitle());
 		int res = sqlSession.insert("infoWrite", dto);
 		System.out.println("infoWrite result: "+res);
+		infoGroupUpdate();
+	}
+	//sequences DB가 닫히는 문제로 분할해 적용 
+	private void infoGroupUpdate() {
+		int res = sqlSession.update("infoGroupUpdate");
+		System.out.println("infogroupUpdate: "+res);
 	}
 	@Override
 	public ArrayList<InfoBoardDto> infoListMain() {
@@ -117,11 +123,17 @@ public class AdminDao implements IAdminDao {
 		dtos = AuthorTransfer(dtos);
 		return dtos; 
 	}
+	private void infoBoardHit(int infoNum) {
+		System.out.println("whom requests "+infoNum+"(hits up)");
+		int res = sqlSession.update("infoBoardHit", infoNum);
+		System.out.println("info hit request: "+res);
+	}
 	@Override
 	public InfoBoardDto infoDetailsHome(int infoNum) {
 		System.out.println("infoDetailsHome method: "+infoNum);
 		InfoBoardDto dto = sqlSession.selectOne("infoDetailsHome", infoNum);
 		dto=AuthorTransfer(dto);
+		infoBoardHit(infoNum);
 		return dto;
 	}
 
