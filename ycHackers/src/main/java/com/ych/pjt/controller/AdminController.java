@@ -26,6 +26,7 @@ import com.ych.pjt.command.InfoBoardPagelistCommand;
 import com.ych.pjt.command.InfoManagePagelistCommand;
 import com.ych.pjt.command.InfoBoardWriteCommand;
 import com.ych.pjt.command.InfoDetailsCommand;
+import com.ych.pjt.command.InfoDetailsUserCommand;
 import com.ych.pjt.command.InfoListMainCommand;
 import com.ych.pjt.command.UserGradeCommand;
 import com.ych.pjt.command.UserSearchCommand;
@@ -162,5 +163,12 @@ public class AdminController {
 		com.execute(req, model);
 		String modalData = (String)req.getAttribute("modalData");
 		return modalData;
+	}
+	@RequestMapping("/infoDetailsUser")
+	public String infoDetailsUser(HttpServletRequest req, Model model) {
+		System.out.println("infoDetailsUser");
+		com = new InfoDetailsUserCommand();
+		com.execute(req, model);
+		return "infoDetailsUser";
 	}
 }

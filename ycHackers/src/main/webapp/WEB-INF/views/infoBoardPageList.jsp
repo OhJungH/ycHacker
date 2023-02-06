@@ -56,7 +56,7 @@
 							</c:choose>
 						</td>
 						<td>
-							<a class="infoP" href="infoDetails?infoNum=${infoDto.infoNum}">
+							<a class="infoDetailsUser" href="infoDetailsUser?infoNum=${infoDto.infoNum}">
 								${infoDto.infoTitle}(${infoDto.infoIndent})
 							</a>
 						</td>
@@ -79,6 +79,25 @@
 				</c:forEach>
 			</tbody>
 		</table>
+<script>
+$(document).ready(function(){
+	$(".infoDetailsUser").click(function(e){
+		e.preventDefault();
+		let thisE = $(e.target);
+		$.ajax({
+			url : thisE.attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+});
+</script>
 
 </body>
 </html>

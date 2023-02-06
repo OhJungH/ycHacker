@@ -126,7 +126,7 @@
 							</c:choose>
 						</td>
 							<td>
-							<a class="infoP" href="infoDetails?infoNum=${infoDto.infoNum}">${infoDto.infoTitle}(${infoDto.infoIndent})</a>
+							<a class="infoDetailsUser" href="infoDetailsUser?infoNum=${infoDto.infoNum}">${infoDto.infoTitle}(${infoDto.infoIndent})</a>
 						</td>
 						<td>${infoDto.infoAuthor}</td>
 						<td>${infoDto.infoDate}</td>
@@ -239,6 +239,21 @@ $(document).ready(function(){
 		event.preventDefault();
 		$.ajax({
 			url : $("#studyroomwrite").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	$(".infoDetailsUser").click(function(e){
+		e.preventDefault();
+		let thisE = $(e.target);
+		$.ajax({
+			url : thisE.attr("href"),
 			type : "get",
 			data : "",
 			success : function(data) {

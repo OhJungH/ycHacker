@@ -20,5 +20,6 @@ public interface IAdminDao {
 	public void infoWrite(InfoBoardDto dto);
 	
 	public InfoBoardDto infoDetailsHome(int infoNum);
+	public InfoBoardDto infoDetailsUser(int infoNum);
 	
 }

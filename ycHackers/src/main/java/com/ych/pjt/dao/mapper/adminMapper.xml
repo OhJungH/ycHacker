@@ -55,5 +55,7 @@
 <update id="infoBoardHit">
 	UPDATE infoData SET INFOHIT=INFOHIT+1 WHERE INFONUM=#{infoNum}
 </update>
-
+<select id="infoDetailsUser" resultType="com.ych.pjt.dto.InfoBoardDto">
+	SELECT * FROM InfoData WHERE INFONUM=#{infoNum}
+</select>
 </mapper>
