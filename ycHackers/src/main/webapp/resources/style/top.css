@@ -6,9 +6,7 @@
     background-color: #000;
     display: block;
 }
-a{
-    text-decoration: none;
-}
+
 #myInfoBox{
     max-width: 50%;
     width: fit-content;
@@ -34,6 +32,7 @@ a{
 }
 .mainNav{
 	background-color: cornsilk;
+	width:100vw;
 }
 .mainLogo{
 	display:none;

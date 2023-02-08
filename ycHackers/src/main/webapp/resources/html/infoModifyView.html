@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main</title>
+    <!--jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--propper jquery -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!--latest javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"/>
+    <!--custom style sheet-->
+    <link rel="stylesheet" href="../style/footer.css"/>
+    <link rel="stylesheet" href="../style/top.css"/>
+    <link rel="stylesheet" href="../style/main.css"/>
+    <!--this file-->
+    <link rel="stylesheet" href="../style/infoModifyView.css"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm mainNav">
+        <button class="navbar-toggler btn btn-block" type="button" data-toggle="collapse" data-target="#collapsiblebar">
+            <span class="navbar-toggler-icon text-dark"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsiblebar">
+            <ul class=" nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="home">home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        안내사항
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="infoBoard" id="infoBoard">공지사항</a>
+                        <a class="dropdown-item" href="helpPage" id="helpInfo">도움말</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cafeList" id="cafeList">검색</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin" id="admin">관리자</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="studyroomwrite" id="studyroomwrite">스터디룸 등록</a>
+                </li>
+            </ul>
+            <p class="mainLogo">
+                YCHackers
+            </p>
+            <div id="myInfoBox">
+                <p class="myInfoP">
+                    ID: 
+                    <a id="myInfoLink" class="myInfoLink" href="myPageView">${userDto.userId}</a><br/>
+                </p>
+                <p class="myInfoP">
+                    등급: 
+                    <span class="myInfoLink">관리자</span><br/>
+                </p>
+                <p class="myInfoP">
+                    <a class="myInfoLink" href="logoutView?userNum=${userDto.userNum}">로그아웃</a>
+                </p>
+            </div>
+        </div><hr/>
+    </nav>
+    <section>
+        <div id="mainRagion">
+            <div id="infoModifyViewContainer">
+                <div id="infoModify" class="infoModifyBlock">
+                    <form id="infoModifyFrm" name="infoModifyFrm" action="infoModify" method="post">
+                        <input type="hidden" name="csrf" value=""/>
+                        <input type="hidden" name="infoNum" value="${infoModifyDto.infoNum}"/>
+                        <input type="hidden" name="infoUpdateDate" value="Date()"/><!--javascript today()-->
+                        <!-- table: infoNum, 이전 작성자(Author)와 권한(Auth), 최근 수정일(UpdateDate), 조회수(infoHit) -->
+                        <div class="form-group">
+                            <label for="infoAuthor">변경될 작성자</label>
+                            <input class="form-control" id="infoAuthor" name="infoAuthor" type="text" readonly value="${user_id}"/>
+                            <label for="infoAuth">권한</label>
+                            <input class="form-control" id="infoAuth" name="infoAuth" type="text" readonly value="${user_authority}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="infoTitle">제목</label>
+                            <input class="form-control" id="infoTitle" name="infoTitle" type="text" value="${infoModifyDto.infoTitle}"/>
+                        </div>
+                        <!-- content input(display none) -->
+                        <div class="d-none">
+                            <textarea class="ck-content" id="infoContent" name="infoContent" required></textarea> 
+                        </div>
+                        <!-- info content preview -->
+                        <div class="contentPreviewContainer">
+                            <p class="previewLabel">내용</p>
+                            <div id="toolbar-container"></div>
+                            <div id="infoEditor" class="ck-content">${infoModifyDto.infoTitle}</div>
+                        </div>
+                        <button id="editSub" type="submit" value="ckedit" style="visibility:hidden;">edit</button>
+                        <div>
+                            <p>
+                                게시여부
+                            </p>
+                            <div id="infoCon1" class="infoCon form-check-inline">
+                                <label for="infoCondition1" class="form-check-label">
+                                    <input id="infoCondition1" name="infoCondition" value="display" type="radio" class="form-check-input"/>
+                                    네. 바로 게시하겠습니다.
+                                </label>
+                            </div>
+                            <div id="infoCon2" class="infoCon form-check-inline">
+                                <label for="infoCondition2" class="form-check-label">
+                                    <input id="infoCondition2" name="infoCondition" value="display-none" type="radio" class="form-check-input"/>
+                                    아니요. 저장만하겠습니다.
+                                </label>
+                            </div><hr/>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="submitCheck" required/>
+                            <label for="submitCheck">
+                                모든 내용을 확인했습니다.
+                            </label>
+                            <p id="validateM">저장하지 않고 페이지를 벗어나면 작성한 내용이 사라집니다!!</p>
+                        </div>
+                        <!-- invisible button -->
+                        <button id="checkBtn" class="d-none" type="submit"></button>
+                        <!-- button -->
+                        <button id="previewBtn" class="btn btn-outline-success">미리보기</button>
+                        <!-- save button(CK editor > validation > submit) -->
+                        <button id="editBtn" class="btn btn-outline-warning" type="button">저장/게시하겠습니다.</button>
+                        <a id="deleteBtn" class="btn btn-danger" href="infoDelete?infoNum=${infoModifyDto.infoNum}">삭제하기</a>
+                    </form>
+                </div>
+            </div>
+            <button id="infoModalBtn" type="button" class="d-none" data-toggle="modal" data-target="#infoModal"></button>
+            <!-- 공지게시판 modal-->
+            <div class="modal" id="infoModal">
+                <div id="infoModalDialog" class="modal-dialog modal-dialog-scrollable modal-xl">
+                    <div id="infoModalContent" class="modal-content">
+                        <!-- 미리보기 -->
+                        <div id="infoModifyPreview" class="infoModifyBlock">
+                            <div id="infoDetails" class="infoBox ${infoModifyDto.infoType}B">
+                                <span class="bg-danger">미리보기</span>
+                                <div id="infoTypeP">
+                                    <c:choose>
+                                        <c:when test="${infoDetailsUser.infoType  eq 'info'}">
+                                            <span class="badge badge-info">공지사항</span>
+                                        </c:when>
+                                        <c:when test="${infoDetailsUser.infoType eq 'result'}">
+                                            <span class="badge badge-danger">신고처리</span>
+                                        </c:when>
+                                        <c:when test="${infoDetailsUser.infoType eq 'event'}">
+                                            <span class="badge badge-success">이벤트</span>
+                                        </c:when>
+                                    </c:choose>
+                                </div>
+                                <div id="infoNumP" class="infoSpace">
+                                    no.${infoModifyDto.infoNum}
+                                </div>
+                                <div id="infoDateP" class="infoSpace">
+                                    작성된 날짜: 
+                                </div>
+                                <div id="infoAuthorP" class="infoSpace">	
+                                    작성자: 
+                                </div>
+                            <div id="infoTitleP" class="infoSpace"></div>
+                            <div id="infoContentP" class="infoSpace"></div>
+                            <hr/>
+                            <form id="infoReply" action="infoBoardReply">
+                                <div class="form-group">
+                                    <label for="infoReplyInput">[user_id]</label>
+                                <textarea id="infoReplyInput" class="form-control" name="infoContent" rows="5" cols="20" placeholder="댓글 입력" readonly></textarea>
+                            </div>
+                            <button type="button" id="replyBtn" class="btn btn-outline-dark btn-block">유저들이 보는 페이지 형식입니다</button>
+                        </form>
+                    </div>            
+                </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- custom script files -->
+            <script src="js/infoBoardMRadioStyle.js"></script>
+            <script src="js/infoBoardMValidation.js"></script>
+            <!-- CK editor module -->
+            <script type="module">	
+             DecoupledEditor
+                .create( document.querySelector('#infoEditor'),{    	    	
+                    language: 'ko',	       	    	
+                    ckfinder: { //이미지 처리 모듈
+                           uploadUrl: 'infoCKedit' //요청경로	   		
+                       },//기능 버튼 선택
+                       toolbar: ['ckfinder', '|','imageUpload', '|', 'heading', '|', 'bold', 'italic','link', 'bulletedList',
+                           'numberedList', 'blockQuote', '|', 'undo','redo','Outdent','Indent','fontsize',
+                           'fontfamily','insertTable','alignment', '|', 'fontColor', 'fontBackgroundColor']			
+                })       
+                .then(function(editorD) {
+                    //window.editorResize = editor;
+                    const toolbarContainer = document.querySelector( '#toolbar-container' );
+                    toolbarContainer.appendChild( editorD.ui.view.toolbar.element );        
+                });
+            </script>
+            <script>    
+            $(document).ready(function(){
+                //previewBtn
+                document.getElementById("previewBtn").addEventListener("click",(e)=>{
+                    e.preventDefault();
+                    //input preview modal
+
+                    //info check
+                let fCon=false;
+                document.getElementById("checkBtn").addEventListener("click",(e)=>{
+                    e.preventDefault();
+                    if(validateData()){//third: function-validateData
+                        fCon=confirm("입력내용을 저장하시겠습니까?");
+                    }else{
+                        alert("내용을 다시 확인해주세요");
+                        return false;
+                    }
+                    if(document.querySelector("input[id=submitCheck]:checked")==null||document.querySelector("input[id=submitCheck]:checked")==""){
+                        alert("내용을 확인하고 체크박스를 눌러주세요.");
+                        return false;
+                    }
+                    console.log("fCon: "+fCon);//final: confirm
+                    //check result
+                    if(fCon){
+                        console.log("ajax: infoModifyFrm.submitBtn");
+                        document.querySelector("#infoModalBtn").click();
+                    }else{
+                        console.log("사용자가 거부");
+                        document.querySelector("#validateM").innerHTML="제출을 거부했습니다.";
+                    }
+                });
+                });
+                //submit button click
+                $("#infoModifyFrm").submit(function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        url:$("#infoModifyFrm").attr("action"),
+                        type:"post",
+                        data:$("#infoModifyFrm").serialize(),
+                        success : function(data) {
+                            console.log("저장 완료.");
+                            $("#mainRagion").html(data);
+                        },
+                        error : function() {
+                            alert("에러입니다.");
+                        }
+                    });
+                });
+                //button > CKeditor > validation > submit
+                function beforeSub(){
+                    $("#infoEditor svg").remove();
+                    let contentVal = $("#infoEditor").html();
+                    $("#infoContent").html(contentVal);
+                    $("#infoContentP").html(contentVal);
+                    setTimeout(function(){
+                        $("#checkBtn").trigger("click");//second: checkBtn
+                    },1000);
+                }
+                //first: editBtn
+                document.querySelector("#editBtn").addEventListener("click",beforeSub);
+            
+                //submit할때 confirm
+                let fCon=false;
+                document.getElementById("checkBtn").addEventListener("click",(e)=>{
+                    e.preventDefault();
+                    if(validateData()){//third: function-validateData
+                        fCon=confirm("입력내용을 저장하시겠습니까?");
+                    }else{
+                        alert("내용을 다시 확인해주세요");
+                        return false;
+                    }
+                    if(document.querySelector("input[id=submitCheck]:checked")==null||document.querySelector("input[id=submitCheck]:checked")==""){
+                        alert("내용을 확인하고 체크박스를 눌러주세요.");
+                        return false;
+                    }
+                    
+                    console.log("fCon: "+fCon);//final: confirm
+                    if(fCon){
+                        console.log("ajax: infoModifyFrm.submitBtn");
+                        document.querySelector("#submitBtn").click();
+                    }else{
+                        console.log("사용자가 제출을 거부");
+                        document.querySelector("#validateM").innerHTML="제출을 거부했습니다.";
+                    }
+                });
+            
+            });
+            </script>
+</body>
+</html>

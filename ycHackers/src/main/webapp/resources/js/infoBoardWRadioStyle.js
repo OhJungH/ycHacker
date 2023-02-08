@@ -54,7 +54,7 @@ infoType3.addEventListener('change',infoTypeControl);
 						infoCon1Box.classList.add("bg-info");
 						infoCon1Box.classList.add("text-light");
 						infoCon1Box.style.fontWeight=700;
-						document.querySelector("#submitBtn").innerHTML="게시하기";
+						document.querySelector("#editBtn").innerHTML="게시하기";
 					}
 					else if(!hasChecked1){
 						infoCon1Box.classList.remove("bg-info");
@@ -66,7 +66,7 @@ infoType3.addEventListener('change',infoTypeControl);
 						infoCon2Box.classList.add("bg-danger");
 						infoCon2Box.classList.add("text-light");
 						infoCon2Box.style.fontWeight=700;
-						document.querySelector("#submitBtn").innerHTML="저장하기";
+						document.querySelector("#editBtn").innerHTML="저장하기";
 					}
 					else if(!hasChecked2){
 						infoCon2Box.classList.remove("bg-danger");

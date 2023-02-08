@@ -24,8 +24,10 @@ import com.ych.pjt.command.InfoBoardListCommand;
 import com.ych.pjt.command.InfoBoardManageCommand;
 import com.ych.pjt.command.InfoBoardPagelistCommand;
 import com.ych.pjt.command.InfoManagePagelistCommand;
+import com.ych.pjt.command.InfoModifyViewCommand;
 import com.ych.pjt.command.InfoBoardWriteCommand;
-import com.ych.pjt.command.InfoDetailsCommand;
+import com.ych.pjt.command.InfoDetailsModalCommand;
+import com.ych.pjt.command.InfoDetailsPreviewCommand;
 import com.ych.pjt.command.InfoDetailsUserCommand;
 import com.ych.pjt.command.InfoListMainCommand;
 import com.ych.pjt.command.UserGradeCommand;
@@ -159,16 +161,30 @@ public class AdminController {
 	@ResponseBody
 	public String infoDetailsHome(HttpServletRequest req, Model model) {
 		System.out.println("infoDetailsHome request > infoModal");
-		com = new InfoDetailsCommand();
+		com = new InfoDetailsModalCommand();
 		com.execute(req, model);
 		String modalData = (String)req.getAttribute("modalData");
 		return modalData;
 	}
 	@RequestMapping("/infoDetailsUser")
 	public String infoDetailsUser(HttpServletRequest req, Model model) {
-		System.out.println("infoDetailsUser");
+		System.out.println("infoDetailsUser request");
 		com = new InfoDetailsUserCommand();
 		com.execute(req, model);
 		return "infoDetailsUser";
+	}
+	@RequestMapping("/infoDetailsPreview")
+	public String infoDetailsPreview(HttpServletRequest req, Model model) {
+		System.out.println("infoDetailsPreview request");
+		com=new InfoDetailsPreviewCommand();
+		com.execute(req, model);
+		return "infoDetailsPreview";
+	}
+	@RequestMapping("/infoModifyView")
+	public String infoModifyView(HttpServletRequest req, Model model) {
+		System.out.println("infoModifyView request");
+		com=new InfoModifyViewCommand();
+		com.execute(req, model);
+		return "infoModifyView";
 	}
 }
