@@ -5,8 +5,9 @@
 #mainRagion{
 	margin-top:10px;
 	margin-bottom:10px;
-	height: 100%;
+	height: fit-content;
 	min-height: 90vw;
+	width: 100vw;
 }
 
 .mainTBL{

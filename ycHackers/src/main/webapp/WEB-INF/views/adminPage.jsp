@@ -59,7 +59,7 @@
 					<tr>
 						<td>${infoDto.infoNum}</td>
 						<td>
-							<a href="infor...View?infoNum=${infoDto.infoNum}">
+							<a class="infoDetailsPreview" href="infoDetailsPreview?infoNum=${infoDto.infoNum}">
 								${infoDto.infoTitle} (${infoDto.infoHit})
 							</a>
 						</td>
@@ -116,6 +116,20 @@ $(document).ready(function() {
 			url:$("#infoBoardManage").attr("href"),	
 			type : "get",
 			data : "",
+			success : function(data) {
+				$("#adminContainer").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	$(".infoDetailsPreview").click(function(e){
+		e.preventDefault();
+		let thisE=$(e.target);
+		$.ajax({
+			url: thisE.attr("href"),
+			type: "get",
 			success : function(data) {
 				$("#adminContainer").html(data);
 			},

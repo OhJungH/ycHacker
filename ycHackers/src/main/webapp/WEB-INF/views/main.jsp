@@ -264,7 +264,21 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
+	$(".infoModifyBtn").click(function(e){
+		e.preventDefault();
+		let thisE = $(e.target);
+		$.ajax({
+			url:thisE.attr("href"),
+			type:"get",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+
 });
 </script>
 

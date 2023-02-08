@@ -144,6 +144,19 @@ public class AdminDao implements IAdminDao {
 		infoBoardHit(infoNum);
 		return dto;
 	}
+	@Override
+	public InfoBoardDto infoDetailsPreview(int infoNum) {
+		System.out.println("infoDetailsPreview method: "+infoNum);
+		InfoBoardDto dto = sqlSession.selectOne("infoDetailsPreview",infoNum);
+		dto=AuthorTransfer(dto);
+		return dto;
+	}
+	@Override
+	public InfoBoardDto infoModifyView(int infoNum) {
+		System.out.println("infoModifyView method: "+infoNum);
+		InfoBoardDto dto = sqlSession.selectOne("infoModifyView", infoNum);
+		return dto;
+	}
 
 
 

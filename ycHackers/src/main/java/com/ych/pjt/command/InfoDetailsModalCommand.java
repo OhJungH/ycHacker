@@ -8,7 +8,7 @@ import com.ych.pjt.dao.AdminDao;
 import com.ych.pjt.dto.InfoBoardDto;
 import com.ych.pjt.util.Constant;
 
-public class InfoDetailsCommand implements IYchCommand {
+public class InfoDetailsModalCommand implements IYchCommand {
 
 	@Override
 	public void execute(HttpServletRequest req, Model model) {

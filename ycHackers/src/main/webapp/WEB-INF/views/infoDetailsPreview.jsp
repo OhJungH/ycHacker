@@ -17,7 +17,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
-<title>infoDetailsUser</title>
+<title>공지글 표시 </title>
 <!--jquery 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
 <!--propper jquery -->
@@ -31,10 +31,9 @@
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!--this page-->
-<link rel="stylesheet" href="style/infoDetailsUser.css"/>
+<link rel="stylesheet" href="style/infoDetailsPreview.css"/>
 </head>
 <body>
-
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="user_id"/>
@@ -62,14 +61,11 @@
 	<form id="infoReply" action="infoBoardReply?infoGroup=${infoDetailsUser.infoGroup}&&infoAuthor=${user_id}">
 		<div class="form-group">
 			<label for="infoReplyInput">${user_id}</label>
-			<textarea id="infoReplyInput" class="form-control" name="infoContent" rows="5" cols="20" placeholder="댓글 입력"></textarea>
+			<textarea id="infoReplyInput" class="form-control" name="infoContent" rows="5" cols="20" placeholder="댓글 입력" readonly></textarea>
 		</div>
-		<input type="hidden" name="infoAuthor" value="${user_id}"/>
-		<input type="hidden" name="infoTitle" value="${infoDetailsUser.infoNum}의 댓글"/>
-		<input type="hidden" name="infoGroup" value="${infoDetailsUser.infoNum}"/>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		<button type="submit" id="replyBtn" class="btn btn-outline-dark btn-block">댓글</button>
-	</form><!--db저장과 함께 javascript로 바로 띄우기-->
+		<button type="button" id="replyBtn" class="btn btn-secondary btn-block">유저들이 보는 페이지 형식입니다</button>
+	</form>
+	<a id="infoModifylink" class="btn btn-block btn-warning" href="infoModifyView?infoNum=${infoDetailsUser.infoNum}">수정하기</a>
 </div>            
 
 <!-- CK editor module -->
@@ -89,6 +85,25 @@
     	const toolbarContainer = document.querySelector( '#toolbar-container' );
         toolbarContainer.appendChild( editorD.ui.view.toolbar.element );        
     });
+</script>
+<script>
+$(document).ready(function(){
+	$("#infoModifylink").click(function(e){
+		e.preventDefault();
+		let thisE = $(e.target);
+		$.ajax({
+			url:thisE.attr("href"),
+			type:"get",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+
+});
 </script>
 </body>
 </html>

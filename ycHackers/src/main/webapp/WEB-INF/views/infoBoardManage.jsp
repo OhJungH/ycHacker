@@ -43,6 +43,7 @@
 		<i class="fas fa-pen"></i>
 		글 쓰기
 	</button>
+	<p style="color:red;font-size:50%;">아래에서 링크를 누르면 수정페이지로 이동합니다.</p>
 	<div class="infoManagerTableContainer">
 		<table id="infoListTbl" class="table table-border">
 			<thead>
@@ -59,7 +60,7 @@
 					<tr class="${infoDto.infoType}">
 						<td>${infoDto.infoNum}</td>
 						<td>
-							<a class="infoP" href="infoDetails?infoNum=${infoDto.infoNum}">
+							<a class="infoModifyBtn" href="infoModifyView?infoNum=${infoDto.infoNum}">
 								${infoDto.infoTitle}
 							</a>
 						</td>
@@ -91,6 +92,20 @@ $(document).ready(function() {
 			type: "get",
 			success : function(data) {
 				$("#adminContainer").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	$(".infoModifyBtn").click(function(e){
+		e.preventDefault();
+		let thisE = $(e.target);
+		$.ajax({
+			url:thisE.attr("href"),
+			type:"get",
+			success : function(data) {
+				$("#mainRagion").html(data);
 			},
 			error : function() {
 				alert("에러입니다.");

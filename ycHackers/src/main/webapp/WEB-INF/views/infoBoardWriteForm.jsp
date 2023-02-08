@@ -52,77 +52,75 @@
 </div>
 <div id="infoWriteContainer">
 	<form id="infoWriteFrm" name="infoWriteFrm" action="infoWrite" method="post" enctype="multipart/form-data">
-			<input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden">
-		<div>
-			<input type="hidden" name="infoNum" value=0/>
-			<p>
-				<i class="fa-play fas"></i>
-				게시판 분류
-			</p>
-			<div class="form-check-inline infoType">
-				<label for="infoType1" class="form-check-label">
-					<input id="infoType1" name="infoType" value="info" type="radio" class="form-check-input"/>
-					<span id="infoType1Span">공지사항</span>
-				</label>
-			</div>
-			<div class="form-check-inline infoType">
-				<label for="infoType2" class="form-check-label">
-					<input id="infoType2" name="infoType" value="result" type="radio" class="form-check-input" />
-					<span id="infoType2Span">신고처리</span>
-				</label>
-			</div>
-			<div class="form-check-inline infoType">
-				<label for="infoType3" class="form-check-label">
-					<input id="infoType3" name="infoType" value="event" type="radio" class="form-check-input"/>
-					<span id="infoType3Span">이벤트</span>
-				</label>
-			</div>
-			<input type="hidden" name="infoAuthor" value="${user_id}"/>
-			<input type="hidden" name="infoAuth" value="${user_authority}"/>
-			<div class="form-group">
-				<label for="infoTitle">
-					<i class="fa-play fas"></i>
-					제목
-				</label>
-				<input id="infoTitle" name="infoTitle" type="text" class="form-control" required/>
-			</div>
-			<!-- content input(display none) -->
-			<div class="form-group d-none">
-				<textarea class="form-control ck-content" id="infoContent" name="infoContent" required></textarea> 
-			</div>
-			<!-- info content preview -->
-			<div class="contentPreviewContainer">
-				<p class="previewLabel">
-					<i class="fa-play fas"></i>내용
-				</p>
-				<div id="toolbar-container"></div>
-				<div id="infoEditor" class="ck-content"></div>
-			</div>
-			<button id="editSub" type="submit" value="ckedit" style="visibility:hidden;">edit</button>
-			<p>
-				<i class="fa-play fas"></i>
-				바로 게시하시겠습니까?
-			</p>
-			<div id="infoCon1" class="infoCon form-check-inline">
-				<label for="infoCondition1" class="form-check-label">
-					<input id="infoCondition1" name="infoCondition" value="display" type="radio" class="form-check-input"/>
-					네. 바로 게시하겠습니다.
-				</label>
-			</div>
-			<div id="infoCon2" class="infoCon form-check-inline">
-				<label for="infoCondition2" class="form-check-label">
-					<input id="infoCondition2" name="infoCondition" value="display-none" type="radio" class="form-check-input"/>
-					아니요. 저장만하겠습니다.
-				</label>
-			</div><hr/>
-			<input type="checkbox" id="submitCheck" required/>
-			<label for="submitCheck">
-				모든 내용을 확인했습니다.
+		<input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden">
+		<input type="hidden" name="infoNum" value=0/>
+		<p>
+			<i class="fa-play fas"></i>
+			게시판 분류
+		</p>
+		<div class="form-check-inline infoType">
+			<label for="infoType1" class="form-check-label">
+				<input id="infoType1" name="infoType" value="info" type="radio" class="form-check-input"/>
+				<span id="infoType1Span">공지사항</span>
 			</label>
 		</div>
+		<div class="form-check-inline infoType">
+			<label for="infoType2" class="form-check-label">
+				<input id="infoType2" name="infoType" value="result" type="radio" class="form-check-input" />
+				<span id="infoType2Span">신고처리</span>
+			</label>
+		</div>
+		<div class="form-check-inline infoType">
+			<label for="infoType3" class="form-check-label">
+				<input id="infoType3" name="infoType" value="event" type="radio" class="form-check-input"/>
+				<span id="infoType3Span">이벤트</span>
+			</label>
+		</div>
+		<input type="hidden" name="infoAuthor" value="${user_id}"/>
+		<input type="hidden" name="infoAuth" value="${user_authority}"/>
+		<div class="form-group">
+			<label for="infoTitle">
+				<i class="fa-play fas"></i>
+				제목
+			</label>
+			<input id="infoTitle" name="infoTitle" type="text" class="form-control" required/>
+		</div>
+		<!-- content input(display none) -->
+		<div class="form-group d-none">
+			<textarea class="form-control ck-content" id="infoContent" name="infoContent" required></textarea> 
+		</div>
+		<!-- info content preview -->
+		<div class="contentPreviewContainer">
+			<p class="previewLabel">
+				<i class="fa-play fas"></i>내용
+			</p>
+			<div id="toolbar-container"></div>
+			<div id="infoEditor" class="ck-content"></div>
+		</div>
+		<button id="editSub" type="submit" value="ckedit" style="visibility:hidden;">edit</button>
+		<p>
+			<i class="fa-play fas"></i>
+			바로 게시하시겠습니까?
+		</p>
+		<div id="infoCon1" class="infoCon form-check-inline">
+			<label for="infoCondition1" class="form-check-label">
+				<input id="infoCondition1" name="infoCondition" value="display" type="radio" class="form-check-input"/>
+				네. 바로 게시하겠습니다.
+			</label>
+		</div>
+		<div id="infoCon2" class="infoCon form-check-inline">
+			<label for="infoCondition2" class="form-check-label">
+				<input id="infoCondition2" name="infoCondition" value="display-none" type="radio" class="form-check-input"/>
+				아니요. 저장만하겠습니다.
+			</label>
+		</div><hr/>
+		<input type="checkbox" id="submitCheck" required/>
+		<label for="submitCheck">
+			모든 내용을 확인했습니다.
+		</label>
 		<p id="validateM">저장하지 않고 페이지를 벗어나면 작성한 내용이 사라집니다!!</p>
 		<!-- validation button(CK editor > validation > submit) -->
-		<button id="editBtn" class="btn btn-outline-warning btn-block" type="button">저장/게시하겠습니다.</button>
+		<button id="editBtn" class="btn btn-outline-warning" type="button">저장/게시하겠습니다.</button>
 		<!-- invisible button -->
 		<button id="checkBtn" class="d-none" type="submit"></button>
 		<button id="submitBtn" class="d-none" type="submit"></button>
@@ -209,7 +207,8 @@ $(document).ready(function(){
 
 	});
 
-});</script>
+});
+</script>
 
 </body>
 </html>
