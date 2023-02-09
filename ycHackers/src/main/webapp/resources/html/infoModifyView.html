@@ -70,21 +70,46 @@
     <section>
         <div id="mainRagion">
             <div id="infoModifyViewContainer">
-                <div id="infoModify" class="infoModifyBlock">
-                    <form id="infoModifyFrm" name="infoModifyFrm" action="infoModify" method="post">
-                        <input type="hidden" name="csrf" value=""/>
-                        <input type="hidden" name="infoNum" value="${infoModifyDto.infoNum}"/>
-                        <input type="hidden" name="infoUpdateDate" value="Date()"/><!--javascript today()-->
+                <div id="infoModify">
+                    <table id="infoModifyDataTBL" class="table">
                         <!-- table: infoNum, 이전 작성자(Author)와 권한(Auth), 최근 수정일(UpdateDate), 조회수(infoHit) -->
-                        <div class="form-group">
+                        <thead>
+                            <tr>
+                                <th colspan="6">수정 전 내용</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="modifyHead">글 번호</td><td class="modifyData">Num</td>
+                                <td class="modifyHead">Author</td><td class="modifyData">aaa@aaaa.com</td>
+                                <td class="modifyHead">Auth</td><td class="modifyData">[ROLE_ADMIN]</td>
+                            </tr>
+                            <tr class="rowF">
+                                <td colspan="2" class="modifyHead">최근 수정일</td><td colspan="2" class="modifyData">2023-01-01</td>
+                                <td class="modifyHead">hits</td><td class="modifyData">50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form id="infoModifyFrm" name="infoModifyFrm" action="infoModify" method="post">
+                        <input type="hidden" name="csrf" value=""/><!--csrf적용-->
+                        <input id="infoNum" type="hidden" name="infoNum" value="1"/><!--{infoModifyDto.infoNum}-->
+                        <input id="infoType" type="hidden" name="infoType" value="result"/><!--{infoModifyDto.infoType}-->
+                        <input  id="infoTempCondition" type="hidden" value="display"/><!--infoModifyDto.infoCondition}-->
+                        <div class="form-group inlineForm">
                             <label for="infoAuthor">변경될 작성자</label>
-                            <input class="form-control" id="infoAuthor" name="infoAuthor" type="text" readonly value="${user_id}"/>
+                            <input class="form-control" id="infoAuthor" name="infoAuthor" type="text" readonly value="aaa@aaa.com"/><!--{user_id}-->
+                        </div>
+                        <div class="form-group inlineForm">
                             <label for="infoAuth">권한</label>
-                            <input class="form-control" id="infoAuth" name="infoAuth" type="text" readonly value="${user_authority}"/>
+                            <input class="form-control" id="infoAuth" name="infoAuth" type="text" readonly value="[ROLE_ADMIN]"/><!--{user_authority}-->
+                        </div>
+                        <div class="form-group">
+                            <label for="infoUpdateDate">수정날짜</label>
+                            <input class="form-control" id="infoUpdateDate" type="date" name="infoUpdateDate"/><!--javascript today()-->
                         </div>
                         <div class="form-group">
                             <label for="infoTitle">제목</label>
-                            <input class="form-control" id="infoTitle" name="infoTitle" type="text" value="${infoModifyDto.infoTitle}"/>
+                            <input class="form-control" id="infoTitle" name="infoTitle" type="text" value="안내사항: 안내드립니다"/><!--{infoModifyDto.infoTitle}-->
                         </div>
                         <!-- content input(display none) -->
                         <div class="d-none">
@@ -94,13 +119,12 @@
                         <div class="contentPreviewContainer">
                             <p class="previewLabel">내용</p>
                             <div id="toolbar-container"></div>
-                            <div id="infoEditor" class="ck-content">${infoModifyDto.infoTitle}</div>
+                            <div id="infoEditor" class="ck-content">내용내용내용내용내용내용</div><!--{infoModifyDto.infoTitle}-->
                         </div>
                         <button id="editSub" type="submit" value="ckedit" style="visibility:hidden;">edit</button>
+                        <!--게시여부 체크-->
                         <div>
-                            <p>
-                                게시여부
-                            </p>
+                            <p>게시여부</p>
                             <div id="infoCon1" class="infoCon form-check-inline">
                                 <label for="infoCondition1" class="form-check-label">
                                     <input id="infoCondition1" name="infoCondition" value="display" type="radio" class="form-check-input"/>
@@ -114,7 +138,7 @@
                                 </label>
                             </div><hr/>
                         </div>
-                        <div>
+                        <div id="finalCheck">
                             <input type="checkbox" id="submitCheck" required/>
                             <label for="submitCheck">
                                 모든 내용을 확인했습니다.
@@ -136,52 +160,47 @@
             <div class="modal" id="infoModal">
                 <div id="infoModalDialog" class="modal-dialog modal-dialog-scrollable modal-xl">
                     <div id="infoModalContent" class="modal-content">
-                        <!-- 미리보기 -->
-                        <div id="infoModifyPreview" class="infoModifyBlock">
-                            <div id="infoDetails" class="infoBox ${infoModifyDto.infoType}B">
-                                <span class="bg-danger">미리보기</span>
-                                <div id="infoTypeP">
-                                    <c:choose>
-                                        <c:when test="${infoDetailsUser.infoType  eq 'info'}">
-                                            <span class="badge badge-info">공지사항</span>
-                                        </c:when>
-                                        <c:when test="${infoDetailsUser.infoType eq 'result'}">
-                                            <span class="badge badge-danger">신고처리</span>
-                                        </c:when>
-                                        <c:when test="${infoDetailsUser.infoType eq 'event'}">
-                                            <span class="badge badge-success">이벤트</span>
-                                        </c:when>
-                                    </c:choose>
-                                </div>
-                                <div id="infoNumP" class="infoSpace">
-                                    no.${infoModifyDto.infoNum}
-                                </div>
-                                <div id="infoDateP" class="infoSpace">
-                                    작성된 날짜: 
-                                </div>
-                                <div id="infoAuthorP" class="infoSpace">	
-                                    작성자: 
-                                </div>
-                            <div id="infoTitleP" class="infoSpace"></div>
-                            <div id="infoContentP" class="infoSpace"></div>
-                            <hr/>
-                            <form id="infoReply" action="infoBoardReply">
-                                <div class="form-group">
-                                    <label for="infoReplyInput">[user_id]</label>
-                                <textarea id="infoReplyInput" class="form-control" name="infoContent" rows="5" cols="20" placeholder="댓글 입력" readonly></textarea>
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                <span id="modalName">미리보기</span>
+                                <button type="button" class="btn btn-dark" data-dismiss="modal">
+                                    close
+                                </button>
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- 미리보기 -->
+                            <div id="infoModifyPreview">
+                                <div id="infoDetails" class="infoBox resultB"><!--${infoModifyDto.infoType}-->
+                                    <div id="infoTypeP"></div>
+                                    <div id="infoNumP" class="infoSpace"></div>
+                                    <div id="infoDateP" class="infoSpace"></div>
+                                    <div id="infoAuthorP" class="infoSpace"></div>
+                                <div id="infoTitleP" class="infoSpace"></div>
+                                <div id="infoContentP" class="infoSpace"></div>
+                                <hr/>
+                                <form id="infoReply" action="infoBoardReply">
+                                    <div class="form-group">
+                                        <label for="infoReplyInput">[user_id]</label>
+                                        <textarea id="infoReplyInput" class="form-control" name="infoContent" rows="5" cols="20" placeholder="댓글 입력" readonly></textarea>
+                                    </div>
+                                    <button type="button" id="replyBtn" class="btn btn-outline-dark btn-block">댓글 입력</button>
+                                </form>
                             </div>
-                            <button type="button" id="replyBtn" class="btn btn-outline-dark btn-block">유저들이 보는 페이지 형식입니다</button>
-                        </form>
-                    </div>            
-                </div>
-                        
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark btn-block" data-dismiss="modal">
+                                    close
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- custom script files -->
-            <script src="js/infoBoardMRadioStyle.js"></script>
-            <script src="js/infoBoardMValidation.js"></script>
-            <!-- CK editor module -->
+            <script src="../js/infoBoardMRadioStyle.js"></script>
+            <script src="../js/infoBoardMValidation.js"></script>
+            
+            <!-- CK editor
             <script type="module">	
              DecoupledEditor
                 .create( document.querySelector('#infoEditor'),{    	    	
@@ -198,40 +217,104 @@
                     const toolbarContainer = document.querySelector( '#toolbar-container' );
                     toolbarContainer.appendChild( editorD.ui.view.toolbar.element );        
                 });
-            </script>
+            </script> -->
             <script>    
             $(document).ready(function(){
-                //previewBtn
+                const updateDate=document.querySelector("#infoUpdateDate");
+                var updateDay;
+                function todayUpdate(){
+                    let today = new Date();
+                    const yyyy=String(today.getFullYear());
+                    const mm=String(today.getMonth()+1).padStart(2,"0");
+                    const dd=String(today.getDate()).padStart(2,"0");
+                    updateDay=`${yyyy}-${mm}-${dd}`;
+                    updateDate.value=updateDay;
+                }
+                function infoBoardCondition(){
+                    let condition=document.querySelector("#infoTempCondition").value;
+                    if(condition==="display"){
+                        document.querySelector("input[id='infoCondition1']").click();
+                    }
+                    else if(condition==="display-none"){
+                        document.querySelector("input[id='infoCondition2']").click();
+                    }
+                }
+                todayUpdate();
+                infoBoardCondition();
+
+                /*previewBtn*/
                 document.getElementById("previewBtn").addEventListener("click",(e)=>{
                     e.preventDefault();
-                    //input preview modal
+
+                    //input data into modal
+                    var data;
+                    var dataE;
+                        //infoNum
+                    data=document.querySelector("#infoNum").value;
+                    document.querySelector("#infoNumP").innerHTML=`no. ${data}`;
+                        //infoType
+                    data=document.getElementById("infoType").value;
+                    if(data==="info"){
+                        dataE="<span class='badge badge-info'>공지사항</span>";
+                    }
+                    else if(data==="result"){
+                        dataE='<span class="badge badge-danger">신고처리</span>'
+                    }
+                    else if(data==="event"){
+                        dataE='<span class="badge badge-success">이벤트</span>'
+                    }
+                    else {
+                        dataE="none data";
+                    }
+                    document.getElementById("infoTypeP").innerHTML=dataE;
+                        //update date
+                    dataE=`작성된 날짜: ${updateDay}`;
+                    document.querySelector("#infoDateP").innerHTML=dataE;
+                        //Author(authority)
+                    let auth=document.querySelector("#infoAuth").value;
+                    if(auth.includes('ROLE_ADMIN')){
+                        auth="페이지 운영자";
+                    }
+                    else if(auth.includes('ROLE_MANAGER')){
+                        auth="카페 매니저";
+                    }
+                    let author=document.querySelector("#infoAuthor").value;
+                    dataE=`작성자: ${author}(${auth})`;
+                    document.querySelector("#infoAuthorP").innerHTML=dataE;
+                        //title
+                    data=document.getElementById("infoTitle").value;
+                    document.getElementById("infoTitleP").innerHTML=data;
+                        //content
+                    $("#infoEditor svg").remove();
+                    let contentVal = $("#infoEditor").html();
+                    $("#infoContentP").html(contentVal);
 
                     //info check
-                let fCon=false;
-                document.getElementById("checkBtn").addEventListener("click",(e)=>{
-                    e.preventDefault();
+                    let fCon=false;
                     if(validateData()){//third: function-validateData
                         fCon=confirm("입력내용을 저장하시겠습니까?");
-                    }else{
+                    }
+                    else{
                         alert("내용을 다시 확인해주세요");
                         return false;
                     }
                     if(document.querySelector("input[id=submitCheck]:checked")==null||document.querySelector("input[id=submitCheck]:checked")==""){
-                        alert("내용을 확인하고 체크박스를 눌러주세요.");
+                        alert("내용을 확인하고 꼭 체크박스를 눌러주세요.");
                         return false;
                     }
                     console.log("fCon: "+fCon);//final: confirm
-                    //check result
+                                            //check result
                     if(fCon){
                         console.log("ajax: infoModifyFrm.submitBtn");
                         document.querySelector("#infoModalBtn").click();
-                    }else{
+                    }
+                    else{
                         console.log("사용자가 거부");
-                        document.querySelector("#validateM").innerHTML="제출을 거부했습니다.";
+                        document.querySelector("#validateM").innerHTML="미리보기를 취소했습니다.";
                     }
                 });
-                });
-                //submit button click
+                
+                /* submit button*/
                 $("#infoModifyFrm").submit(function(e){
                     e.preventDefault();
                     $.ajax({
@@ -265,26 +348,25 @@
                 document.getElementById("checkBtn").addEventListener("click",(e)=>{
                     e.preventDefault();
                     if(validateData()){//third: function-validateData
-                        fCon=confirm("입력내용을 저장하시겠습니까?");
+                        fCon=confirm("미리보기를 수행하시겠습니까?");
                     }else{
                         alert("내용을 다시 확인해주세요");
                         return false;
                     }
                     if(document.querySelector("input[id=submitCheck]:checked")==null||document.querySelector("input[id=submitCheck]:checked")==""){
-                        alert("내용을 확인하고 체크박스를 눌러주세요.");
+                        alert("내용을 확인하고 체크박스를 꼭 눌러주세요.");
                         return false;
                     }
                     
                     console.log("fCon: "+fCon);//final: confirm
                     if(fCon){
-                        console.log("ajax: infoModifyFrm.submitBtn");
-                        document.querySelector("#submitBtn").click();
+                        console.log("infoModifyFrm.infoModal");
+                        document.querySelector("#infoModalBtn").click();
                     }else{
                         console.log("사용자가 제출을 거부");
                         document.querySelector("#validateM").innerHTML="제출을 거부했습니다.";
                     }
                 });
-            
             });
             </script>
 </body>

@@ -1,17 +1,19 @@
 //게시여부체크 비동기 style
-const infoCon1=document.querySelector("#infoCondition1");
-const infoCon1Box=document.querySelector("#infoCon1");
-const infoCon2=document.querySelector("#infoCondition2");
-const infoCon2Box=document.querySelector("#infoCon2");
+var infoCon1=document.querySelector("#infoCondition1");
+var infoCon1Box=document.querySelector("#infoCon1");
+var infoCon2=document.querySelector("#infoCondition2");
+var infoCon2Box=document.querySelector("#infoCon2");
+var infoTempInput=document.querySelector("#infoTempCondition");
 function infoConditionControl(){
-	const hasChecked1=infoCon1.checked;
-	const hasChecked2=infoCon2.checked;
+	let hasChecked1=infoCon1.checked;
+	let hasChecked2=infoCon2.checked;
 	if(hasChecked1){
 		console.log("inputCondition: "+document.querySelector("input[id='infoCondition1']:checked").value);
 		infoCon1Box.classList.add("bg-info");
 		infoCon1Box.classList.add("text-light");
 		infoCon1Box.style.fontWeight=700;
 		document.querySelector("#editBtn").innerHTML="게시하기";
+		infoTempInput.value="display";
 	}
 	else if(!hasChecked1){
 		infoCon1Box.classList.remove("bg-info");
@@ -24,6 +26,7 @@ function infoConditionControl(){
 		infoCon2Box.classList.add("text-light");
 		infoCon2Box.style.fontWeight=700;
 		document.querySelector("#editBtn").innerHTML="저장하기";
+		infoTempInput.value="display-none";
 	}
 	else if(!hasChecked2){
 		infoCon2Box.classList.remove("bg-danger");

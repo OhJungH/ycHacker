@@ -72,23 +72,5 @@
 	</form><!--db저장과 함께 javascript로 바로 띄우기-->
 </div>            
 
-<!-- CK editor module -->
-<script type="module">	
- DecoupledEditor
-    .create(document.querySelector('#ckeditor'),{    	    	
-    	language: 'ko',	       	    	
-    	ckfinder: {
-	   		uploadUrl: 'ckedit' 		
-	   	},
-	   	toolbar: ['ckfinder', '|','imageUpload', '|', 'heading', '|', 'bold', 'italic','link', 'bulletedList',
-	   		'numberedList', 'blockQuote', '|', 'undo','redo','Outdent','Indent','fontsize',
-	   		'fontfamily','insertTable','alignment', '|', 'fontColor', 'fontBackgroundColor']			
-    })       
-    .then(function(editorD) {
-    	//window.editorResize = editor;
-    	const toolbarContainer = document.querySelector( '#toolbar-container' );
-        toolbarContainer.appendChild( editorD.ui.view.toolbar.element );        
-    });
-</script>
 </body>
 </html>

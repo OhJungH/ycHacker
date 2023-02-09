@@ -157,6 +157,21 @@ public class AdminDao implements IAdminDao {
 		InfoBoardDto dto = sqlSession.selectOne("infoModifyView", infoNum);
 		return dto;
 	}
+	@Override
+	public void infoModify(InfoBoardDto dto) {
+		System.out.println("infoModify method: "+dto.getInfoNum());
+		int res=sqlSession.update("infoModify",dto);
+		System.out.println("modify result: "+res+"\n "
+				+ "infoboard modify information: "+dto.getInfoAuthor()
+				+ "/ "+ dto.getInfoAuth()+ "/ "+dto.getInfoUpdateDate()
+				+ "/ "+ dto.getInfoTitle()+ "/ condition: "+dto.getInfoCondition());
+	}
+	@Override
+	public void infoDelete(int infoNum) {
+		System.out.println("infoDelete method: "+infoNum);
+		int res=sqlSession.delete("infoDelete", infoNum);
+		System.out.println("infoBoard delete result: "+res);
+	}
 
 
 

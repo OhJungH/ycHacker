@@ -13,7 +13,7 @@ public class InfoModifyViewCommand implements IYchCommand {
 	@Override
 	public void execute(HttpServletRequest req, Model model) {
 		String infoNumST = req.getParameter("infoNum");
-		System.out.println("infoModify command: "+infoNumST);
+		System.out.println("infoModifyView command: "+infoNumST);
 		AdminDao adDao =Constant.adDao;
 		int infoNum=Integer.parseInt(infoNumST);
 		InfoBoardDto dto = adDao.infoModifyView(infoNum);
