@@ -28,6 +28,9 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<!-- CKEditor API -->
+<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/decoupled-document/ckeditor.js"></script> 
+<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
 <!--custom Style-->
     <link rel="stylesheet" href="style/home.css"/>
     <link rel="stylesheet" href="style/footer.css"/>
@@ -101,24 +104,6 @@
 	</div>
 </div>
 
-<!-- CK editor module -->
-<script type="module">	
- DecoupledEditor
-    .create(document.querySelector('#ckeditor'),{    	    	
-    	language: 'ko',	       	    	
-    	ckfinder: {
-	   		uploadUrl: 'ckedit' 		
-	   	},
-	   	toolbar: ['ckfinder', '|','imageUpload', '|', 'heading', '|', 'bold', 'italic','link', 'bulletedList',
-	   		'numberedList', 'blockQuote', '|', 'undo','redo','Outdent','Indent','fontsize',
-	   		'fontfamily','insertTable','alignment', '|', 'fontColor', 'fontBackgroundColor']			
-    })       
-    .then(function(editorD) {
-    	//window.editorResize = editor;
-    	const toolbarContainer = document.querySelector( '#toolbar-container' );
-        toolbarContainer.appendChild( editorD.ui.view.toolbar.element );        
-    });
-</script>
 <script>
 $(document).ready(function(){
 	const infoBtn=document.querySelector("#infoModalBtn");
@@ -132,6 +117,7 @@ $(document).ready(function(){
 			type:"get",
 			success: function(data){
 				$("#infoModalContent").html(data);
+				$(".ck-widget__resizer").remove();
 				infoBtn.click();
 			}
 		});

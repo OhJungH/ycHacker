@@ -23,4 +23,6 @@ public interface IAdminDao {
 	public InfoBoardDto infoDetailsUser(int infoNum);
 	public InfoBoardDto infoDetailsPreview(int infoNum);
 	public InfoBoardDto infoModifyView(int infoNum);
+	public void infoModify(InfoBoardDto dto);
+	public void infoDelete(int infoNum);
 }

@@ -64,4 +64,10 @@
 <select id="infoModifyView" resultType="com.ych.pjt.dto.InfoBoardDto">
 	SELECT * FROM InfoData WHERE INFONUM=#{infoNum}
 </select>
+<update id="infoModify" parameterType="com.ych.pjt.dto.InfoBoardDto">
+	UPDATE InfoData SET INFOAUTHOR=#{infoAuthor},INFOAUTH=#{infoAuth},INFOUPDATEDATE=#{infoUpdateDate},INFOTITLE=#{infoTitle},INFOCONTENT=#{infoContent} WHERE INFONUM=#{infoNum}
+</update>
+<delete id="infoDelete">
+	DELETE FROM InfoData WHERE INFONUM=#{infoNum}
+</delete>
 </mapper>

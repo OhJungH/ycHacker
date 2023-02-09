@@ -65,27 +65,9 @@
 		</div>
 		<button type="button" id="replyBtn" class="btn btn-secondary btn-block">유저들이 보는 페이지 형식입니다</button>
 	</form>
-	<a id="infoModifylink" class="btn btn-block btn-warning" href="infoModifyView?infoNum=${infoDetailsUser.infoNum}">수정하기</a>
+	<a id="infoModifylink" class="btn btn-block btn-warning" href="infoModifyView?infoNum=${infoDetailsUser.infoNum}">수정/삭제하기</a>
 </div>            
 
-<!-- CK editor module -->
-<script type="module">	
- DecoupledEditor
-    .create(document.querySelector('#ckeditor'),{    	    	
-    	language: 'ko',	       	    	
-    	ckfinder: {
-	   		uploadUrl: 'ckedit' 		
-	   	},
-	   	toolbar: ['ckfinder', '|','imageUpload', '|', 'heading', '|', 'bold', 'italic','link', 'bulletedList',
-	   		'numberedList', 'blockQuote', '|', 'undo','redo','Outdent','Indent','fontsize',
-	   		'fontfamily','insertTable','alignment', '|', 'fontColor', 'fontBackgroundColor']			
-    })       
-    .then(function(editorD) {
-    	//window.editorResize = editor;
-    	const toolbarContainer = document.querySelector( '#toolbar-container' );
-        toolbarContainer.appendChild( editorD.ui.view.toolbar.element );        
-    });
-</script>
 <script>
 $(document).ready(function(){
 	$("#infoModifylink").click(function(e){

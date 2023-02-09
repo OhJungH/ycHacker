@@ -1,6 +1,5 @@
 package com.ych.pjt.dto;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 //using CK Editor
 public class InfoBoardDto {
@@ -9,7 +8,7 @@ public class InfoBoardDto {
 	private String infoAuthor;
 	private String infoAuth;
 	private Timestamp infoDate;
-	private Date infoUpdateDate;
+	private String infoUpdateDate;
 	private String infoTitle;
 	private String infoContent;
 	private int infoGroup;
@@ -23,7 +22,7 @@ public class InfoBoardDto {
 	}
 	//all fileds
 	public InfoBoardDto(int infoNum, String infoType, String infoAuthor, String infoAuth, Timestamp infoDate,
-			Date infoUpdateDate, String infoTitle, String infoContent, int infoGroup, int infoIndent, int infoHit,
+			String infoUpdateDate, String infoTitle, String infoContent, int infoGroup, int infoIndent, int infoHit,
 			int infoCondition) {
 		super();
 		this.infoNum = infoNum;
@@ -60,6 +59,18 @@ public class InfoBoardDto {
 		this.infoContent = infoContent;
 		this.infoCondition = infoCondition;
 	}
+	//infoBoard modify
+	public InfoBoardDto(int infoNum, String infoAuthor, String infoAuth, String infoUpdateDate, String infoTitle,
+			String infoContent, int infoCondition) {
+		super();
+		this.infoNum = infoNum;
+		this.infoAuthor = infoAuthor;
+		this.infoAuth = infoAuth;
+		this.infoUpdateDate = infoUpdateDate;
+		this.infoTitle = infoTitle;
+		this.infoContent = infoContent;
+		this.infoCondition = infoCondition;
+	}
 	//getter/setter
 	public int getInfoNum() {
 		return infoNum;
@@ -91,10 +102,10 @@ public class InfoBoardDto {
 	public void setInfoDate(Timestamp infoDate) {
 		this.infoDate = infoDate;
 	}
-	public Date getInfoUpdateDate() {
+	public String getInfoUpdateDate() {
 		return infoUpdateDate;
 	}
-	public void setInfoUpdateDate(Date infoUpdateDate) {
+	public void setInfoUpdateDate(String infoUpdateDate) {
 		this.infoUpdateDate = infoUpdateDate;
 	}
 	public String getInfoTitle() {

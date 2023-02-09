@@ -24,8 +24,10 @@ import com.ych.pjt.command.InfoBoardListCommand;
 import com.ych.pjt.command.InfoBoardManageCommand;
 import com.ych.pjt.command.InfoBoardPagelistCommand;
 import com.ych.pjt.command.InfoManagePagelistCommand;
+import com.ych.pjt.command.InfoModifyCommand;
 import com.ych.pjt.command.InfoModifyViewCommand;
 import com.ych.pjt.command.InfoBoardWriteCommand;
+import com.ych.pjt.command.InfoDeleteCommand;
 import com.ych.pjt.command.InfoDetailsModalCommand;
 import com.ych.pjt.command.InfoDetailsPreviewCommand;
 import com.ych.pjt.command.InfoDetailsUserCommand;
@@ -186,5 +188,25 @@ public class AdminController {
 		com=new InfoModifyViewCommand();
 		com.execute(req, model);
 		return "infoModifyView";
+	}
+	@RequestMapping(value="/infoModify",produces="application/text;charset=UTF8")
+	public String infoModify(HttpServletRequest req, Model model) {
+		System.out.println("infoModify request");
+		com=new InfoModifyCommand();
+		com.execute(req, model);
+		//admin으로 재호출
+		com=new InfoListMainCommand();
+		com.execute(req, model);
+		return "adminPage";	
+	}
+	@RequestMapping("/infoDelete")
+	public String infoDelete(HttpServletRequest req,Model model) {
+		System.out.println("infoDelete request");
+		com=new InfoDeleteCommand();
+		com.execute(req, model);
+		//admin으로 재호출
+		com=new InfoListMainCommand();
+		com.execute(req, model);
+		return "adminPage";	
 	}
 }
