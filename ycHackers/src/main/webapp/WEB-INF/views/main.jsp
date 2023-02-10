@@ -278,7 +278,21 @@ $(document).ready(function(){
 			}
 		});
 	});
-
+	$("#myInfoLink").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#myInfoLink").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	
 });
 </script>
 

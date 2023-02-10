@@ -106,8 +106,7 @@
 		</div>
 		<div class="container" style="text-align:center;">
 			<button type="submit" class="btn btn-success">예약하기</button>
-			<button type="submit" class="btn btn-danger">예약취소</button>
-			<button type="submit" class="btn btn-primary">메인으로</button>
+			<a class="btn btn-primary" href="main">메인으로</a>
 		</div>
 	</form>
 </div>

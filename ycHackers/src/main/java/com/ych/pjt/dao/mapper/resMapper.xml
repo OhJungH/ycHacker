@@ -17,4 +17,19 @@ SELECT * FROM restbl ORDER BY RESNUM
 <select id="resModifyView" resultType="com.ych.pjt.dto.ResDto">
 SELECT * FROM restbl where RESNUM = #{resNum}
 </select>
+
+<update id="resModify" parameterType="com.ych.pjt.dto.ResDto">
+UPDATE restbl SET 
+RESNUM = #{resNum},
+RESNAME = #{resName},
+RESBIRTH = #{resBirth},
+RESPHONE = #{resPhone},
+RESDATE = #{resDate},
+RESTIME = #{resTime},
+RESMEMBER = #{resMember},
+PAYMENTS = #{payMents},
+CAFEPHONE = #{cafePhone},
+RESCOMMENTS = #{resComments}
+WHERE RESNUM = #{resNum}
+</update>
 </mapper>
