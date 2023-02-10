@@ -44,32 +44,39 @@
             <label for="userId">E-mail</label>
             <input id="userId" name="userId" type="email" class="form-control" placeholder="email 주소를 적어주세요." pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required/>
          </div>
+         <p class="inputWarning">email형식에 맞게 적어주세요.</p>
          <div class="form-group">
             <label for="userPw">비밀번호</label>
             <input id="userPw" name="userPw" type="password" class="form-control" placeholder="대문자, 소문자, 특수문자, 8자 이상" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,16}$" required/>
          </div>
+         <p class="inputWarning">비밀번호는 대문자, 소문자, 특수문자를 포함한 8글자 이상이어야 합니다.</p>
          <div class="form-group">
             <label for="pwValid">비밀번호 확인</label>
             <input id="pwValid" class="form-control" type="password" placeholder="한번 더 입력해주세요." required/>
          </div>
+         <p class="inputWarning">비밀번호 확인을 위해 위의 비밀번호와 똑같이 적어주세요.</p>
          <input type="hidden" name="userAuth" value="."/>
          <div class="form-group">
             <label for="userName">이름</label>
             <input id="userName" name="userName" type="text" class="form-control" placeholder="한글 이름을 입력해주세요." pattern="[가-힣]{2,10}" required/>
          </div>
+         <p class="inputWarning">이름은 한글 또는 영문자로만 적어주세요.</p>
          <div class="form-group">
             <label for="userPhone">전화번호</label>
             <input id="userPhone" name="userPhone" type="text" class="form-control" placeholder="000-0000-0000" pattern="(010)-\d{3,4}-\d{4}" required/>
          </div>
+         <p class="inputWarning">전화번호는 010-3자리(또는 4자리)-리의 형식으로 적어주세요.</p>
          <div class="form-group">
             <label for="userBirth">생년월일</label>
             <input id="userBirth" name="userBirth" type="date" class="form-control"   pattern="\d{4}-[1-12]{2}-[1-31]{2}" required/>
          </div>
+         <p class="inputWarning">14세 이하는 가입할 수 없습니다. </p>
          <div class="form-group">
             <label for="userLocation">내 지역</label>
             <input id="userLocation" name="userLocation" type="text" placeholder="주소를 검색해 우편번호 5자리 숫자를 입력합니다." pattern="\d{5}" class="form-control" placeholder="data.go.kr API 적용"/>
          </div>
-         <!-- onclick="goPopup()"  -->
+         <p class="inputWarning">살고 있는 지역의 우편번호를 적어주세요.</p>
+         <!-- onclick="goPopup()" ??? -->
          <div class="form-group">
             <label for="userGender">성별</label>
             <select class="form-control" id="userGender" name="userGender" required>
@@ -77,11 +84,15 @@
                <option value="1">남성</option>
                <option value="2">여성</option>
             </select>
-         </div>
-         <button type="submit" class="btn btn-outline-success">회원가입</button> &emsp;
-         <button type="reset" class="btn btn-outline-danger">취 소</button> &emsp;
-         <a href="logView" class="btn btn-outline-primary">계정이 있어요</a>&emsp;
-         <a href="home" class="btn btn-outline-secondary">home으로</a>
+		</div>
+		<p class="inputWarning">입력창을 벗어나면 내용이 사라집니다.</p>
+		<hr/>
+		<div id="joinBtnGroup" class="btn-group">
+			<button type="submit" class="joinBtn btn btn-outline-success">회원가입</button> &emsp;
+			<button type="reset" class="joinBtn btn btn-outline-danger">취 소</button> &emsp;
+			<a href="logView" class="joinBtn btn btn-outline-primary">계정이 있어요</a>&emsp;
+			<a href="home" class="joinBtn btn btn-outline-secondary">home으로</a>
+		</div>
       </form>
    </div>
 </div>
