@@ -9,8 +9,8 @@ public class ResDto {
 	private String resTime;
 	private String resMember;
 	private String payMents;
-	private String resComments;
 	private String cafePhone;
+	private String resComments;
 	
 	public ResDto() {
 		super();
@@ -18,7 +18,7 @@ public class ResDto {
 	}
 
 	public ResDto(int resNum, String resName, String resBirth, String resPhone, String resDate, String resTime,
-			String resMember, String payMents, String resComments, String cafePhone) {
+			String resMember, String payMents,String cafePhone ,String resComments) {
 		super();
 		this.resNum = resNum;
 		this.resName = resName;
@@ -28,8 +28,8 @@ public class ResDto {
 		this.resTime = resTime;
 		this.resMember = resMember;
 		this.payMents = payMents;
-		this.resComments = resComments;
 		this.cafePhone = cafePhone;
+		this.resComments = resComments;
 	}
 
 	public int getResNum() {
@@ -96,13 +96,6 @@ public class ResDto {
 		this.payMents = payMents;
 	}
 
-	public String getResComments() {
-		return resComments;
-	}
-
-	public void setResComments(String resComments) {
-		this.resComments = resComments;
-	}
 
 	public String getCafePhone() {
 		return cafePhone;
@@ -110,6 +103,13 @@ public class ResDto {
 
 	public void setCafePhone(String cafePhone) {
 		this.cafePhone = cafePhone;
+	}
+	public String getResComments() {
+		return resComments;
+	}
+	
+	public void setResComments(String resComments) {
+		this.resComments = resComments;
 	}
 	
 }

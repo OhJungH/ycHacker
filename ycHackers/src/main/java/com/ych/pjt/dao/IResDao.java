@@ -8,4 +8,6 @@ public interface IResDao {
 	public String res(ResDto dto);
 	public ArrayList<ResDto> myResInfo();
 	public ResDto resModifyView(int resNum);
+	public void resModify(ResDto dto);
+	
 }

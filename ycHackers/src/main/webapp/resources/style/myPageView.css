@@ -7,7 +7,7 @@ body {
 	height : 100vh;
 	margin : 0;
 }
-.Box {
+.box {
 	display : flex;
 	justify-content: center;
 	align-items: center;
@@ -15,16 +15,16 @@ body {
 	font-size: 1.2rem;
 	font-weight:bold;
 }
-.User {
+.user {
 	background-color : #d7bee2;
-	
+	text-align:center;
 }
 
-.Res {
+.res {
 	background-color : #a9c7d8;
+	text-align:center;
 }
-
-.MyPageContainer {
+.myPageContainer {
 	display: grid;
 	padding: 100px;
 	grid-template-columns: repeat(2, 1fr);

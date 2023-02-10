@@ -15,6 +15,7 @@
 <!-- MS -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <title>JSP</title>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -29,117 +30,75 @@
 <link rel="stylesheet" href="style/footer.css"/>
 </head>
 <body>
-<div class="container" style="text-align:center">
-	<h1 style="color:#00CCFF;">YCHackers</h1>
-</div>
 
-<nav class="navbar navbar-expand-md" style="margin-bottom: 1em">
-	<button class="navbar-toggler btn btn-block" type="button" data-toggle="collapse" data-target="#collapsiblebar">
-		<span class="navbar-toggler-icon text-dark"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="collapsibleNavbar">		
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link" href="home"> 
-			 		<i class="fas fa-home" style="font-size:30px;color:white;"></i>
-			 	</a>
-			</li>			
-			 <li class="nav-item">
-			 	<a class="nav-link" href="info">안내</a>
-			 </li>
-			 <li class="nav-item">
-			 	<a class="nav-link" href="search">검색</a> 
-			 </li>
-			 <li class="nav-item">
-			 	<a class="nav-link" href="manager">관리자</a>
-			 </li>						
-		</ul>
-		<div id="myInfoBox">
-	        <a class="myInfoLink" href="#">id</a><br/>
-	        <a class="myInfoLink" href="#">등급</a><br/>
-	        <a class="myInfoLink" href="#">로그아웃</a>
-       	</div>
-	</div>	
-</nav>
-<form action="resModifyView" method="post">
-<div class="form-group text-center text-info threeDEffect">
-	<label for="resNum">회원번호</label>
-	<input type="text" id="resNum" name="resNum" value="${resDto.resNum}" style="width:500px;" readonly>
-</div>
-<div class="form-group text-center text-info threeDEffect">
-	<label for="resName">이름</label>
-	<input type="text" id="resName" name="resName" value="${resDto.resName}" style="width:500px;" readonly>
-</div>
-<div class="form-group text-center text-info threeDEffect">
-	<label for="resBirth">생년월일</label>
-	<input type="date" id="resBirth" name="resBirth" value="${resDto.resBirth}" style="width:500px;" readonly>
-</div>
-<div class="form-group text-center text-info threeDEffect">
-	<label for="resPhone">연락처</label>
-	<input type="text" id="resPhone" name="resPhone" value="${resDto.resPhone}" style="width:500px;" readonly>
-</div>
-<div class="form-group text-center text-info threeDEffect">
-	<label for="resDate">예약날짜</label>
-	<input type="date" id="resDate" name="resDate" value="${resDto.resDate}" style="width:500px;" readonly>
-</div>
-<div class="form-group text-center text-info threeDEffect">
-	<label for="resTime">예약시간</label>
-	<input type="text" id="resTime" name="resTime" value="${resDto.resTime}" style="width:500px;" readonly>
-</div>
-<div class="form-group text-center text-info threeDEffect">
-	<label for="resMember">인원</label>
-	<input type="text" id="resMember" name="resMember" value="${resDto.resMember}" style="width:500px;" readonly>
-</div>
-<div class="form-group text-center text-info threeDEffect">
-	<label for="payments">결제</label>
-	<input type="text" id="payMents" name="payMents" value="${resDto.payMents}" style="width:500px;" readonly>
-</div>
-<div class="form-group text-center text-info threeDEffect">
-	<label for="cafePhone">카페번호</label>
-	<input type="text" id="cafePhone" name="cafePhone" value="${resDto.cafePhone}" style="width:500px;" readonly>
-</div>
-<div class="form-group text-center text-info threeDEffect">
-	<label for="resComments">요청사항</label>
-	<input type="text" id="resComments" name="resComments" value="${resDto.resComments}"  style="width:500px;" readonly>
-</div>
-
-<div class="buttonBox" style="text-align:center;">
-	<button type="submit" class="btn btn-success" id="submit">예약변경</button>
-	<a class="btn btn-info" href="myResInfoView">이전으로</a>
-</div>
-</form>
-
-<div id="footer">
-    <div class="footerBox">
-        <p id="footerPageName" class="footerLabel">YCHackers</p>
-        <p id="footerCompany">
-            <span class="footerLabel">회사명</span> (사)양천구해커스
-        </p>
-        <p id="footerCompanyNum">
-            <span class="footerLabel">사업자번호</span> 000-00-00000
-        </p>
-        <p id="footerAddress">서울특별시 양천구 신정동 1319-4 양천중앙도서관 </p>
-        <a class="footerLink" id="companyIntro" href="companyIntro">회사소개</a>&emsp; 
-        <a class="footerLink" id="termsOfService" href="termsOfService">서비스이용약관</a> &emsp;
-        <a class="footerLink" id="privacyPolicy" href="privacyPolicy">개인정보처리방침</a>
-    </div>
-    <div class="footerBox">
-        <p>
-            <span class="footerLabel">등록문의</span> 000-0000-0000
-        </p>
-        <p>
-            <span class="footerLabel">기타문의</span> 000-0000-0000
-        </p>
-        <br/><br/>
-        <p>
-            <span id="footerCopy">COPYRIGHT &copy; 2022(주)양천구해커스 ALL RIGHTS RESERVED</span>
-        </p>
-    </div>
+<div class="resModifyContainer" id="resModifyContainer">
+	<form action="resModify" method="post" id="resModify">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resNum">회원번호</label>
+			<input type="text" id="resNum" name="resNum" value="${resDto.resNum}" style="width:500px;" readonly>
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resName">이름</label>
+			<input type="text" id="resName" name="resName" value="${resDto.resName}" style="width:500px;" readonly>
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resBirth">생년월일</label>
+			<input type="date" id="resBirth" name="resBirth" value="${resDto.resBirth}" style="width:500px;" readonly>
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resPhone">연락처</label>
+			<input type="text" id="resPhone" name="resPhone" value="${resDto.resPhone}" style="width:500px;" readonly>
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resDate">예약날짜</label>
+			<input type="date" id="resDate" name="resDate" value="${resDto.resDate}" style="width:500px;">
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resTime">예약시간</label>
+			<input type="text" id="resTime" name="resTime" value="${resDto.resTime}" style="width:500px;">
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resMember">인원</label>
+			<input type="text" id="resMember" name="resMember" value="${resDto.resMember}" style="width:500px;">
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="payments">결제</label>
+			<input type="text" id="payMents" name="payMents" value="${resDto.payMents}" style="width:500px;">
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="cafePhone">카페번호</label>
+			<input type="text" id="cafePhone" name="cafePhone" value="${resDto.cafePhone}" style="width:500px;">
+		</div>
+		<div class="form-group text-center text-info threeDEffect">
+			<label for="resComments">요청사항</label>
+			<input type="text" id="resComments" name="resComments" value="${resDto.resComments}"  style="width:500px;">
+		</div>
+		
+		<div class="buttonBox" style="text-align:center;">
+			<button type="submit" class="btn btn-primary">예약변경</button>
+			<a class="btn btn-info" href="myResInfoView" id="backBtn">이전으로</a>
+		</div>
+	</form>
 </div>
 
 <script>
 $(document).ready(function(){
-
+	$("#resModify").submit(function(event){
+		event.preventDefault();
+		$.ajax({//document.querySelector("#resModify");
+			url : $("#resModify").attr("action"),
+			type : "post",
+			data : $("#resModify").serialize(),	
+			success : function(data) {
+				alert("예약 변경 되었습니다.");
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("error");
+			}				
+		});
+	});
 });
 </script>
 </body>
