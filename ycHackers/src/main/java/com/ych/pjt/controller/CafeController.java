@@ -51,8 +51,7 @@ public class CafeController {
 	public String StudyroomWrite(MultipartHttpServletRequest mphr, Model model,
 			@RequestParam("cafeImage") MultipartFile[] files ) {
 		System.out.println("studyroomWrite");
-		String cafeno1 = mphr.getParameter("cafeno");
-		int cafeNo = Integer.parseInt(cafeno1);
+		int cafeno = 0;
 		String cafeName = mphr.getParameter("cafeName");
 		String cafeLocation = mphr.getParameter("cafeLocation");
 		String cafePrice = mphr.getParameter("cafePrice");
@@ -70,7 +69,7 @@ public class CafeController {
 		long fileSize = mfti.getSize();
 		String safeFile = path + prename + originFileName;
 		cafeImage = prename + originFileName;
-		CafeDto cdto = new CafeDto(cafeNo, cafeName, cafeLocation, cafePrice, cafeImage, cafeMember, 0, cafeIntro, cafeTel, cafeTime);
+		CafeDto cdto = new CafeDto(0, cafeName, cafeLocation, cafePrice, cafeImage, cafeMember, 0, cafeIntro, cafeTel, cafeTime);
 		mphr.setAttribute("cdto", cdto);
 		com = new StudyroomWriteCommand();
 		com.execute(mphr, model);
