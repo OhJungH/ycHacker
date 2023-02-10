@@ -49,7 +49,8 @@ public class AdminController {
 		Constant.adDao=adDao;
 	}
 	
-	@RequestMapping("/admin")//admin page
+/*admin page*/
+	@RequestMapping("/admin")
 	public String admin(HttpServletRequest req,Model model) {
 		System.out.println("admin page request");
 		//공지 게시판 최근 10개 호출 command
@@ -58,7 +59,9 @@ public class AdminController {
 		//page 정보 관련 data 호출 command
 		return "adminPage";
 	}	
-	/*공지게시판 관련 request*/
+	
+/*공지게시판 관련 request*/
+	//home.jsp에서 접근하는 infoBoard list
 	@RequestMapping("/infoBoardHome")
 	public String infoBoardHome(HttpServletRequest req, Model model) {
 		System.out.println("infoBoard show from Home request");
@@ -66,6 +69,7 @@ public class AdminController {
 		com.execute(req, model);
 		return "infoBoardHome";
 	}
+	//information board list
 	@RequestMapping("/infoBoard")
 	public String infoBoardList(HttpServletRequest req,Model model) {
 		System.out.println("infoBoardList request");
@@ -73,6 +77,7 @@ public class AdminController {
 		com.execute(req, model);
 		return "infoBoard";
 	}
+	//infoBoard pagination
 	@RequestMapping("/infoBoardPageList")
 	public String infoBoardPageList(HttpServletRequest req, Model model) {
 		String pageNum = req.getParameter("pageNo");
@@ -81,13 +86,7 @@ public class AdminController {
 		com.execute(req, model);
 		return "infoBoardPageList";
 	}
-	@RequestMapping("/infoBoardManage")//관리자
-	public String infoBoardManage(HttpServletRequest req, Model model) {
-		System.out.println("infoBoardManage request");
-		com = new InfoBoardManageCommand();
-		com.execute(req, model);
-		return "infoBoardManage";
-	}
+	//when someone click pagination
 	@RequestMapping("/infoPList")
 	public String infoPList(HttpServletRequest req, Model model) {
 		String pageNum = req.getParameter("pageNo");
@@ -96,11 +95,21 @@ public class AdminController {
 		com.execute(req, model);
 		return "infoManagePageList";
 	}
+	//infoBoard List in Admin page
+	@RequestMapping("/infoBoardManage")
+	public String infoBoardManage(HttpServletRequest req, Model model) {
+		System.out.println("infoBoardManage request");
+		com = new InfoBoardManageCommand();
+		com.execute(req, model);
+		return "infoBoardManage";
+	}
+	//Form to write information Board
 	@RequestMapping("/infoBoardWriteForm")
 	public String infoBoardWriteForm() {
 		System.out.println("infoBoardWriteForm request");
 		return "infoBoardWriteForm";
 	}
+	//Using CK editor for file upload in information Board
 	@RequestMapping("/infoCKedit")
 	public void infoCKedit(MultipartHttpServletRequest req, HttpServletResponse res) throws IOException {
 		System.out.println("CK editor image upload");
@@ -138,7 +147,7 @@ public class AdminController {
 		//url: protocol(scheme)://도메인(서버주소:포트)/request 경로/파일명
 		//https://localhost:8443/pjt/editUpload/0f5f307b-4c20-495a-9d54-8c4a7f40263aimg_avatar3.png
 		//req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+image_request_path+changeFileName
-		String requestURL="editUpload/"+changeFileName;
+		String requestURL=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+image_request_path+changeFileName;
 		editorData.put("url",requestURL);
 		System.out.println("##uploaded URL: "+(String)editorData.get("url"));
 		
@@ -147,6 +156,7 @@ public class AdminController {
 		res.setCharacterEncoding("UTF-8");
 		res.getWriter().print(editorData.toString());
 	}
+	//Insert into infoBoard DB
 	@RequestMapping(value="/infoWrite",produces="application/text;charset=UTF8")
 	public String infoWrite(HttpServletRequest req, Model model) {
 		System.out.println("infoWrite request");
@@ -159,6 +169,7 @@ public class AdminController {
 		System.out.println("(infoWrite request)infoBoardList");
 		return "infoBoardManage";
 	}
+	//view details(infoBoard) for home.jsp
 	@RequestMapping(value="/infoDetailsHome",produces="application/text;charset=UTF8")
 	@ResponseBody
 	public String infoDetailsHome(HttpServletRequest req, Model model) {
@@ -168,6 +179,7 @@ public class AdminController {
 		String modalData = (String)req.getAttribute("modalData");
 		return modalData;
 	}
+	//view details(infoBoard) for User(main/infoBoard tab)
 	@RequestMapping("/infoDetailsUser")
 	public String infoDetailsUser(HttpServletRequest req, Model model) {
 		System.out.println("infoDetailsUser request");
@@ -175,6 +187,7 @@ public class AdminController {
 		com.execute(req, model);
 		return "infoDetailsUser";
 	}
+	//view details(infoBoard) for Admin
 	@RequestMapping("/infoDetailsPreview")
 	public String infoDetailsPreview(HttpServletRequest req, Model model) {
 		System.out.println("infoDetailsPreview request");
@@ -182,6 +195,7 @@ public class AdminController {
 		com.execute(req, model);
 		return "infoDetailsPreview";
 	}
+	//form modifying infoBoard
 	@RequestMapping("/infoModifyView")
 	public String infoModifyView(HttpServletRequest req, Model model) {
 		System.out.println("infoModifyView request");
@@ -189,6 +203,7 @@ public class AdminController {
 		com.execute(req, model);
 		return "infoModifyView";
 	}
+	//modify infoBoard request with infoNum
 	@RequestMapping(value="/infoModify",produces="application/text;charset=UTF8")
 	public String infoModify(HttpServletRequest req, Model model) {
 		System.out.println("infoModify request");
@@ -199,6 +214,7 @@ public class AdminController {
 		com.execute(req, model);
 		return "adminPage";	
 	}
+	//delete infoBoard request with infoNum
 	@RequestMapping("/infoDelete")
 	public String infoDelete(HttpServletRequest req,Model model) {
 		System.out.println("infoDelete request");
