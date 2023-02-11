@@ -16,8 +16,13 @@ public class CafeListCommand implements IYchCommand {
 	public void execute(HttpServletRequest req, Model model) {
 		
 	CafeDao cdao = Constant.cDao;
-	ArrayList<CafeDto> dtos = cdao.cafeList();
 	
+	String location = req.getParameter("location");
+	String cafeSearch = req.getParameter("cafeSearch");
+	String search = req.getParameter("search");
+	String searchWhat = req.getParameter("searchWhat");
+	ArrayList<CafeDto> dtos = cdao.cafeList();
+	dtos = cdao.cafeSearch(location, search, searchWhat);
 	model.addAttribute("cafeList", dtos);
 	}
 
