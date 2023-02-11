@@ -50,4 +50,17 @@ public class ResDao implements IResDao {
 		int res = sqlSession.update("resModify",dto);
 		
 	}
+	/*예약 취소*/
+	@Override
+	public ResDto resDeleteView(int resNum) {
+		System.out.println("resDelete list dao");
+		ResDto dto = sqlSession.selectOne("resDeleteView", resNum);
+		return dto;
+	}
+	@Override
+	public void resDelete(int resNum) {
+		System.out.println("resDelte dao");
+		int res = sqlSession.delete("resDelete",resNum);
+	}
+	
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.MyResInfoCommand;
 import com.ych.pjt.command.ResCommand;
+import com.ych.pjt.command.ResDeleteCommand;
+import com.ych.pjt.command.ResDeleteViewCommand;
 import com.ych.pjt.command.ResModify1Command;
 import com.ych.pjt.command.ResModifyCommand;
 import com.ych.pjt.dao.ResDao;
@@ -62,10 +64,14 @@ public class ResController {
 		return "myResInfoView";
 	}
 	
-	@RequestMapping("/resCancelView")
-	public String resCancelView(HttpServletRequest req, Model model) {
-		System.out.println("resCancelView requset");
-		return "resCancelView";
+	@RequestMapping("/resDeleteView")
+	public String resDeleteView(HttpServletRequest req, Model model) {
+		System.out.println("resDeleteView request");
+		com = new ResDeleteViewCommand();
+		com.execute(req, model);
+		com = new ResDeleteCommand();
+		com.execute(req, model);
+		return "resDeleteView";
 	}
 	
 }

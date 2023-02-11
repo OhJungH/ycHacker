@@ -65,26 +65,43 @@
 					<td>${resDto.cafePhone}</td>
 					<td>${resDto.resComments}</td>
 					<td><a class="resModifyBtn btn btn-primary fa fa-exchange-alt" href="resModifyView?resNum=${resDto.resNum}"></a></td>
-					<td><a class="btn btn-danger fa fa-trash" href="resCancelView?resNum=${resDto.resNum}"></a></td>
+					<td><a class="resDeleteBtn btn btn-danger fa fa-trash" href="resDeleteView?resNum=${resDto.resNum}"></a></td>
 				</tr>			
 			</c:forEach>
 		</tbody>		
 	</table>			
 </div>
 <script>
-$(".resModifyBtn").click(function(e) {
-	event.preventDefault();
-	let thisE = $(e.target);
-	$.ajax({
-		url : thisE.attr("href"),
-		type : "get",
-		data: "",
-		success : function(data) {
-			$("#mainRagion").html(data);
-		},
-		error : function() {
-			alert("에러입니다.");
-		}
+$(document).ready(function(){
+	$(".resModifyBtn").click(function(event) {
+		event.preventDefault();
+		let thisE = $(event.target);
+		$.ajax({
+			url : thisE.attr("href"),
+			type : "get",
+			data: "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	$(".resDeleteBtn").click(function(event) {
+		event.preventDefault();
+		let thisE = $(event.target);
+		$.ajax({
+			url : thisE.attr("href"),
+			type : "get",
+			data: "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
 	});
 });
 </script>
