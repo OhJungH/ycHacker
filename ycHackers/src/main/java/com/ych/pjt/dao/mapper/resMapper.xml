@@ -32,4 +32,12 @@ CAFEPHONE = #{cafePhone},
 RESCOMMENTS = #{resComments}
 WHERE RESNUM = #{resNum}
 </update>
+
+<select id="resDeleteView" resultType="com.ych.pjt.dto.ResDto">
+SELECT * FROM restbl WHERE RESNUM = #{resNum}
+</select>
+
+<delete id="resDelete">
+	DELETE FROM restbl WHERE RESNUM = #{resNum}
+</delete>
 </mapper>

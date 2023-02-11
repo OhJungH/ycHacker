@@ -5,7 +5,6 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,60 +23,81 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <!--bootstrap-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<!-- custom style -->
-<link rel="stylesheet" href="style/footer.css"/>
-<link rel="stylesheet" href="style/top.css"/>
+<!--fontawesome icon-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<!--google icon -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 <div>
-	<form action="resForm" method="post">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	<form action="resDelete" method="post" id="resDeleteFrm">
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resNum">회원번호</label>
-			<input type="text" id="resNum" name="resNum" style="width:500px;">
+			<input type="text" id="resNum" name="resNum" value="${resDto.resNum}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resName">이름</label>
-			<input type="text" id="resName" name="resName" style="width:500px;">
+			<input type="text" id="resName" name="resName" value="${resDto.resName}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resBirth">생년월일</label>
-			<input type="date" id="resBirth" name="resBirth" style="width:500px;">
+			<input type="date" id="resBirth" name="resBirth" value="${resDto.resBirth}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resPhone">연락처</label>
-			<input type="text" id="resPhone" name="resPhone" style="width:500px;">
+			<input type="text" id="resPhone" name="resPhone" value="${resDto.resPhone}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resDate">예약날짜</label>
-			<input type="date" id="resDate" name="resDate" style="width:500px;">
+			<input type="date" id="resDate" name="resDate" value="${resDto.resDate}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resTime">예약시간</label>
-			<input type="text" id="resTime" name="resTime" style="width:500px;">
+			<input type="text" id="resTime" name="resTime" value="${resDto.resTime}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resMember">인원</label>
-			<input type="text" id="resMember" name="resMember" style="width:500px;">
+			<input type="text" id="resMember" name="resMember" value="${resDto.resMember}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="payments">결제</label>
-			<input type="text" id="payMents" name="payMents" style="width:500px;">
+			<input type="text" id="payMents" name="payMents" value="${resDto.payMents}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="cafePhone">카페번호</label>
-			<input type="text" id="cafePhone" name="cafePhone" style="width:500px;">
+			<input type="text" id="cafePhone" name="cafePhone" value="${resDto.cafePhone}" style="width:500px;" readonly>
 		</div>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resComments">요청사항</label>
-			<input type="text" id="resComments" name="resComments" style="width:500px;">
+			<input type="text" id="resComments" name="resComments" value="${resDto.resComments}" style="width:500px;" readonly>
 		</div>
-		<div class="container" style="text-align:center;">
-			<button type="submit" class="btn btn-success">예약하기</button>
-			<a class="btn btn-primary" href="main">메인으로</a>
+
+		<div style="text-align:center;">
+			<a type="submit" class="btn btn-danger" id="deleteBtn" href="myResInfoView?resNum=${resDto.resNum}">취소하기</a>
+			<a class="btn btn-warning">이전으로</a>
 		</div>
 	</form>
 </div>
 
+<script>
+$(document).ready(function(){
+	$("#deleteBtn").click(function(event){
+		event.preventDefault();
+		let thisE = $(event.target);
+		$.ajax({
+			url:thisE.attr("href"),
+			type:"get",
+			success : function(data) {
+				alert("예약 취소 되었습니다.");
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("error");
+			}
+		});
+	});
+});
+</script>
 </body>
 </html>
