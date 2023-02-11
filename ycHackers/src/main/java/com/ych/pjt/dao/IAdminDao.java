@@ -1,5 +1,6 @@
 package com.ych.pjt.dao;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.ych.pjt.dto.InfoBoardDto;
@@ -29,4 +30,6 @@ public interface IAdminDao {
 	public void infoModify(InfoBoardDto dto);
 		//delete
 	public void infoDelete(int infoNum);
+		//reply
+	public Timestamp infoReplyCheck(String infoAuthor);
 }

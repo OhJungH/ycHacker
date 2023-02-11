@@ -26,6 +26,7 @@ import com.ych.pjt.command.InfoBoardPagelistCommand;
 import com.ych.pjt.command.InfoManagePagelistCommand;
 import com.ych.pjt.command.InfoModifyCommand;
 import com.ych.pjt.command.InfoModifyViewCommand;
+import com.ych.pjt.command.InfoReplyTermCommand;
 import com.ych.pjt.command.InfoBoardWriteCommand;
 import com.ych.pjt.command.InfoDeleteCommand;
 import com.ych.pjt.command.InfoDetailsModalCommand;
@@ -224,5 +225,15 @@ public class AdminController {
 		com=new InfoListMainCommand();
 		com.execute(req, model);
 		return "adminPage";	
+	}
+	//Before insert infoBoard reply, check in 10 minute
+	@RequestMapping("/infoReplyTerm")
+	@ResponseBody
+	public String infoReplyTerm(HttpServletRequest rep, Model model) {
+		System.out.println("confirm infoBoard item made in 10 minutes");
+		com=new InfoReplyTermCommand();
+		com.execute(rep, model);
+		
+		return "";
 	}
 }
