@@ -15,9 +15,10 @@
 <update id="changeGrade" parameterType="com.ych.pjt.dto.UserDataDto">
 	UPDATE userData SET USERAUTH=#{userAuth} WHERE USERID=#{userId}
 </update>
+
 <!-- Information Board -->
 <select id="infoBoardHome" resultType="com.ych.pjt.dto.InfoBoardDto">
-	SELECT * FROM InfoData WHERE INFOCONDITION="10" ORDER BY INFONUM DESC
+	SELECT * FROM InfoData WHERE INFOCONDITION="10" AND INFOTITLE NOT LIKE '*#reply%' ORDER BY INFONUM DESC
 </select> 
 <select id="infoDetailsHome" resultType="com.ych.pjt.dto.InfoBoardDto">
 	SELECT * FROM InfoData WHERE INFONUM=#{infoNum}
@@ -31,10 +32,10 @@
 			A) 
 		WHERE INFONUM < 11
 	]]> -->
-	SELECT * FROM InfoData ORDER BY INFONUM DESC LIMIT 10
+	SELECT * FROM InfoData WHERE INFOTITLE NOT LIKE '*#reply%' ORDER BY INFONUM DESC LIMIT 10
 </select>		
 <select id="infoPageList" resultType="com.ych.pjt.dto.InfoBoardDto">
-	SELECT * FROM InfoData ORDER BY INFONUM DESC LIMIT #{startN}, 10
+	SELECT * FROM InfoData AND INFOTITLE NOT LIKE '*#reply%' ORDER BY INFONUM DESC LIMIT #{startN}, 10
 </select>
 <insert id="infoWrite" parameterType="com.ych.pjt.dto.InfoBoardDto">
 	INSERT INTO InfoData (INFONUM,INFOTYPE,INFOAUTHOR,INFOAUTH,INFOUPDATEDATE,INFOTITLE,INFOCONTENT,INFOINDENT,INFOHIT,INFOCONDITION) 
@@ -44,13 +45,13 @@
 	UPDATE InfoData SET INFOGROUP=INFONUM
 </update>
 <select id="infoListMain" resultType="com.ych.pjt.dto.InfoBoardDto">
-	SELECT * FROM InfoData WHERE INFOCONDITION="10" ORDER BY INFONUM DESC LIMIT 10
+	SELECT * FROM InfoData WHERE INFOCONDITION="10" AND INFOTITLE NOT LIKE '*#reply%' ORDER BY INFONUM DESC LIMIT 10
 </select>
 <select id="infoBoardList"  resultType="com.ych.pjt.dto.InfoBoardDto">
-	SELECT * FROM InfoData WHERE INFOCONDITION="10" ORDER BY INFONUM DESC LIMIT 50
+	SELECT * FROM InfoData WHERE INFOCONDITION="10" AND INFOTITLE NOT LIKE '*#reply%' ORDER BY INFONUM DESC LIMIT 50
 </select>
 <select id="infoBoardPagelist" resultType="com.ych.pjt.dto.InfoBoardDto">
-	SELECT * FROM InfoData WHERE INFOCONDITION="10" ORDER BY INFONUM DESC LIMIT #{startN}, 50
+	SELECT * FROM InfoData WHERE INFOCONDITION="10" AND INFOTITLE NOT LIKE '*#reply%' ORDER BY INFONUM DESC LIMIT #{startN}, 50
 </select>
 <update id="infoBoardHit">
 	UPDATE infoData SET INFOHIT=INFOHIT+1 WHERE INFONUM=#{infoNum}
@@ -70,4 +71,9 @@
 <delete id="infoDelete">
 	DELETE FROM InfoData WHERE INFONUM=#{infoNum}
 </delete>
+
+<!-- infoBoard reply -->
+<select id="infoReplyCheck" parameterType="String" resultType="java.sql.Timestamp">
+	SELECT INFODATE FROM InfoData WHERE INFOAUTHOR=#{infoAuthor} AND INFODATE > (SELECT subtime(now(),'00:10:00'))
+</select>
 </mapper>

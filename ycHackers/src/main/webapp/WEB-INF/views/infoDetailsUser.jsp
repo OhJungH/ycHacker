@@ -35,9 +35,9 @@
 </head>
 <body>
 
-
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="user_id"/>
+	<sec:authentication property="principal.authorities" var="user_authority"/>
 </sec:authorize>
 <div id="infoDetails" class="infoBox ${infoDetailsUser.infoType}B">
 	<div id="infoType">
@@ -59,18 +59,82 @@
 	<div id="infoTitle" class="infoSpace">${infoDetailsUser.infoTitle}</div>
 	<div id="infoContent" class="infoSpace">${infoDetailsUser.infoContent}</div>
 	<hr/>
-	<form id="infoReply" action="infoBoardReply?infoGroup=${infoDetailsUser.infoGroup}&&infoAuthor=${user_id}">
+	<form id="infoReply" action="infoBoardReply">
 		<div class="form-group">
 			<label for="infoReplyInput">${user_id}</label>
-			<textarea id="infoReplyInput" class="form-control" name="infoContent" rows="5" cols="20" placeholder="댓글 입력"></textarea>
+			<textarea id="infoReplyInput" maxlength="600" class="form-control" name="infoContent" placeholder="댓글은 10분마다 한건씩, 최대 500자까지만 입력할 수 있습니다."></textarea>
 		</div>
-		<input type="hidden" name="infoAuthor" value="${user_id}"/>
-		<input type="hidden" name="infoTitle" value="${infoDetailsUser.infoNum}의 댓글"/>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<input type="hidden" name="infoAuthor" id="userID"value="<c:out value='${user_id}'/>" />
+		<input type="hidden" name="infoAuth" value="<c:out value='${user_authority}'/>" />
+		<input type="hidden" name="infoTitle" value="*#reply:${infoDetailsUser.infoNum}"/>
 		<input type="hidden" name="infoGroup" value="${infoDetailsUser.infoNum}"/>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		<button type="submit" id="replyBtn" class="btn btn-outline-dark btn-block">댓글</button>
+		<button type="submit" id="submitBtn" class="d-none"></button>
+		<button type="button" id="replyBtn" class="btn btn-outline-dark btn-block">댓글</button>
 	</form><!--db저장과 함께 javascript로 바로 띄우기-->
-</div>            
+	<hr/>
+	<div id="replyContainer"></div>
+</div>  
+<!-- reply data -->
+<script>
+//num:nextVal, type: reply, condition: -10, date: now()
+$(document).ready(function(){
+	$("#infoReply").submit(function(e){
+		e.preventDefault();
+		$.ajax({
+			url:$("#infoReply").attr("action"),
+			type:"post",
+			data:$("#infoReply").serialize(),
+			success:function(data){
+				$("#mainRagion").html(data);
+			},
+			error:function(){
+				alert("서버 에러");
+			}
+		});
+	});
+});
+</script>
 
+<!-- reply -->          
+<script>
+document.querySelector("#replyBtn").addEventListener("click",(e)=>{
+	e.preventDefault();
+	//입력한 시간 중 10분이내 기록이 있으면 사용불가 기능
+	let userId=document.getElementById("userID").value;
+	let replyTermURL="infoReplyTerm?infoAuthor="+userID;
+	setTimeout(()=>{
+		$.ajax({
+			url: replyTermURL,
+			type:"post",
+			success:function(data){
+				if(data.contain("dataIsNull")){
+					//10분 입력 제한 확인 후 처리  
+					let replyContent=document.getElementById("infoReplyInput");
+					if(replyContent==null){
+						alert("입력할 내용이 없습니다.");
+						return false;
+					}
+					else if(replyContent==""||replyContent==" "||replyContent=="  "||replyContent=="   "){
+						alert("입력할 내용이 없습니다.");
+						return false;
+					}
+					else{
+						document.querySelector("#submitBtn").click();
+					}
+				}
+				else{
+					alert("10분이내에 다시 댓글을 입력할 수 없습니다. 마지막입력시간: ");
+					return false;
+				}
+			},
+			error: function(){
+				alert("서버 에러");
+				return false;
+			}
+		});
+	}, 0);
+});
+</script>
 </body>
 </html>

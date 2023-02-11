@@ -1,6 +1,7 @@
 package com.ych.pjt.dao;
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -186,6 +187,13 @@ public class AdminDao implements IAdminDao {
 	private void infoGroupUpdate() {
 		int res = sqlSession.update("infoGroupUpdate");
 		System.out.println("infogroupUpdate: "+res);
+	}
+	@Override
+	public Timestamp infoReplyCheck(String infoAuthor) {
+		System.out.println("check reply in 10 minute: "+infoAuthor);
+		Timestamp infoDate= sqlSession.selectOne(infoAuthor);
+		System.out.println("check result: "+infoAuthor+"// "+infoDate);
+		return infoDate;
 	}
 
 }

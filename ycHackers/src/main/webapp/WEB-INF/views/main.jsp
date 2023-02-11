@@ -41,6 +41,7 @@
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="user_id"/>
+	<sec:authentication property="principal.authorities" var="user_authority"/>
 </sec:authorize>
 <nav class="navbar navbar-expand-sm mainNav">
 	<button class="navbar-toggler btn btn-block" type="button" data-toggle="collapse" data-target="#collapsiblebar">
