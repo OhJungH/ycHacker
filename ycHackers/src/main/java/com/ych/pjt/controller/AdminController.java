@@ -2,6 +2,7 @@ package com.ych.pjt.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -228,12 +229,30 @@ public class AdminController {
 	}
 	//Before insert infoBoard reply, check in 10 minute
 	@RequestMapping("/infoReplyTerm")
-	@ResponseBody
-	public String infoReplyTerm(HttpServletRequest rep, Model model) {
+	public void infoReplyTerm(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
 		System.out.println("confirm infoBoard item made in 10 minutes");
-		com=new InfoReplyTermCommand();
-		com.execute(rep, model);
 		
-		return "";
+		com=new InfoReplyTermCommand();
+		com.execute(req, model);
+		String termCheck = (String)req.getAttribute("result");
+		System.out.println("term check: "+termCheck);
+		
+		res.setContentType("text/event-stream");
+		res.setCharacterEncoding("UTF-8");
+		PrintWriter writer=res.getWriter();
+		writer.write("data:"+termCheck+",\n");
+		writer.flush();
+
+
+		Thread thread = new Thread();
+		try {
+			Thread.sleep(1000);
+			System.out.println(Thread.currentThread().getName());
+			thread.interrupt();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		writer.close();
 	}
 }

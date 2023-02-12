@@ -73,7 +73,7 @@
 </delete>
 
 <!-- infoBoard reply -->
-<select id="infoReplyCheck" parameterType="String" resultType="java.sql.Timestamp">
+<select id="infoReplyCheck" resultType="java.sql.Timestamp">
 	SELECT INFODATE FROM InfoData WHERE INFOAUTHOR=#{infoAuthor} AND INFODATE > (SELECT subtime(now(),'00:10:00'))
 </select>
 </mapper>

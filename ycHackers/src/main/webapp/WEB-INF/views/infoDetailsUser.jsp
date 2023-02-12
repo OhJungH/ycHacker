@@ -18,8 +18,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <title>infoDetailsUser</title>
-<!--jquery 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!--propper jquery -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <!--latest javascript -->
@@ -59,7 +59,7 @@
 	<div id="infoTitle" class="infoSpace">${infoDetailsUser.infoTitle}</div>
 	<div id="infoContent" class="infoSpace">${infoDetailsUser.infoContent}</div>
 	<hr/>
-	<form id="infoReply" action="infoBoardReply">
+	<form id="infoReply" action="infoBoardReply" method="post">
 		<div class="form-group">
 			<label for="infoReplyInput">${user_id}</label>
 			<textarea id="infoReplyInput" maxlength="600" class="form-control" name="infoContent" placeholder="댓글은 10분마다 한건씩, 최대 500자까지만 입력할 수 있습니다."></textarea>
@@ -75,7 +75,7 @@
 	<hr/>
 	<div id="replyContainer"></div>
 </div>  
-<!-- reply data -->
+<!-- submit -->
 <script>
 //num:nextVal, type: reply, condition: -10, date: now()
 $(document).ready(function(){
@@ -98,43 +98,33 @@ $(document).ready(function(){
 
 <!-- reply -->          
 <script>
-document.querySelector("#replyBtn").addEventListener("click",(e)=>{
-	e.preventDefault();
-	//입력한 시간 중 10분이내 기록이 있으면 사용불가 기능
-	let userId=document.getElementById("userID").value;
-	let replyTermURL="infoReplyTerm?infoAuthor="+userID;
-	setTimeout(()=>{
-		$.ajax({
-			url: replyTermURL,
-			type:"post",
-			success:function(data){
-				if(data.contain("dataIsNull")){
-					//10분 입력 제한 확인 후 처리  
-					let replyContent=document.getElementById("infoReplyInput");
-					if(replyContent==null){
-						alert("입력할 내용이 없습니다.");
-						return false;
-					}
-					else if(replyContent==""||replyContent==" "||replyContent=="  "||replyContent=="   "){
-						alert("입력할 내용이 없습니다.");
-						return false;
-					}
-					else{
-						document.querySelector("#submitBtn").click();
-					}
-				}
-				else{
-					alert("10분이내에 다시 댓글을 입력할 수 없습니다. 마지막입력시간: ");
-					return false;
-				}
-			},
-			error: function(){
-				alert("서버 에러");
+document.querySelector("#replyBtn").addEventListener("click",infoReplyTermCheck);
+function infoReplyTermCheck(e){
+	if(typeof(EventSource)!=="undefined"){
+		//입력한 시간 중 10분이내 기록이 있으면 사용불가 기능
+		let userId=document.getElementById("userID");
+		let replyTermURL="infoReplyTerm?infoAuthor="+userID.value;
+		
+		let eventSource = new EventSource(replyTermURL);
+		eventSource.addEventListen=function(event){
+			let responseData = event.data;
+			if(responseData=='null'||responseData.isNull()){
+				console.log("10분 내 이 계정으로글을 올리지 않음");
+			}
+			else{
+				alert("10분 내 입력된 댓글("+responseData+")이 있습니다.");
 				return false;
 			}
-		});
-	}, 0);
-});
+			eventSource.close();
+		}
+	}
+	else{
+		alert("이 브라우저는 SSE기능을 지원하지 않아 댓글을 입력할 수 없습니다.");
+	}
+}
+
+
+
 </script>
 </body>
 </html>

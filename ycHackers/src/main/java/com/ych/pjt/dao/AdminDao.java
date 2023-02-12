@@ -138,6 +138,14 @@ public class AdminDao implements IAdminDao {
 		int res=sqlSession.delete("infoDelete", infoNum);
 		System.out.println("infoBoard delete result: "+res);
 	}
+/*infoBoard reply*/
+	@Override
+	public Timestamp infoReplyCheck(String infoAuthor) {
+		System.out.println("check reply in 10 minute: "+infoAuthor);
+		Timestamp infoDate= sqlSession.selectOne("infoReplyCheck",infoAuthor);
+		System.out.println("check result: "+infoAuthor+"// "+infoDate);
+		return infoDate;
+	}
 
 /*no Overriding method*/
 	//data transfer method(return ArrayList)
@@ -187,13 +195,6 @@ public class AdminDao implements IAdminDao {
 	private void infoGroupUpdate() {
 		int res = sqlSession.update("infoGroupUpdate");
 		System.out.println("infogroupUpdate: "+res);
-	}
-	@Override
-	public Timestamp infoReplyCheck(String infoAuthor) {
-		System.out.println("check reply in 10 minute: "+infoAuthor);
-		Timestamp infoDate= sqlSession.selectOne(infoAuthor);
-		System.out.println("check result: "+infoAuthor+"// "+infoDate);
-		return infoDate;
 	}
 
 }
