@@ -17,13 +17,9 @@ public class CafeListCommand implements IYchCommand {
 		
 	CafeDao cdao = Constant.cDao;
 	
-	String location = req.getParameter("location");
-	String cafeSearch = req.getParameter("cafeSearch");
-	String search = req.getParameter("search");
-	String searchWhat = req.getParameter("searchWhat");
 	ArrayList<CafeDto> dtos = cdao.cafeList();
-	dtos = cdao.cafeSearch(location, search, searchWhat);
 	model.addAttribute("cafeList", dtos);
+	
 	}
 
 }

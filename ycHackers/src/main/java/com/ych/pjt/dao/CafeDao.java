@@ -39,10 +39,6 @@ public class CafeDao implements ICafeDao {
 		return dto;
 	}
 
-	public ArrayList<CafeDto> cafeSearch(String location, String search, String searchWhat) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	
