@@ -16,4 +16,8 @@
 		<select id="cafeDetail" parameterType="string" resultType="com.ych.pjt.dto.CafeDto">
 			SELECT * FROM CAFELIST WHERE CAFENAME= #{CAFENAME}
 		</select>
+		
+		<select id="cafeName" parameterType="String" resultType="com.ych.pjt.dto.CafeDto">
+			select * from cafelist where cafeName like '%' || #{search} || '%' order by cafeNo desc
+		</select>
 </mapper>

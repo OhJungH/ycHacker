@@ -34,11 +34,11 @@
 
 <div id="cafeContainer">
 <div class="cafeSearch" style="margin-bottom:50px;">
-	<form action="cafeList" method="get" id="searchFrm">
-		<input type="hidden" value="search" name="cafeSearch">
+	<form action="cafeList" method="get" id="searchFrm" name="cafeSearch">
+		<input type="hidden" value="search" name="viewType">
 		<div class="input-group" style="width:40%;height:50px; margin:auto;">
 			<input hidden="hidden" value="cafeName" id="searchWhat" name="searchWhat">
-			<input hidden="hidden" value="cafeLocation" id="location" name="location">
+			<input hidden="hidden" value="cafeLocation" id="location" name="chose">
 			<div class="input-group-prepend d-inline">
 				<div class="dropdown d-inline">
 					<button type="button" class="btn btn-primary dropdown-toggle search" data-toggle="dropdown" style=" display : inline-block; height:50px;">전체검색</button>

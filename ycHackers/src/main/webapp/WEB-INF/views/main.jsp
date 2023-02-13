@@ -196,7 +196,7 @@ $(document).ready(function(){
 	$("#cafeList").click(function(event) {
 		event.preventDefault();
 		$.ajax({
-			url : $("#cafeList").attr("href"),
+			url : "cafeList?location=cafeLocation",
 			type : "get",
 			data : "",
 			success : function(data) {

@@ -1,6 +1,8 @@
 package com.ych.pjt.dao;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,28 @@ public class CafeDao implements ICafeDao {
 		return dto;
 	}
 
+	@Override
+	public ArrayList<CafeDto> cafeSearch(String location, String searchWhat, String search) {
+		ArrayList<CafeDto> dtos = new ArrayList<CafeDto>();
+		if(searchWhat.equals("cafeName")) {
+		} else if(searchWhat.equals("location")) {
+			List<Integer> noC = sqlSession.selectList("location",search);
+			noC.sort(Comparator.reverseOrder());
+			for(int i =0; i<noC.size(); i++) {
+				int no = noC.get(i);
+				dtos.add(sqlSession.selectOne("searchLocation", no));
+			}
+		} else {
+			if(searchWhat.equals("people")) {
+				List<Integer> noS = sqlSession.selectList("searchPeople" ,search);
+				noS.sort(Comparator.reverseOrder());
+				for(int i=0; i<noS.size(); i++) {
+					int no = noS.get(i);
+					dtos.add(sqlSession.selectOne("searchPeople", no));
+				}
+			}
+		}
+		return dtos;
+	}
 
-
-	
 }
