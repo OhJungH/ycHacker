@@ -45,7 +45,12 @@
 			<!-- table: infoNum, 이전 작성자(Author)와 권한(Auth), 최근 수정일(UpdateDate), 조회수(infoHit) -->
 			<thead>
 				<tr>
-					<th colspan="6">수정 전 내용</th>
+					<th colspan="4">수정 전 내용</th>
+					<th colspan="2">
+						<a id="infoReplyAdmin" href="infoReplyAdmin?infoNum=${infoModifyDto.infoNum}" class="btn btn-outline-success btn-block">
+							댓글확인
+						</a>
+					</th>
 				</tr>
 			</thead>
 			<tbody>

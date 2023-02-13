@@ -187,6 +187,11 @@ public class AdminController {
 		System.out.println("infoDetailsUser request");
 		com = new InfoDetailsUserCommand();
 		com.execute(req, model);
+		//reply list
+		String infoGroup ="";//req.getParameter("infoGroup")
+		System.out.println("infoReply list:"+infoGroup);
+		
+		
 		return "infoDetailsUser";
 	}
 	//view details(infoBoard) for Admin
@@ -228,8 +233,9 @@ public class AdminController {
 		return "adminPage";	
 	}
 	//Before insert infoBoard reply, check in 10 minute
-	@RequestMapping("/infoReplyTerm")
-	public void infoReplyTerm(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
+	@RequestMapping(value="/infoReplyTerm",produces="application/text;charset=UTF8")
+	@ResponseBody
+	public String infoReplyTerm(HttpServletRequest req, Model model) {
 		System.out.println("confirm infoBoard item made in 10 minutes");
 		
 		com=new InfoReplyTermCommand();
@@ -237,22 +243,32 @@ public class AdminController {
 		String termCheck = (String)req.getAttribute("result");
 		System.out.println("term check: "+termCheck);
 		
-		res.setContentType("text/event-stream");
-		res.setCharacterEncoding("UTF-8");
-		PrintWriter writer=res.getWriter();
-		writer.write("data:"+termCheck+",\n");
-		writer.flush();
+		return termCheck;
+	}
+	//info reply upload > redirection detailsView
+	@RequestMapping("/infoReply")
+	public String infoReply(HttpServletRequest req, Model model) {
+		//reply insert command
+		System.out.println("infoReply insert request");
+		
+		
+		//hit을 제외한 details
+		String infoNum ="";//req.getParameter("infoGroup")
+		System.out.println("infoDetails reload: "+infoNum);
+		com=new InfoDetailsPreviewCommand();
+		com.execute(req, model);
 
-
-		Thread thread = new Thread();
-		try {
-			Thread.sleep(1000);
-			System.out.println(Thread.currentThread().getName());
-			thread.interrupt();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		writer.close();
+		//reply list
+		String infoGroup ="";//req.getParameter("infoGroup")
+		System.out.println("infoReply list:"+infoGroup);
+		
+		
+		return "infoDetailsUser";
+	}
+	//info reply manage page
+	@RequestMapping("/infoReplyAdmin")
+	public String infoReplyAdmin(HttpServletRequest req, Model model) {
+		System.out.println("infoReply manage request");
+		return "infoReplyAdmin";
 	}
 }

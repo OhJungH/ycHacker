@@ -17,7 +17,14 @@ public class InfoReplyTermCommand implements IYchCommand {
 		System.out.println("10분 입력확인: "+infoAuthor);
 		AdminDao adDao=Constant.adDao;
 		Timestamp infoDate = adDao.infoReplyCheck(infoAuthor);
-		req.setAttribute("result", infoDate);
+		
+		String data = "";
+		if(infoDate==null) {
+			data="dataIsNull";
+		}else {
+			data=infoDate.toString();
+		}
+		req.setAttribute("result", data);
 	}
 
 }
