@@ -59,19 +59,22 @@
 	<div id="infoTitle" class="infoSpace">${infoDetailsUser.infoTitle}</div>
 	<div id="infoContent" class="infoSpace">${infoDetailsUser.infoContent}</div>
 	<hr/>
-	<form id="infoReply" action="infoBoardReply" method="post">
+	<!--db저장과 함께 javascript로 바로 띄우기-->
+	<form id="infoReply" action="infoReply" method="post">
 		<div class="form-group">
 			<label for="infoReplyInput">${user_id}</label>
-			<textarea id="infoReplyInput" maxlength="600" class="form-control" name="infoContent" placeholder="댓글은 10분마다 한건씩, 최대 500자까지만 입력할 수 있습니다."></textarea>
+			<textarea name="infoContent" id="infoReplyInput" maxlength="600" class="form-control" placeholder="댓글은 10분마다 한건씩, 최대 500자까지만 입력할 수 있습니다."></textarea>
 		</div>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		<input type="hidden" name="infoAuthor" id="userID"value="<c:out value='${user_id}'/>" />
-		<input type="hidden" name="infoAuth" value="<c:out value='${user_authority}'/>" />
-		<input type="hidden" name="infoTitle" value="*#reply:${infoDetailsUser.infoNum}"/>
-		<input type="hidden" name="infoGroup" value="${infoDetailsUser.infoNum}"/>
+		<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
+		<input name="infoAuthor" type="hidden" id="userID" value="<c:out value='${user_id}'/>" />
+		<input name="infoAuth" type="hidden" value="<c:out value='${user_authority}'/>" />
+		<input name="infoTitle" type="hidden" value="*#reply:${infoDetailsUser.infoNum}"/>
+		<input name="infoGroup" type="hidden" value="${infoDetailsUser.infoNum}" />
 		<button type="submit" id="submitBtn" class="d-none"></button>
-		<button type="button" id="replyBtn" class="btn btn-outline-dark btn-block">댓글</button>
-	</form><!--db저장과 함께 javascript로 바로 띄우기-->
+	</form>
+	<a id="replyBtn" href="infoReplyTerm" class="btn btn-outline-dark btn-block">
+		<span id="buttnTxt">댓글 달기</span>
+	</a>
 	<hr/>
 	<div id="replyContainer"></div>
 </div>  
@@ -98,31 +101,59 @@ $(document).ready(function(){
 
 <!-- reply -->          
 <script>
-document.querySelector("#replyBtn").addEventListener("click",infoReplyTermCheck);
-function infoReplyTermCheck(e){
-	if(typeof(EventSource)!=="undefined"){
-		//입력한 시간 중 10분이내 기록이 있으면 사용불가 기능
-		let userId=document.getElementById("userID");
-		let replyTermURL="infoReplyTerm?infoAuthor="+userID.value;
+//입력한 시간 중 10분이내 기록이 있으면 사용불가 기능
+$(document).ready(function(){
+	$("#replyBtn").click(function(e){
+		e.preventDefault();
+		let url = "infoReplyTerm?infoAuthor=";
+		let query = $("#userID").val();
+		url+=query;
+		console.log("url check: "+url);
 		
-		let eventSource = new EventSource(replyTermURL);
-		eventSource.addEventListen=function(event){
-			let responseData = event.data;
-			if(responseData=='null'||responseData.isNull()){
-				console.log("10분 내 이 계정으로글을 올리지 않음");
+		$.ajax({
+			url:url,
+			type:"get",
+			success:function(data){
+				if(data.search("dataIsNull") > -1){
+					console.log("10분 내 기록 없음.");
+					setTimeout(()=>{
+						$("#submitBtn").click();
+					},1500);
+				}
+				else { 
+					//Recently Objects Within 10 Minutes
+					let reply = new Date(data);
+					let countdown;
+					function time(){
+						countdown= setInterval(termCheck,1000);
+						$("#buttnTxt").text("댓글 달기");
+					}
+					time();
+				}
+				function termCheck(){
+					let now = new Date();
+					let timeCount=new Date(now-before);
+					let mm=timeCount.getMinutes();
+					let ss=timeCount.getSeconds();
+					if(mm>=10){
+						$("#buttnTxt").text("댓글 달기");
+						clearInterval(countdown);
+					}
+					else if(mm<10){
+						mm=String(9-mm).padStart(2,"0");
+						ss=String(59-ss).padStart(2,"0");
+						if(ss=="00")console.log("waiting time: "+mm+":"+ss);
+						if(ss=="00"&&mm=="00")console.log("end of waiting time: "+mm+":"+ss);
+						$("#buttnTxt").text("남은 시간: "+mm+":"+ss);
+					}
+				}
+			},
+			error:function(){
+				alert("서버 에러");	
 			}
-			else{
-				alert("10분 내 입력된 댓글("+responseData+")이 있습니다.");
-				return false;
-			}
-			eventSource.close();
-		}
-	}
-	else{
-		alert("이 브라우저는 SSE기능을 지원하지 않아 댓글을 입력할 수 없습니다.");
-	}
-}
-
+		});
+	});
+});
 
 
 </script>

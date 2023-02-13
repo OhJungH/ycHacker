@@ -74,6 +74,6 @@
 
 <!-- infoBoard reply -->
 <select id="infoReplyCheck" resultType="java.sql.Timestamp">
-	SELECT INFODATE FROM InfoData WHERE INFOAUTHOR=#{infoAuthor} AND INFODATE > (SELECT subtime(now(),'00:10:00'))
+	SELECT INFODATE FROM InfoData WHERE INFOAUTHOR=#{infoAuthor} AND INFODATE > (SELECT subtime(now(),'00:10:00')) AND INFOTITLE LIKE '*#reply%'
 </select>
 </mapper>
