@@ -5,18 +5,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import com.ych.pjt.dao.AdminDao;
-import com.ych.pjt.dto.InfoBoardDto;
 import com.ych.pjt.util.Constant;
 
-public class InfoDetailsUserCommand implements IYchCommand {
+public class InfoReplyDeleteCommand implements IYchCommand {
 
 	@Override
 	public void execute(HttpServletRequest req, Model model) {
-		String infoNumST = req.getParameter("infoNum");
-		AdminDao adDao =Constant.adDao;
+		String infoNumST = req.getParameter("replyNum");
+		System.out.println("InfoReplyDeleteCommand: "+infoNumST);
 		int infoNum=Integer.parseInt(infoNumST);
-		InfoBoardDto dto = adDao.infoDetailsUser(infoNum);
-		model.addAttribute("infoDetailsUser", dto);
+		
+		AdminDao adDao=Constant.adDao;
+		adDao.infoReplyDelete(infoNum);
 	}
 
 }

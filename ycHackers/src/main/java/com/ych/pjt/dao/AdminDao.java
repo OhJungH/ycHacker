@@ -43,7 +43,7 @@ public class AdminDao implements IAdminDao {
 	public ArrayList<InfoBoardDto> infoBoardList() {
 		System.out.println("infoBoarList method");
 		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoBoardList");
-		dtos = AuthorTransfer(dtos);
+		dtos = authorTransfer(dtos);
 		return dtos;
 	}
 	@Override//information board page for user
@@ -54,7 +54,7 @@ public class AdminDao implements IAdminDao {
 		if(page!=1)startN=(page-1)*50+1;
 		System.out.println("start page number: "+startN);
 		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoBoardPagelist", startN);
-		dtos = AuthorTransfer(dtos);
+		dtos = authorTransfer(dtos);
 		return dtos; 
 	}
 	@Override
@@ -94,7 +94,7 @@ public class AdminDao implements IAdminDao {
 	public InfoBoardDto infoDetailsHome(int infoNum) {
 		System.out.println("infoDetailsHome method: "+infoNum);
 		InfoBoardDto dto = sqlSession.selectOne("infoDetailsHome", infoNum);
-		dto=AuthorTransfer(dto);
+		dto=authorTransfer(dto);
 		infoBoardHit(infoNum);
 		return dto;
 	}
@@ -102,7 +102,7 @@ public class AdminDao implements IAdminDao {
 	public InfoBoardDto infoDetailsUser(int infoNum) {
 		System.out.println("infoDetailsUser method: "+infoNum);
 		InfoBoardDto dto=sqlSession.selectOne("infoDetailsUser", infoNum);
-		dto=AuthorTransfer(dto);
+		dto=authorTransfer(dto);
 		infoBoardHit(infoNum);
 		return dto;
 	}
@@ -110,7 +110,7 @@ public class AdminDao implements IAdminDao {
 	public InfoBoardDto infoDetailsPreview(int infoNum) {
 		System.out.println("infoDetailsPreview method: "+infoNum);
 		InfoBoardDto dto = sqlSession.selectOne("infoDetailsPreview",infoNum);
-		dto=AuthorTransfer(dto);
+		dto=authorTransfer(dto);
 		return dto;
 	}
 	
@@ -138,7 +138,7 @@ public class AdminDao implements IAdminDao {
 		int res=sqlSession.delete("infoDelete", infoNum);
 		System.out.println("infoBoard delete result: "+res);
 	}
-/*infoBoard reply*/
+	//infoBoard reply
 	@Override
 	public Timestamp infoReplyCheck(String infoAuthor) {
 		System.out.println("check reply in 10 minute: "+infoAuthor);
@@ -146,10 +146,28 @@ public class AdminDao implements IAdminDao {
 		System.out.println("check result: "+infoAuthor+"// "+infoDate);
 		return infoDate;
 	}
-
+	@Override
+	public void infoReplyInsert(InfoBoardDto dto) {
+		System.out.println("infoReplyInsert method: "+dto.getInfoGroup());
+		int res = sqlSession.insert("infoReplyInsert", dto);
+		System.out.println("infoReplyInsert result: "+res);
+	}
+	@Override
+	public ArrayList<InfoBoardDto> infoDetailsReplyList(int infoGroup){
+		System.out.println("infoDetailsList method: "+infoGroup);
+		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoDetailsReplyList", infoGroup);
+		dtos = authorTransfer(dtos);
+		return dtos;
+	}
+	@Override
+	public void infoReplyDelete(int infoNum) {
+		System.out.println("infoReplyDelete: "+infoNum);
+		int res = sqlSession.delete("infoReplyDelete", infoNum);
+		System.out.println("infoReplyDelete result: "+res);
+	}
 /*no Overriding method*/
 	//data transfer method(return ArrayList)
-	private ArrayList<InfoBoardDto> AuthorTransfer(ArrayList<InfoBoardDto> dtos){
+	private ArrayList<InfoBoardDto> authorTransfer(ArrayList<InfoBoardDto> dtos){
 		String message="[AuthorTransfer] \n";
 		for(int i=0;i<dtos.size();i++) {
 			InfoBoardDto dto=dtos.get(i);
@@ -169,7 +187,7 @@ public class AdminDao implements IAdminDao {
 		return dtos;
 	}
 	//data transfer method(return Dto)
-	private InfoBoardDto AuthorTransfer(InfoBoardDto dto){
+	private InfoBoardDto authorTransfer(InfoBoardDto dto){
 		String message="[AuthorTransfer] \n";
 			String dbAuthor = dto.getInfoAuth();
 			String userAuthor="";
