@@ -27,9 +27,12 @@ import com.ych.pjt.command.InfoBoardPagelistCommand;
 import com.ych.pjt.command.InfoManagePagelistCommand;
 import com.ych.pjt.command.InfoModifyCommand;
 import com.ych.pjt.command.InfoModifyViewCommand;
+import com.ych.pjt.command.InfoReplyDeleteCommand;
+import com.ych.pjt.command.InfoReplyInsertCommand;
 import com.ych.pjt.command.InfoReplyTermCommand;
 import com.ych.pjt.command.InfoBoardWriteCommand;
 import com.ych.pjt.command.InfoDeleteCommand;
+import com.ych.pjt.command.InfoDetailsReplyListCommand;
 import com.ych.pjt.command.InfoDetailsModalCommand;
 import com.ych.pjt.command.InfoDetailsPreviewCommand;
 import com.ych.pjt.command.InfoDetailsUserCommand;
@@ -188,9 +191,10 @@ public class AdminController {
 		com = new InfoDetailsUserCommand();
 		com.execute(req, model);
 		//reply list
-		String infoGroup ="";//req.getParameter("infoGroup")
-		System.out.println("infoReply list:"+infoGroup);
-		
+		String infoGroup =req.getParameter("infoNum");
+		System.out.println("infoReply list in detailsUser: "+infoGroup);
+		com=new InfoDetailsReplyListCommand();
+		com.execute(req, model);
 		
 		return "infoDetailsUser";
 	}
@@ -250,19 +254,33 @@ public class AdminController {
 	public String infoReply(HttpServletRequest req, Model model) {
 		//reply insert command
 		System.out.println("infoReply insert request");
-		
-		
+		com=new InfoReplyInsertCommand();
+		com.execute(req, model);
 		//hit을 제외한 details
-		String infoNum ="";//req.getParameter("infoGroup")
+		String infoNum =req.getParameter("infoGroup");
 		System.out.println("infoDetails reload: "+infoNum);
 		com=new InfoDetailsPreviewCommand();
 		com.execute(req, model);
-
 		//reply list
-		String infoGroup ="";//req.getParameter("infoGroup")
-		System.out.println("infoReply list:"+infoGroup);
-		
-		
+		String infoGroup =infoNum;
+		System.out.println("infoReply list in detailsUser: "+infoGroup);
+		com=new InfoDetailsReplyListCommand();
+		com.execute(req, model);
+
+		return "infoDetailsUser";
+	}
+	@RequestMapping("/replyDelete")
+	public String replyDelete(HttpServletRequest req, Model model) {
+		System.out.println("replyDelete: "+req.getParameter("replyNum"));
+		com=new InfoReplyDeleteCommand();
+		com.execute(req, model);
+		//hit을 제외한 details
+		System.out.println("reload: "+req.getParameter("infoNum"));
+		com=new InfoDetailsPreviewCommand();
+		com.execute(req, model);
+		//reply list
+		com=new InfoDetailsReplyListCommand();
+		com.execute(req, model);
 		return "infoDetailsUser";
 	}
 	//info reply manage page

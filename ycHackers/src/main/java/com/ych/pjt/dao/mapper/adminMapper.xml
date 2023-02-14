@@ -76,4 +76,25 @@
 <select id="infoReplyCheck" resultType="java.sql.Timestamp">
 	SELECT INFODATE FROM InfoData WHERE INFOAUTHOR=#{infoAuthor} AND INFODATE > (SELECT subtime(now(),'00:10:00')) AND INFOTITLE LIKE '*#reply%'
 </select>
+<insert id="infoReplyInsert" parameterType="com.ych.pjt.dto.InfoBoardDto">
+	INSERT INTO InfoData (INFONUM,INFOTYPE,INFOAUTHOR,INFOAUTH,INFOUPDATEDATE,INFOTITLE,INFOCONTENT,INFOGROUP,INFOINDENT,INFOCONDITION)
+	VALUES(
+		(SELECT nextval('infoseq') FROM DUAL),
+		#{infoType},#{infoAuthor},
+		#{infoAuth},
+		now(),
+		#{infoTitle},
+		#{infoContent},
+		#{infoGroup},
+		(SELECT NUM FROM 
+			(SELECT MAX(INFOINDENT)+1 AS NUM FROM InfoData WHERE INFOGROUP=#{infoGroup}) 
+		A),
+		#{infoCondition})
+</insert>
+<select id="infoDetailsReplyList" resultType="com.ych.pjt.dto.InfoBoardDto">
+	SELECT * FROM InfoData WHERE INFOGROUP=#{infoGroup} AND INFOTITLE LIKE '*#reply%' AND INFOCONDITION=-10 ORDER BY INFODATE ASC
+</select>
+<delete id="infoReplyDelete">
+	DELETE FROM InfoData WHERE INFONUM=#{infoNum}
+</delete>
 </mapper>

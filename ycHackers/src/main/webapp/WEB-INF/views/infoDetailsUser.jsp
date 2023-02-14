@@ -70,17 +70,33 @@
 		<input name="infoAuth" type="hidden" value="<c:out value='${user_authority}'/>" />
 		<input name="infoTitle" type="hidden" value="*#reply:${infoDetailsUser.infoNum}"/>
 		<input name="infoGroup" type="hidden" value="${infoDetailsUser.infoNum}" />
+		<input name="infoNum" type="hidden" value="${infoDetailsUser.infoNum}" />
 		<button type="submit" id="submitBtn" class="d-none"></button>
 	</form>
 	<a id="replyBtn" href="infoReplyTerm" class="btn btn-outline-dark btn-block">
 		<span id="buttnTxt">댓글 달기</span>
 	</a>
 	<hr/>
-	<div id="replyContainer"></div>
+	<div id="replyContainer">
+		<c:forEach items="${replyDataList}" var="replyDto">
+			<div class="replyBox">
+				<div class="replyAutor">
+					댓글 작성자: 
+					${replyDto.infoAuthor}(${replyDto.infoAuth})
+				</div>
+				<div class="replyDate">
+					작성일시: ${replyDto.infoDate}
+				</div>
+				<div class="replyContent">
+					${replyDto.infoContent}
+				</div>
+				<a id="id${replyDto.infoAuthor}" href="replyDelete?infoNum=${infoDetailsUser.infoNum}&&replyNum=${replyDto.infoNum}" class="replyDelete btn btn-outline-danger">댓글 삭제</a>
+			</div>
+		</c:forEach>
+	</div>
 </div>  
 <!-- submit -->
 <script>
-//num:nextVal, type: reply, condition: -10, date: now()
 $(document).ready(function(){
 	$("#infoReply").submit(function(e){
 		e.preventDefault();
@@ -98,30 +114,36 @@ $(document).ready(function(){
 	});
 });
 </script>
-
-<!-- reply -->          
+<!-- reply check-->          
 <script>
-//입력한 시간 중 10분이내 기록이 있으면 사용불가 기능
+//Input is restricted if there is a reply entered within 10 minutes
 $(document).ready(function(){
 	$("#replyBtn").click(function(e){
 		e.preventDefault();
+		//content check
+		let content = $("#infoReplyInput").val().trim()=="";
+		if(content){
+			$("#buttnTxt").text("댓글달기(입력된 내용이 없습니다)");
+			return false;
+		}
+		//request path
 		let url = "infoReplyTerm?infoAuthor=";
 		let query = $("#userID").val();
 		url+=query;
-		console.log("url check: "+url);
-		
+		//check request
 		$.ajax({
 			url:url,
 			type:"get",
 			success:function(data){
+				//dataIsNull > submit button
 				if(data.search("dataIsNull") > -1){
 					console.log("10분 내 기록 없음.");
 					setTimeout(()=>{
 						$("#submitBtn").click();
 					},1500);
 				}
+				//data exist > message
 				else { 
-					//Recently Objects Within 10 Minutes
 					let reply = new Date(data);
 					let countdown;
 					function time(){
@@ -132,6 +154,7 @@ $(document).ready(function(){
 				}
 				function termCheck(){
 					let now = new Date();
+					let before= new Date(before);
 					let timeCount=new Date(now-before);
 					let mm=timeCount.getMinutes();
 					let ss=timeCount.getSeconds();
@@ -153,9 +176,35 @@ $(document).ready(function(){
 			}
 		});
 	});
+	/*reply delete*/
+	$(".replyDelete").click(function(e){
+		e.preventDefault();
+		let thisE=$(e.target);
+		//author check
+		let authorID=thisE.attr("id");
+		let userID="id"+$("#userID").val();
+		console.log("author: "+authorID+"/user: "+userID);
+		if(authorID.trim()!=userID.trim()){
+			alert("자신이 작성한 글만 삭제할 수 있습니다.");
+			return false;
+		}
+		let userConfirm = confirm("이 댓글을 삭제하시겠습니까?");
+		if(userConfirm){
+			let thisURL = thisE.attr("href");
+			$.ajax({
+				url:thisURL,
+				type:"get",
+				success:function(data){
+					$("#mainRagion").html(data);
+				},
+				error:function(){
+					alert("서버 에러");
+				}
+			});
+		}
+	});
 });
-
-
 </script>
+
 </body>
 </html>

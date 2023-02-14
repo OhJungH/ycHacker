@@ -71,6 +71,18 @@ public class InfoBoardDto {
 		this.infoContent = infoContent;
 		this.infoCondition = infoCondition;
 	}
+	//infoBoard reply insert
+	public InfoBoardDto(String infoType, String infoAuthor, String infoAuth, String infoTitle, String infoContent,
+			int infoGroup, int infoCondition) {
+		super();
+		this.infoType = infoType;
+		this.infoAuthor = infoAuthor;
+		this.infoAuth = infoAuth;
+		this.infoTitle = infoTitle;
+		this.infoContent = infoContent;
+		this.infoGroup = infoGroup;
+		this.infoCondition = infoCondition;
+	}
 	//getter/setter
 	public int getInfoNum() {
 		return infoNum;

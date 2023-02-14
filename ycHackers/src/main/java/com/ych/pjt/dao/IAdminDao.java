@@ -32,4 +32,7 @@ public interface IAdminDao {
 	public void infoDelete(int infoNum);
 		//reply
 	public Timestamp infoReplyCheck(String infoAuthor);
+	public void infoReplyInsert(InfoBoardDto dto);
+	public ArrayList<InfoBoardDto> infoDetailsReplyList(int infoGroup);
+	public void infoReplyDelete(int infoNum);
 }
