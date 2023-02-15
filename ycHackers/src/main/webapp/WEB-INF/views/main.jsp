@@ -127,7 +127,7 @@
 							</c:choose>
 						</td>
 							<td>
-							<a class="infoDetailsUser" href="infoDetailsUser?infoNum=${infoDto.infoNum}">${infoDto.infoTitle}(${infoDto.infoIndent})</a>
+							<a class="infoDetailsUser" href="infoDetailsUser?infoNum=${infoDto.infoNum}">${infoDto.infoTitle}</a>
 						</td>
 						<td>${infoDto.infoAuthor}</td>
 						<td>${infoDto.infoDate}</td>

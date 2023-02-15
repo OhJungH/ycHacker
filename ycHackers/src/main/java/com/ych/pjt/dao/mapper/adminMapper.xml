@@ -97,4 +97,7 @@
 <delete id="infoReplyDelete">
 	DELETE FROM InfoData WHERE INFONUM=#{infoNum}
 </delete>
+<select id="maxIndent" resultType="com.ych.pjt.dto.InfoBoardDto">
+	SELECT INFOGROUP, COUNT(INFOINDENT)-1 AS INFOUNDENT FROM InfoData GROUP BY INFOGROUP 
+</select>
 </mapper>
