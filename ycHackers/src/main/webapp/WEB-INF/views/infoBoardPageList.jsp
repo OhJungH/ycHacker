@@ -57,7 +57,7 @@
 						</td>
 						<td>
 							<a class="infoDetailsUser" href="infoDetailsUser?infoNum=${infoDto.infoNum}">
-								${infoDto.infoTitle}
+								${infoDto.infoTitle} (${infoDto.infoIndent})
 							</a>
 						</td>
 						<td>${infoDto.infoAuth}</td>

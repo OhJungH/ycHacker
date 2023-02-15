@@ -167,6 +167,12 @@ public class AdminDao implements IAdminDao {
 		int res = sqlSession.delete("infoReplyDelete", infoNum);
 		System.out.println("infoReplyDelete result: "+res);
 	}
+	@Override
+	public ArrayList<InfoBoardDto> infoReplyListAdmin(int infoNum) {
+		System.out.println("infoReplyListAdmin: "+infoNum);
+		ArrayList<InfoBoardDto> dtos = (ArrayList)sqlSession.selectList("infoReplyListAdmin", infoNum);
+		return dtos;
+	}
 /*no Overriding method*/
 	//data transfer method(return ArrayList)
 	private ArrayList<InfoBoardDto> authorTransfer(ArrayList<InfoBoardDto> dtos){
@@ -216,36 +222,5 @@ public class AdminDao implements IAdminDao {
 		int res = sqlSession.update("infoGroupUpdate");
 		System.out.println("infogroupUpdate: "+res);
 	}
-	//max indent in same group: 전용 DTO를 생성해야할지도 지금은 기능x
-	private ArrayList<InfoBoardDto> maxIndent(ArrayList<InfoBoardDto> dtos) {
-		ArrayList<InfoBoardDto> dataList= (ArrayList)sqlSession.selectList("maxIndent");
-		int infoNum=0;
-		InfoBoardDto paramData =null;
-		int infoGroup=0;
-		InfoBoardDto dbData=null;
-		int infoIndent=0;
-		String dataView="";
-		
-		System.out.println("indent data update: DB"+dataList.size()+"/DTO"+dtos.size());
-		if(dtos.size()>0) {
-			for(int i=0;i<dtos.size();i++) {
-				paramData=dtos.get(i);
-				infoNum=paramData.getInfoNum();
-				for(int j=0;j<dataList.size();j++) {
-					dbData=dataList.get(j);
-					infoGroup=dbData.getInfoGroup();
-					infoIndent=dbData.getInfoIndent();
-					dataView+=infoNum+"/"+infoGroup+"//num:"+infoIndent+"@";
-					if(infoNum==infoGroup&&infoIndent!=0) {
-						paramData.setInfoIndent(infoIndent);
-						System.out.println(infoNum+" reply count: "+infoIndent);
-						dtos.add(i, paramData);
-						break;
-					}
-				}
-			}
-			System.out.println(dataView);
-		}
-		return dtos;
-	}
+
 }

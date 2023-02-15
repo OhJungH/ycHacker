@@ -35,22 +35,29 @@
 		<tr>
 			<th>no</th>
 			<th>제목</th>
-			<th>작성일(댓글))</th>
+			<th>작성일</th>
 			<th>작성자</th>
 			<th>조회</th>
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${listContent}" var="infoDto">
-			<tr>
+		<c:forEach items="${infoBoardList}" var="infoDto">
+			<tr class="${infoDto.infoType}">
 				<td>${infoDto.infoNum}</td>
-				<td>${infoDto.infoTitle}</td>
+				<td>
+					<a class="infoModifyBtn" href="infoModifyView?infoNum=${infoDto.infoNum}">
+						${infoDto.infoTitle} (${infoDto.infoIndent})
+					</a>
+				</td>
 				<td>${infoDto.infoDate}</td>
-				<td>${infoDto.infoHit}</td>
+				<td>
+					${infoDto.infoAuthor}
+					(${infoDto.infoAuth})
+				</td>
+				<td class="${infoDto.infoCondition}">${infoDto.infoHit}</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-
 </body>
 </html>
