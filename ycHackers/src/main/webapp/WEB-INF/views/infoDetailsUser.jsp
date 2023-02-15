@@ -80,18 +80,20 @@
 	<div id="replyContainer">
 		<c:forEach items="${replyDataList}" var="replyDto">
 			<div class="replyBox">
-				<div class="replyAutor">
+				<div class="replyAuthor">
 					댓글 작성자: 
 					${replyDto.infoAuthor}(${replyDto.infoAuth})
 				</div>
 				<div class="replyDate">
 					작성일시: ${replyDto.infoDate}
 				</div>
+				<a id="id${replyDto.infoAuthor}" href="replyDelete?infoNum=${infoDetailsUser.infoNum}&&replyNum=${replyDto.infoNum}" class="replyDelete btn btn-outline-danger">&times;</a>
 				<div class="replyContent">
 					${replyDto.infoContent}
 				</div>
-				<a id="id${replyDto.infoAuthor}" href="replyDelete?infoNum=${infoDetailsUser.infoNum}&&replyNum=${replyDto.infoNum}" class="replyDelete btn btn-outline-danger">댓글 삭제</a>
+
 			</div>
+			<hr/>
 		</c:forEach>
 	</div>
 </div>  
@@ -154,7 +156,7 @@ $(document).ready(function(){
 				}
 				function termCheck(){
 					let now = new Date();
-					let before= new Date(before);
+					let before= new Date(data);
 					let timeCount=new Date(now-before);
 					let mm=timeCount.getMinutes();
 					let ss=timeCount.getSeconds();

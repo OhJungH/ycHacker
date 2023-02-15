@@ -50,7 +50,7 @@
 				<tr>
 					<th>no</th>
 					<th>제목</th>
-					<th>작성일(댓글))</th>
+					<th>작성일</th>
 					<th>작성자</th>
 					<th>조회</th>
 				</tr>
@@ -64,9 +64,7 @@
 								${infoDto.infoTitle}
 							</a>
 						</td>
-						<td>
-							${infoDto.infoDate}(${infoDto.infoIndent})
-						</td>
+						<td>${infoDto.infoDate}</td>
 						<td>
 							${infoDto.infoAuthor}
 							(${infoDto.infoAuth})

@@ -83,6 +83,12 @@ public class InfoBoardDto {
 		this.infoGroup = infoGroup;
 		this.infoCondition = infoCondition;
 	}
+	//indent
+	public InfoBoardDto(int infoGroup, int infoIndent) {
+		super();
+		this.infoGroup = infoGroup;
+		this.infoIndent = infoIndent;
+	}
 	//getter/setter
 	public int getInfoNum() {
 		return infoNum;
