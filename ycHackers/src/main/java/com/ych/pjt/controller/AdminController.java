@@ -27,6 +27,7 @@ import com.ych.pjt.command.InfoBoardPagelistCommand;
 import com.ych.pjt.command.InfoManagePagelistCommand;
 import com.ych.pjt.command.InfoModifyCommand;
 import com.ych.pjt.command.InfoModifyViewCommand;
+import com.ych.pjt.command.InfoReplyListAdminCommand;
 import com.ych.pjt.command.InfoReplyDeleteCommand;
 import com.ych.pjt.command.InfoReplyInsertCommand;
 import com.ych.pjt.command.InfoReplyTermCommand;
@@ -287,6 +288,8 @@ public class AdminController {
 	@RequestMapping("/infoReplyAdmin")
 	public String infoReplyAdmin(HttpServletRequest req, Model model) {
 		System.out.println("infoReply manage request");
-		return "infoReplyAdmin";
+		com=new InfoReplyListAdminCommand();
+		com.execute(req, model);
+		return "infoReplyListAdmin";
 	}
 }

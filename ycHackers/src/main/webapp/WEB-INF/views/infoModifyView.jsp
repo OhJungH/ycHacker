@@ -312,6 +312,19 @@ $(document).ready(function(){
 			return false;
 		}
 	});
+	$("#infoReplyAdmin").click(function(e){
+		e.preventDefault();
+		$.ajax({
+			url:$("#infoReplyAdmin").attr("href"),
+			type:"get",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
 	//button > CKeditor > validation > submit
 	function beforeSub(){
 		$("#infoEditor svg").remove();

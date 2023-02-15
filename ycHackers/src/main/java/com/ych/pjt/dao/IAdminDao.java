@@ -35,4 +35,5 @@ public interface IAdminDao {
 	public void infoReplyInsert(InfoBoardDto dto);
 	public ArrayList<InfoBoardDto> infoDetailsReplyList(int infoGroup);
 	public void infoReplyDelete(int infoNum);
+	public ArrayList<InfoBoardDto> infoReplyListAdmin(int infoNum);
 }

@@ -61,7 +61,7 @@
 						<td>${infoDto.infoNum}</td>
 						<td>
 							<a class="infoModifyBtn" href="infoModifyView?infoNum=${infoDto.infoNum}">
-								${infoDto.infoTitle}
+								${infoDto.infoTitle} (${infoDto.infoIndent})
 							</a>
 						</td>
 						<td>${infoDto.infoDate}</td>
