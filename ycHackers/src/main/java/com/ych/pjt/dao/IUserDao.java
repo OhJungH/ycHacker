@@ -10,4 +10,5 @@ public interface IUserDao {
 	public void tempUserDB(TempUserDto dto);
 	public void tempUserJoin(TempUserDto dto);
 	public TempUserDto tempUserLogin(String userId);
+	public UserDataDto userInfoView(int userNum);
 }

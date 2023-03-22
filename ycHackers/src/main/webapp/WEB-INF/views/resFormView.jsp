@@ -30,7 +30,7 @@
 </head>
 <body>
 <div>
-	<form action="resForm" method="post">
+	<form action="resForm" method="post" id="resFrm">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<div class="form-group text-center text-info threeDEffect">
 			<label for="resNum">회원번호</label>
@@ -73,11 +73,29 @@
 			<input type="text" id="resComments" name="resComments" style="width:500px;">
 		</div>
 		<div class="container" style="text-align:center;">
-			<button type="submit" class="btn btn-success">예약하기</button>
+			<button type="submit" class="btn btn-success" id="res">예약하기</button>
 			<a class="btn btn-primary" href="main">메인으로</a>
 		</div>
 	</form>
 </div>
-
+<script>
+$(document).ready(function(){
+	$("#res").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : "resForm",
+			type : "post",
+			data : $("#resFrm").serialize(),				
+			success : function(data) {
+				$("#mainRagion").html(data);	
+				alert("예약되었습니다.");
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+});	
+</script>
 </body>
 </html>

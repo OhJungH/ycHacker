@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import com.ych.pjt.dao.ResDao;
 import com.ych.pjt.dto.ResDto;
+import com.ych.pjt.dto.UserDataDto;
 import com.ych.pjt.util.Constant;
 
 public class MyResInfoCommand implements IYchCommand {

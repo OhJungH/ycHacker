@@ -1,5 +1,7 @@
 package com.ych.pjt.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,10 +49,10 @@ public class UserDao implements IUserDao {
 		String dbAuth = dto.getUserAuth();
 		String userAuth="";
 		System.out.println("auth check: "+dbAuth);
-		if(dbAuth.contains("_USER"))userAuth="정회원";
-		else if(dbAuth.contains("_TEMPUSER"))userAuth="SNS 로그인 회원";
-		else if(dbAuth.contains("_MANAGER"))userAuth="카페 매니저";
-		else if(dbAuth.contains("_ADMIN"))userAuth="페이지 운영자";
+		if(dbAuth.contains("_USER"))userAuth="�젙�쉶�썝";
+		else if(dbAuth.contains("_TEMPUSER"))userAuth="SNS 濡쒓렇�씤 �쉶�썝";
+		else if(dbAuth.contains("_MANAGER"))userAuth="移댄럹 留ㅻ땲��";
+		else if(dbAuth.contains("_ADMIN"))userAuth="�럹�씠吏� �슫�쁺�옄";
 		else userAuth=dbAuth;
 		System.out.println("auth transfer result: "+userAuth);
 		dto.setUserAuth(userAuth);
@@ -77,5 +79,11 @@ public class UserDao implements IUserDao {
 		System.out.println("result: "+dto.getUserId());
 		return dto;
 	}
-	
+	/*회원 정보*/
+	@Override 
+	public UserDataDto userInfoView(int userNum) {
+		System.out.println("userInfoView dao");
+		UserDataDto dto = sqlSession.selectOne("userInfoView",userNum);
+		return dto;
+	}
 }

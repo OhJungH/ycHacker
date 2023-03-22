@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.MyResInfoCommand;
@@ -29,15 +30,21 @@ public class ResController {
 		Constant.rDao = rDao;
 	}
 	
-	@RequestMapping("/resForm")
-	public String resForm(HttpServletRequest req, HttpServletResponse response, Model model) {
-		System.out.println("resForm request");
-		com = new ResCommand();
-		com.execute(req,model);
-		//øπæ‡ list∏¶ «œ¥¬ ∞ÊøÏ listøÎ Command √ﬂ∞°
-		return "resForm";
+	@RequestMapping("/resFormView")
+	public String resFormView() {
+		System.out.println("resFormView request");
+		return "resFormView";
 	}
-		
+	@RequestMapping(value="/resForm",method = RequestMethod.POST) 
+		public String resForm(HttpServletRequest req, Model model) {
+		System.out.println("resForm Îì±Î°ù");
+		com = new ResCommand();
+		com.execute(req, model);
+		com = new MyResInfoCommand();
+		com.execute(req, model);
+		return "myResInfoView";
+	}
+	
 	@RequestMapping("/myResInfoView")
 	public String myResInfo(HttpServletRequest req, Model model) {
 		System.out.println("myResInfoView request");

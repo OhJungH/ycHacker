@@ -31,25 +31,41 @@
 
 <div class="myPageContainer" id="myPage">
 	<div class="box user">
-		<a class="userInfo" href="userInfoView">회원정보</a>		
+		<a class="userInfo" href="userInfoView?userNum=${userDataDto.userNum}" id="userInfo">회원정보</a>		
 	</div>
 	<div class="box res">
 		<a class="resInfo" href="myResInfoView" id="resInfo">예약정보</a>
 	</div>
 </div>
 <script>
-$("#resInfo").click(function(event) {
-	event.preventDefault();
-	$.ajax({
-		url : $("#resInfo").attr("href"),
-		type : "get",
-		data : "",
-		success : function(data) {
-			$("#mainRagion").html(data);
-		},
-		error : function() {
-			alert("에러입니다.");
-		}
+$(document).ready(function(){
+	$("#userInfo").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#userInfo").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+	$("#resInfo").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#resInfo").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
 	});
 });
 </script>
