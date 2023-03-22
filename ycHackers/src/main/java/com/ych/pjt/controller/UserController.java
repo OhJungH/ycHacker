@@ -38,8 +38,10 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.ych.pjt.command.ChangeGradeCommand;
 import com.ych.pjt.command.IYchCommand;
 import com.ych.pjt.command.InfoListMainCommand;
+import com.ych.pjt.command.MyResInfoCommand;
 import com.ych.pjt.command.TempUserCommand;
 import com.ych.pjt.command.UserGradeCommand;
+import com.ych.pjt.command.UserInfoViewCommand;
 import com.ych.pjt.command.UserJoinCommand;
 import com.ych.pjt.command.UserMainDataCommand;
 import com.ych.pjt.command.UserSearchCommand;
@@ -165,6 +167,8 @@ public class UserController {
 	@RequestMapping("/userInfoView")
 	public String userInfoView(HttpServletRequest req, Model model) {
 		System.out.println("userInfoView request");
+		com = new UserInfoViewCommand();
+		com.execute(req,model);
 		return "userInfoView";
 	}
 	

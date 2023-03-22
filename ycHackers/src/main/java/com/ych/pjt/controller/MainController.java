@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ych.pjt.command.IYchCommand;
+import com.ych.pjt.command.MyPageViewCommand;
 
 @Controller
 public class MainController {
@@ -24,7 +25,9 @@ public class MainController {
 		return "joinView";
 	}
 	@RequestMapping("/myPageView")
-	public String myPageView(HttpServletRequest request, Model model) {
+	public String myPageView(HttpServletRequest req, Model model) {
+		com = new MyPageViewCommand();
+		com.execute(req, model);
 		System.out.println("myPageView request");
 		return "myPageView";
 	}

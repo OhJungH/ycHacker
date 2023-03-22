@@ -26,4 +26,8 @@
 <select id="tempUserLogin" resultType="com.ych.pjt.dto.TempUserDto">
 	SELECT * FROM TempUser WHERE USERID=#{userId}
 </select>
+
+<select id="userInfoView" resultType="com.ych.pjt.dto.UserDataDto">
+	SELECT * FROM userdata WHERE USERNUM = #{userNum}
+</select>
 </mapper>

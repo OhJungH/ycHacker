@@ -27,98 +27,43 @@
 <!-- custom style sheet-->
 <link rel="stylesheet" href="style/footer.css"/>
 <link rel="stylesheet" href="style/top.css"/>
-<style>
-#myInfoBox{
-	padding-left: 1em;
-}
-</style>
 </head>
 <body>
-<div class="container" style="text-align:center">
-	<h1 style="color:#00CCFF;">YCHackers</h1>
-</div>
-
-<nav class="navbar navbar-expand-md" style="margin-bottom: 1em">
-	<button class="navbar-toggler btn btn-block" type="button" data-toggle="collapse" data-target="#collapsiblebar">
-		<span class="navbar-toggler-icon text-dark"></span>
-	</button>	
-	<div class="collapse navbar-collapse" id="collapsibleNavbar">		
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link" href="home"> 
-			 		<i class="fas fa-home" style="font-size:30px;color:white;"></i>
-			 	</a>
-			</li>			
-			 <li class="nav-item">
-			 	<a class="nav-link" href="#">안내</a>
-			 </li>
-			 <li class="nav-item">
-			 	<a class="nav-link" href="#">검색</a> 
-			 </li>
-			 <li class="nav-item">
-			 	<a class="nav-link" href="#">관리자</a>
-			 </li>								
-		</ul>
-		<div id="myInfoBox">
-        	<a class="myInfoLink" href="#">id</a><br/>
-        	<a class="myInfoLink" href="#">등급</a><br/>
-        	<a class="myInfoLink" href="#">로그아웃</a>
-       	</div>
-	</div>	
-</nav>
-
 <table border="1" style="width:800px;height:300px;text-align:center;margin:auto;">
-	<tr>
-		<th colspan="3" style="text-align:center;">회원번호</th>
+	<tr>		
+		<th colspan="3">
+			회원번호 : <input type="text" id="userNum" name="userNum" value="${userDataDto.userNum}">
+		</th> 
+	</tr>
+	<tr>		
+		<td colspan="2">
+			ID : <input type="text" id="userId" name="userId" value="${userDataDto.userId}">
+		</td>
+		<td>
+			회원등급 : <input type="text" id="userAuth" name="userAuth" value="${userDataDto.userAuth}">
+		</td>
 	</tr>
 	<tr>
-		<td colspan="2">ID</td>
-		<td>회원등급</td>
+		<td colspan="3"></td>
 	</tr>
 	<tr>
-		<td colspan="3">이름</td>
+		<td colspan="3">
+			생년월일 : <input type="text" id="userBirth" name="userBirth" value="${userDataDto.userBirth}">
+		</td>
 	</tr>
 	<tr>
-		<td colspan="3">생년월일</td>
+		<td colspan="3">
+			지역코드(우편번호) : <input type="text" id="userLocation" name="userLocation" value="${userDataDto.userLocation}">
+		</td>
 	</tr>
 	<tr>
-		<td colspan="3">지역코드(우편번호)</td>
-	</tr>
-	<tr>
-		<td colspan="3">성별</td>
+		<td colspan="3">
+			성별 : <input type="text" id="userGender" name="userGender" value="${userDataDto.userGender}">
+		</td>
 	</tr>
 </table>
 
 <div style="text-align:center;margin-top:1em;">
 	<button type="submit" class="btn btn-success">submit</button>
-	<button type="submit" class="btn btn-info">비밀번호변경</button>
 	<button type="submit" class="btn btn-danger">회원탈퇴</button>
-</div>
-
-<div id="footer">
-    <div class="footerBox">
-        <p id="footerPageName" class="footerLabel">YCHackers</p>
-        <p id="footerCompany">
-            <span class="footerLabel">회사명</span> (사)양천구해커스
-        </p>
-        <p id="footerCompanyNum">
-            <span class="footerLabel">사업자번호</span> 000-00-00000
-        </p>
-        <p id="footerAddress">서울특별시 양천구 신정동 1319-4 양천중앙도서관 </p>
-        <a class="footerLink" id="companyIntro" href="companyIntro">회사소개</a>&emsp; 
-        <a class="footerLink" id="termsOfService" href="termsOfService">서비스이용약관</a> &emsp;
-        <a class="footerLink" id="privacyPolicy" href="privacyPolicy">개인정보처리방침</a>
-    </div>
-    <div class="footerBox">
-        <p>
-            <span class="footerLabel">등록문의</span> 000-0000-0000
-        </p>
-        <p>
-            <span class="footerLabel">기타문의</span> 000-0000-0000
-        </p>
-        <br/><br/>
-        <p>
-            <span id="footerCopy">COPYRIGHT &copy; 2022(주)양천구해커스 ALL RIGHTS RESERVED</span>
-        </p>
-    </div>
 </div>

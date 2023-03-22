@@ -81,7 +81,7 @@
 		<div id="myInfoBox">
 			<p class="myInfoP">
 				ID: 
-				<a id="myInfoLink" class="myInfoLink" href="myPageView">${userDto.userId}</a><br/>
+				<a id="myInfoLink" class="myInfoLink" href="myPageView?userNum=${userDto.userNum}">${userDto.userId}</a><br/>
 			</p>
 			<p class="myInfoP">
 				등급: 
@@ -154,7 +154,7 @@
 				<tr>
 					<td>1</td>
 					<td>
-						<a href="#">testCafe</a>
+						<a href="cafeDetail" id="cafeDetail">testCafe</a>
 					</td>
 					<td>서울</td>
 					<td>3명</td>
@@ -293,7 +293,20 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
+	$("#cafeDetail").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#cafeDetail").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
 });
 </script>
 

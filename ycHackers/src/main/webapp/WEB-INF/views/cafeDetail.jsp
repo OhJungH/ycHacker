@@ -79,7 +79,25 @@ margin-left:40px;
 				<th style="padding:10px;">30000원</th>
 			</tr>
 		</table>
-		<a href="resForm">예약하기</a>
+		<a href="resFormView" id="resFormView">예약하기</a>
 	</div>
+<script>
+$(document).ready(function(){
+	$("#resFormView").click(function(event) {
+		event.preventDefault();
+		$.ajax({
+			url : $("#resFormView").attr("href"),
+			type : "get",
+			data : "",
+			success : function(data) {
+				$("#mainRagion").html(data);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+	});
+});	
+</script>
 </body>
 </html>
